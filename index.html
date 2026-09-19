@@ -1146,7 +1146,7 @@
 
 
                     <span class="monitor-unit">
-                        m³/jam
+                        m³/menit
                     </span>
 
                 </div>
@@ -1279,8 +1279,7 @@
 
                     M<sub>deposited</sub>
                     =
-                    C × Q ×
-                    (t / 60)
+                    C × Q<sub>menit</sub> × t
                     × DF
 
                 </div>
@@ -1391,11 +1390,17 @@
 <footer>
 
     <center>
+
         © 2026 <strong>PETA —
         Platform Estimasi Takaran Aerosol. </strong>
-        <p> Created for Eureka ITB  Sains Project 2026. </p>
-        <p> SMAN 1 TARAKAN</p>
-        
+
+        <p>
+            Created for Eureka! ITB Science Project 2026.
+        </p>
+
+        <p>
+            SMAN 1 TARAKAN
+        </p>
 
     </center>
 
@@ -1411,22 +1416,38 @@
 ===================================================== */
 
 /*
-    MASUKKAN API KEY KAMU SENDIRI.
+    MASUKKAN API KEY IQAIR KAMU SENDIRI.
 
     Jangan membagikan API key di repository publik.
 */
 
-
-const WAQI_TOKEN =
-    "c22d2bdbb540a2eaf87cd726aa3381f60cdd4fc3";
-
-
-const STATION_ID =
-    "A519133";
-
-
 const IQAIR_API_KEY =
-    "f8560fc3-5b91-4ebc-8703-b51f389a1826";
+    "e95c4d22-759f-4592-bc47-b9c2e08ea8c5";
+
+
+/* =====================================================
+   KOORDINAT TARAKAN
+===================================================== */
+
+const TARAKAN_LAT =
+    3.3274;
+
+const TARAKAN_LON =
+    117.5785;
+
+
+/* =====================================================
+   CACHE IQAIR
+===================================================== */
+
+const IQAIR_CACHE_KEY =
+    "peta_iqair_cache";
+
+const IQAIR_CACHE_TIME_KEY =
+    "peta_iqair_cache_time";
+
+const IQAIR_CACHE_DURATION =
+    15 * 60 * 1000;
 
 
 
@@ -1750,70 +1771,6 @@ function estimatePM25FromAQI(aqi) {
 
 
 /* =====================================================
-   WAQI
-===================================================== */
-
-async function getWAQI() {
-
-
-    if (
-
-        !WAQI_TOKEN ||
-
-        WAQI_TOKEN ===
-        "MASUKKAN_TOKEN_WAQI_KAMU"
-
-    ) {
-
-        throw new Error(
-            "Token WAQI belum diisi."
-        );
-
-    }
-
-
-    const url =
-
-        `https://api.waqi.info/feed/` +
-
-        `${STATION_ID}/?token=${WAQI_TOKEN}`;
-
-
-    const response =
-        await fetch(url);
-
-
-    if (!response.ok) {
-
-        throw new Error(
-
-            `WAQI HTTP ${response.status}`
-
-        );
-
-    }
-
-
-    const result =
-        await response.json();
-
-
-    if (result.status !== "ok") {
-
-        throw new Error(
-            "Data WAQI tidak tersedia."
-        );
-
-    }
-
-
-    return result.data;
-
-}
-
-
-
-/* =====================================================
    IQAIR
 ===================================================== */
 
@@ -1838,19 +1795,23 @@ async function getIQAir() {
 
     const url =
 
-        `https://api.airvisual.com/v2/city?` +
+        `https://api.airvisual.com/v2/nearest_city` +
 
-        `city=Tarakan` +
+        `?lat=${TARAKAN_LAT}` +
 
-        `&state=North%20Kalimantan` +
-
-        `&country=Indonesia` +
+        `&lon=${TARAKAN_LON}` +
 
         `&key=${IQAIR_API_KEY}`;
 
 
     const response =
         await fetch(url);
+
+
+    console.log(
+        "IQAIR STATUS:",
+        response.status
+    );
 
 
     if (!response.ok) {
@@ -1866,6 +1827,12 @@ async function getIQAir() {
 
     const result =
         await response.json();
+
+
+    console.log(
+        "IQAIR RESPONSE:",
+        result
+    );
 
 
     if (
@@ -2001,6 +1968,305 @@ function formatNumber(
 
 
 /* =====================================================
+   APPLY IQAIR DATA
+===================================================== */
+
+function applyIQAirData(iqair) {
+
+
+    console.log(
+        "Hasil IQAIR:",
+        iqair
+    );
+
+
+    /* =========================================
+       POLLUTION
+    ========================================= */
+
+    if (
+
+        iqair.current &&
+
+        iqair.current.pollution
+
+    ) {
+
+
+        const pollution =
+            iqair.current.pollution;
+
+
+
+        /* =========================================
+           US AQI
+        ========================================= */
+
+        const aqi =
+
+            pollution.aqius !== undefined
+
+                ? Number(
+                    pollution.aqius
+                )
+
+                : null;
+
+
+
+        document.getElementById(
+            "aqi"
+        ).textContent =
+
+            aqi !== null
+
+                ? Math.round(aqi)
+
+                : "--";
+
+
+
+        document.getElementById(
+            "aqi-status"
+        ).textContent =
+
+            getAQIStatus(aqi);
+
+
+
+        /* =========================================
+           ESTIMASI PM2.5
+        ========================================= */
+
+        const estimatedPM25 =
+
+            estimatePM25FromAQI(
+                aqi
+            );
+
+
+        console.log(
+            "US AQI IQAir:",
+            aqi
+        );
+
+
+        console.log(
+            "Estimasi PM2.5:",
+            estimatedPM25,
+            "µg/m³"
+        );
+
+
+        if (
+
+            estimatedPM25 !== null &&
+
+            !isNaN(estimatedPM25)
+
+        ) {
+
+
+            window.currentPM25 =
+                estimatedPM25;
+
+
+            document.getElementById(
+                "pm25"
+            ).textContent =
+
+                formatNumber(
+                    estimatedPM25,
+                    1
+                );
+
+
+            document.getElementById(
+                "used-pm25"
+            ).textContent =
+
+                formatNumber(
+                    estimatedPM25,
+                    1
+                );
+
+        }
+
+
+        else {
+
+
+            window.currentPM25 =
+                null;
+
+
+            document.getElementById(
+                "pm25"
+            ).textContent =
+                "--";
+
+
+            document.getElementById(
+                "used-pm25"
+            ).textContent =
+                "--";
+
+        }
+
+
+
+        /* =========================================
+           POLUTAN UTAMA
+        ========================================= */
+
+        const mainPollutant =
+
+            pollution.mainus || "--";
+
+
+        let pollutantName =
+
+            mainPollutant.toUpperCase();
+
+
+        if (
+
+            mainPollutant.toLowerCase()
+            === "p2"
+
+        ) {
+
+            pollutantName =
+                "PM2.5";
+
+        }
+
+
+        else if (
+
+            mainPollutant.toLowerCase()
+            === "p1"
+
+        ) {
+
+            pollutantName =
+                "PM10";
+
+        }
+
+
+        document.getElementById(
+            "main-pollutant"
+        ).textContent =
+            pollutantName;
+
+    }
+
+
+
+    /* =============================================
+       WEATHER
+    ============================================= */
+
+    if (
+
+        iqair.current &&
+
+        iqair.current.weather
+
+    ) {
+
+
+        const weather =
+            iqair.current.weather;
+
+
+
+        if (
+            weather.tp !== undefined
+        ) {
+
+
+            document.getElementById(
+                "temperature"
+            ).textContent =
+
+                formatNumber(
+                    weather.tp,
+                    1
+                );
+
+        }
+
+
+
+        if (
+            weather.hu !== undefined
+        ) {
+
+
+            document.getElementById(
+                "humidity"
+            ).textContent =
+
+                formatNumber(
+                    weather.hu,
+                    0
+                );
+
+        }
+
+    }
+
+
+
+    /* =============================================
+       WAKTU
+    ============================================= */
+
+    if (
+
+        iqair.current &&
+
+        iqair.current.pollution &&
+
+        iqair.current.pollution.ts
+
+    ) {
+
+
+        document.getElementById(
+            "updated"
+        ).textContent =
+
+            iqair.current.pollution.ts;
+
+    }
+
+
+
+    /* =============================================
+       STASIUN
+    ============================================= */
+
+    document.getElementById(
+        "station"
+    ).textContent =
+        "Kota Tarakan Pamusian";
+
+
+
+    /* =============================================
+       HITUNG ULANG
+    ============================================= */
+
+    calculateExposure();
+
+}
+
+
+
+/* =====================================================
    LOAD AIR QUALITY
 ===================================================== */
 
@@ -2008,7 +2274,95 @@ async function loadAirQuality() {
 
 
     /* =================================================
-       IQAIR
+       CEK CACHE
+    ================================================= */
+
+    try {
+
+
+        const cachedData =
+            localStorage.getItem(
+                IQAIR_CACHE_KEY
+            );
+
+
+        const cachedTime =
+            localStorage.getItem(
+                IQAIR_CACHE_TIME_KEY
+            );
+
+
+        if (
+
+            cachedData &&
+
+            cachedTime
+
+        ) {
+
+
+            const cacheAge =
+                Date.now() -
+                Number(cachedTime);
+
+
+            if (
+
+                cacheAge <
+                IQAIR_CACHE_DURATION
+
+            ) {
+
+
+                console.log(
+                    "Menggunakan data IQAir dari cache."
+                );
+
+
+                const iqair =
+                    JSON.parse(
+                        cachedData
+                    );
+
+
+                applyIQAirData(
+                    iqair
+                );
+
+
+                return;
+
+            }
+
+        }
+
+    }
+
+
+    catch (error) {
+
+
+        console.warn(
+            "Cache IQAir tidak dapat digunakan:",
+            error
+        );
+
+
+        localStorage.removeItem(
+            IQAIR_CACHE_KEY
+        );
+
+
+        localStorage.removeItem(
+            IQAIR_CACHE_TIME_KEY
+        );
+
+    }
+
+
+
+    /* =================================================
+       AMBIL DATA IQAIR BARU
     ================================================= */
 
     try {
@@ -2019,288 +2373,41 @@ async function loadAirQuality() {
 
 
         console.log(
-            "Hasil IQAIR:",
-            iqair
+            "Mengambil data IQAir baru."
         );
 
 
-        if (
+        /* =============================================
+           SIMPAN CACHE
+        ============================================= */
 
-            iqair.current &&
+        localStorage.setItem(
 
-            iqair.current.pollution
+            IQAIR_CACHE_KEY,
 
-        ) {
+            JSON.stringify(
+                iqair
+            )
 
+        );
 
-            const pollution =
-                iqair.current.pollution;
 
+        localStorage.setItem(
 
+            IQAIR_CACHE_TIME_KEY,
 
-            /* =========================================
-               US AQI
-            ========================================= */
+            Date.now().toString()
 
-            const aqi =
-
-                pollution.aqius !== undefined
-
-                    ? Number(
-                        pollution.aqius
-                    )
-
-                    : null;
-
-
-
-            document.getElementById(
-                "aqi"
-            ).textContent =
-
-                aqi !== null
-
-                    ? Math.round(aqi)
-
-                    : "--";
-
-
-
-            document.getElementById(
-                "aqi-status"
-            ).textContent =
-
-                getAQIStatus(aqi);
-
-
-
-            /* =========================================
-               ESTIMASI PM2.5
-            ========================================= */
-
-            const estimatedPM25 =
-
-                estimatePM25FromAQI(
-                    aqi
-                );
-
-
-            console.log(
-                "US AQI IQAir:",
-                aqi
-            );
-
-
-            console.log(
-                "Estimasi PM2.5:",
-                estimatedPM25,
-                "µg/m³"
-            );
-
-
-            if (
-
-                estimatedPM25 !== null &&
-
-                !isNaN(estimatedPM25)
-
-            ) {
-
-
-                window.currentPM25 =
-                    estimatedPM25;
-
-
-                document.getElementById(
-                    "pm25"
-                ).textContent =
-
-                    formatNumber(
-                        estimatedPM25,
-                        1
-                    );
-
-
-                document.getElementById(
-                    "used-pm25"
-                ).textContent =
-
-                    formatNumber(
-                        estimatedPM25,
-                        1
-                    );
-
-            }
-
-
-            else {
-
-
-                window.currentPM25 =
-                    null;
-
-
-                document.getElementById(
-                    "pm25"
-                ).textContent =
-                    "--";
-
-
-                document.getElementById(
-                    "used-pm25"
-                ).textContent =
-                    "--";
-
-            }
-
-
-
-            /* =========================================
-               POLUTAN UTAMA
-            ========================================= */
-
-            const mainPollutant =
-
-                pollution.mainus || "--";
-
-
-            let pollutantName =
-
-                mainPollutant.toUpperCase();
-
-
-            if (
-
-                mainPollutant.toLowerCase()
-                === "p2"
-
-            ) {
-
-                pollutantName =
-                    "PM2.5";
-
-            }
-
-
-            else if (
-
-                mainPollutant.toLowerCase()
-                === "p1"
-
-            ) {
-
-                pollutantName =
-                    "PM10";
-
-            }
-
-
-            document.getElementById(
-                "main-pollutant"
-            ).textContent =
-                pollutantName;
-
-        }
-
+        );
 
 
         /* =============================================
-           WEATHER
+           TAMPILKAN DATA
         ============================================= */
 
-        if (
-
-            iqair.current &&
-
-            iqair.current.weather
-
-        ) {
-
-
-            const weather =
-                iqair.current.weather;
-
-
-
-            if (
-                weather.tp !== undefined
-            ) {
-
-
-                document.getElementById(
-                    "temperature"
-                ).textContent =
-
-                    formatNumber(
-                        weather.tp,
-                        1
-                    );
-
-            }
-
-
-
-            if (
-                weather.hu !== undefined
-            ) {
-
-
-                document.getElementById(
-                    "humidity"
-                ).textContent =
-
-                    formatNumber(
-                        weather.hu,
-                        0
-                    );
-
-            }
-
-        }
-
-
-
-        /* =============================================
-           WAKTU
-        ============================================= */
-
-        if (
-
-            iqair.current &&
-
-            iqair.current.pollution &&
-
-            iqair.current.pollution.ts
-
-        ) {
-
-
-            document.getElementById(
-                "updated"
-            ).textContent =
-
-                iqair.current.pollution.ts;
-
-        }
-
-
-
-        /* =============================================
-           STASIUN
-        ============================================= */
-
-        if (iqair.city) {
-
-
-            document.getElementById(
-                "station"
-            ).textContent =
-
-                iqair.city || 
-                "Tarakan";
-
-        }
-
+        applyIQAirData(
+            iqair
+        );
 
     }
 
@@ -2359,15 +2466,10 @@ async function loadAirQuality() {
         window.currentPM25 =
             null;
 
+
+        calculateExposure();
+
     }
-
-
-
-    /* =================================================
-       HITUNG EXPOSURE
-    ================================================= */
-
-    calculateExposure();
 
 }
 
@@ -2410,11 +2512,23 @@ function calculateExposure() {
 
 
     /* ================================================
-       Q
+       Q AWAL
+       satuan: m³/jam
     ================================================ */
 
-    const Q =
+    const Q_hour =
         selectedModel.ventilation;
+
+
+
+    /* ================================================
+       KONVERSI Q
+       m³/jam → m³/menit
+    ================================================ */
+
+    const Q_minute =
+        Q_hour / 60;
+
 
 
     /* ================================================
@@ -2423,6 +2537,7 @@ function calculateExposure() {
 
     const DF =
         selectedModel.df;
+
 
 
     /* ================================================
@@ -2436,6 +2551,7 @@ function calculateExposure() {
         );
 
 
+
     /* ================================================
        TAMPILKAN Q
     ================================================ */
@@ -2445,9 +2561,10 @@ function calculateExposure() {
     ).textContent =
 
         formatNumber(
-            Q,
-            2
+            Q_minute,
+            4
         );
+
 
 
     /* ================================================
@@ -2503,22 +2620,15 @@ function calculateExposure() {
 
 
     /* ================================================
-       MENIT → JAM
-    ================================================= */
-
-    const timeHour =
-        duration / 60;
-
-
-
-    /* ================================================
        VOLUME UDARA
        
-       V = Q × t
-    ================================================= */
+       V = Q_menit × t_menit
+    ================================================ */
 
     const airVolume =
-        Q * timeHour;
+
+        Q_minute *
+        duration;
 
 
 
@@ -2526,10 +2636,12 @@ function calculateExposure() {
        MASSA PM2.5 TERHIRUP
        
        M = C × V
-    ================================================= */
+    ================================================ */
 
     const inhaledMass =
-        C * airVolume;
+
+        C *
+        airVolume;
 
 
 
@@ -2538,16 +2650,18 @@ function calculateExposure() {
        
        M_deposited =
        M_inhaled × DF
-    ================================================= */
+    ================================================ */
 
     const depositedMass =
-        inhaledMass * DF;
+
+        inhaledMass *
+        DF;
 
 
 
     /* ================================================
        TAMPILKAN HASIL
-    ================================================= */
+    ================================================ */
 
     document.getElementById(
         "air-volume"
@@ -2662,6 +2776,10 @@ loadAirQuality();
 =====================================================
 
    600000 ms = 10 menit
+
+   Sistem mengecek data setiap 10 menit.
+   API hanya dipanggil kembali jika cache
+   sudah lebih dari 15 menit.
 
 ===================================================== */
 
