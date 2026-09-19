@@ -15,6 +15,53 @@
 
     <style>
 
+        /* ==========================================
+           TEMA WARNA (CSS VARIABLES)
+        ========================================== */
+
+        /* 1. Tema Default (Hijau Gelap / Dark Forest) */
+        :root {
+            --bg-main: #090d0a;
+            --bg-section: #0f1511;
+            --bg-card: #141c17;
+            --bg-input: #19241d;
+            --bg-formula: #111a13;
+            
+            --border-color: #1e2c22;
+            --border-hover: #388e3c;
+            
+            --text-primary: #f0f4f1;
+            --text-secondary: #b0c2b4;
+            --text-muted: #8fa394;
+            --accent-green: #81c784;
+            --accent-bright: #4caf50;
+            
+            --nav-bg: rgba(9, 13, 10, 0.82);
+            --hero-overlay: linear-gradient(90deg, rgba(9,13,10,0.92), rgba(9,13,10,0.65), rgba(9,13,10,0.85));
+        }
+
+        /* 2. Tema Terang (Hijau Sage / Light Mode) */
+        [data-theme="light"] {
+            --bg-main: #f4f7f4;
+            --bg-section: #eaf0eb;
+            --bg-card: #ffffff;
+            --bg-input: #ffffff;
+            --bg-formula: #e1ebe2;
+            
+            --border-color: #d0dad1;
+            --border-hover: #4a7c59;
+            
+            --text-primary: #1c2826;
+            --text-secondary: #354a3d;
+            --text-muted: #5e7365;
+            --accent-green: #2d6a4f;
+            --accent-bright: #355e3b;
+            
+            --nav-bg: rgba(244, 247, 244, 0.88);
+            --hero-overlay: linear-gradient(90deg, rgba(244,247,244,0.95), rgba(244,247,244,0.7), rgba(244,247,244,0.9));
+        }
+
+
         * {
             margin: 0;
             padding: 0;
@@ -34,11 +81,13 @@
                 Helvetica,
                 sans-serif;
 
-            background: #0b0b0b;
+            background: var(--bg-main);
 
-            color: #f5f5f5;
+            color: var(--text-primary);
 
             line-height: 1.6;
+
+            transition: background 0.3s, color 0.3s;
 
         }
 
@@ -67,13 +116,13 @@
             padding: 18px 7%;
 
             background:
-                rgba(10, 10, 10, 0.75);
+                var(--nav-bg);
 
             backdrop-filter: blur(12px);
 
             border-bottom:
                 1px solid
-                rgba(255,255,255,0.08);
+                var(--border-color);
 
         }
 
@@ -90,7 +139,7 @@
 
 
         .logo span {
-            color: #aaa;
+            color: var(--accent-green);
         }
 
 
@@ -100,6 +149,8 @@
 
             gap: 28px;
 
+            align-items: center;
+
             list-style: none;
 
         }
@@ -107,7 +158,7 @@
 
         nav a {
 
-            color: #ddd;
+            color: var(--text-secondary);
 
             text-decoration: none;
 
@@ -119,7 +170,24 @@
 
 
         nav a:hover {
-            color: white;
+            color: var(--accent-green);
+        }
+
+        /* Tombol Pilihan Tema */
+        .theme-toggle-btn {
+            background: var(--bg-input);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .theme-toggle-btn:hover {
+            border-color: var(--accent-green);
         }
 
 
@@ -145,12 +213,7 @@
 
             background:
 
-                linear-gradient(
-                    90deg,
-                    rgba(0,0,0,0.9),
-                    rgba(0,0,0,0.55),
-                    rgba(0,0,0,0.8)
-                ),
+                var(--hero-overlay),
 
                 url(
                     "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=80"
@@ -174,7 +237,7 @@
 
             letter-spacing: 4px;
 
-            color: #aaa;
+            color: var(--accent-green);
 
             margin-bottom: 18px;
 
@@ -200,7 +263,7 @@
 
 
         .hero h1 span {
-            color: #aaa;
+            color: var(--accent-green);
         }
 
 
@@ -208,7 +271,7 @@
 
             max-width: 650px;
 
-            color: #ccc;
+            color: var(--text-secondary);
 
             font-size: 17px;
 
@@ -231,7 +294,7 @@
 
         .section-label {
 
-            color: #777;
+            color: var(--accent-green);
 
             font-size: 12px;
 
@@ -259,7 +322,7 @@
         ========================= */
 
         .monitor-section {
-            background: #101010;
+            background: var(--bg-section);
         }
 
 
@@ -283,9 +346,9 @@
 
             border:
                 1px solid
-                #292929;
+                var(--border-color);
 
-            background: #151515;
+            background: var(--bg-card);
 
             display: flex;
 
@@ -300,7 +363,7 @@
 
         .monitor-card:hover {
 
-            border-color: #555;
+            border-color: var(--border-hover);
 
             transform:
                 translateY(-3px);
@@ -310,7 +373,7 @@
 
         .monitor-label {
 
-            color: #888;
+            color: var(--text-muted);
 
             font-size: 12px;
 
@@ -332,7 +395,7 @@
 
             font-size: 12px;
 
-            color: #888;
+            color: var(--text-muted);
 
         }
 
@@ -341,7 +404,7 @@
 
             margin-top: 20px;
 
-            color: #777;
+            color: var(--text-muted);
 
             font-size: 13px;
 
@@ -353,7 +416,7 @@
         ========================= */
 
         .estimate-section {
-            background: #0b0b0b;
+            background: var(--bg-main);
         }
 
 
@@ -371,11 +434,11 @@
 
         .panel {
 
-            background: #111;
+            background: var(--bg-card);
 
             border:
                 1px solid
-                #282828;
+                var(--border-color);
 
             padding: 30px;
 
@@ -400,7 +463,7 @@
 
             display: block;
 
-            color: #999;
+            color: var(--text-muted);
 
             font-size: 13px;
 
@@ -417,24 +480,26 @@
             padding:
                 14px 15px;
 
-            background: #191919;
+            background: var(--bg-input);
 
-            color: white;
+            color: var(--text-primary);
 
             border:
                 1px solid
-                #333;
+                var(--border-color);
 
             outline: none;
 
             font-size: 14px;
+
+            transition: 0.3s;
 
         }
 
 
         select:focus,
         input:focus {
-            border-color: #777;
+            border-color: var(--accent-bright);
         }
 
 
@@ -459,11 +524,11 @@
 
             padding: 18px;
 
-            background: #181818;
+            background: var(--bg-input);
 
             border:
                 1px solid
-                #292929;
+                var(--border-color);
 
         }
 
@@ -472,7 +537,7 @@
 
             display: block;
 
-            color: #777;
+            color: var(--text-muted);
 
             margin-bottom: 6px;
 
@@ -506,11 +571,11 @@
 
             padding: 25px;
 
-            background: #181818;
+            background: var(--bg-input);
 
             border:
                 1px solid
-                #292929;
+                var(--border-color);
 
         }
 
@@ -519,7 +584,7 @@
 
             display: block;
 
-            color: #888;
+            color: var(--text-muted);
 
             margin-bottom: 10px;
 
@@ -535,7 +600,7 @@
 
         .result-card span {
 
-            color: #888;
+            color: var(--text-muted);
 
             font-size: 13px;
 
@@ -548,18 +613,18 @@
 
             padding: 22px;
 
-            background: #151515;
+            background: var(--bg-formula);
 
             border-left:
-                2px solid
-                #777;
+                3px solid
+                var(--accent-bright);
 
         }
 
 
         .formula-box p {
 
-            color: #bbb;
+            color: var(--text-secondary);
 
             font-size: 14px;
 
@@ -576,7 +641,7 @@
 
             font-size: 19px;
 
-            color: white;
+            color: var(--text-primary);
 
         }
 
@@ -586,7 +651,7 @@
         ========================= */
 
         .about {
-            background: #101010;
+            background: var(--bg-section);
         }
 
 
@@ -597,7 +662,7 @@
 
         .about-content p {
 
-            color: #aaa;
+            color: var(--text-secondary);
 
             margin-bottom: 18px;
 
@@ -615,9 +680,9 @@
 
             border-top:
                 1px solid
-                #222;
+                var(--border-color);
 
-            color: #666;
+            color: var(--text-muted);
 
             font-size: 13px;
 
@@ -751,6 +816,12 @@
             <a href="#project">
                 Project
             </a>
+        </li>
+
+        <li>
+            <button id="theme-toggle" class="theme-toggle-btn">
+                🌙 Gelap
+            </button>
         </li>
 
     </ul>
@@ -1409,6 +1480,38 @@
 
 
 <script>
+
+/* =====================================================
+   THEME TOGGLE SWITCH (GELAP / TERANG)
+===================================================== */
+
+const themeToggleBtn = document.getElementById("theme-toggle");
+
+const savedTheme = localStorage.getItem("peta_theme");
+
+if (savedTheme === "light") {
+    document.documentElement.setAttribute("data-theme", "light");
+    if (themeToggleBtn) themeToggleBtn.textContent = "☀️ Terang";
+} else {
+    document.documentElement.setAttribute("data-theme", "dark");
+    if (themeToggleBtn) themeToggleBtn.textContent = "🌙 Gelap";
+}
+
+if (themeToggleBtn) {
+    themeToggleBtn.addEventListener("click", () => {
+        const currentTheme = document.documentElement.getAttribute("data-theme");
+        
+        if (currentTheme === "light") {
+            document.documentElement.setAttribute("data-theme", "dark");
+            localStorage.setItem("peta_theme", "dark");
+            themeToggleBtn.textContent = "🌙 Gelap";
+        } else {
+            document.documentElement.setAttribute("data-theme", "light");
+            localStorage.setItem("peta_theme", "light");
+            themeToggleBtn.textContent = "☀️ Terang";
+        }
+    });
+}
 
 
 /* =====================================================
