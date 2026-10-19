@@ -1335,6 +1335,107 @@ footer {
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
+    function showDailyInsight(inhaled, deposited) {
+  const popup = document.getElementById("dailyInsightPopup");
+
+  // Pastikan hasil perhitungan berupa angka yang valid
+  const validInhaled =
+    typeof inhaled === "number" &&
+    Number.isFinite(inhaled) &&
+    inhaled >= 0;
+
+  const validDeposited =
+    typeof deposited === "number" &&
+    Number.isFinite(deposited) &&
+    deposited >= 0;
+
+  if (!validInhaled || !validDeposited) {
+    alert("Hasil estimasi belum tersedia. Silakan hitung kembali.");
+    return;
+  }
+
+  // Tampilkan hasil aktual, bukan angka contoh
+  document.getElementById("insightInhaled").textContent =
+    inhaled.toLocaleString("id-ID", {
+      maximumFractionDigits: 6
+    });
+
+  document.getElementById("insightDeposited").textContent =
+    deposited.toLocaleString("id-ID", {
+      maximumFractionDigits: 6
+    });
+
+  const message = document.getElementById("insightMessage");
+  const fact = document.getElementById("insightFact");
+  const icon = document.getElementById("insightIcon");
+  const title = document.getElementById("insightTitle");
+
+  // Penjelasan disesuaikan dengan hasil estimasi
+  if (inhaled === 0) {
+    icon.textContent = "🌱";
+    title.textContent = "Mari pahami hasilmu";
+    message.textContent =
+      "Model memperkirakan massa PM2.5 terhirup sebesar 0 µg " +
+      "untuk parameter yang dihitung. Hasil ini bergantung pada " +
+      "data konsentrasi dan asumsi model yang digunakan.";
+    fact.textContent =
+      "Nilai nol pada hasil model tidak otomatis membuktikan " +
+      "bahwa udara benar-benar bebas dari partikel.";
+  } else {
+    icon.textContent = "🔬";
+    title.textContent = "Setiap napas punya cerita";
+
+    message.textContent =
+      "Dalam skenario yang kamu pilih, model memperkirakan " +
+      "massa PM2.5 terhirup sebesar " +
+      inhaled.toLocaleString("id-ID", {
+        maximumFractionDigits: 6
+      }) +
+      " µg. Dari jumlah tersebut, estimasi massa yang terdeposit " +
+      "adalah " +
+      deposited.toLocaleString("id-ID", {
+        maximumFractionDigits: 6
+      }) +
+      " µg berdasarkan faktor deposisi yang digunakan.";
+
+    fact.textContent =
+      "PM2.5 merupakan partikel berukuran sangat kecil. " +
+      "Sebagian partikel yang terhirup dapat terdeposit di " +
+      "saluran pernapasan. Besarnya deposisi diperkirakan " +
+      "menggunakan faktor deposisi (DF), bukan diukur langsung.";
+  }
+
+  popup.hidden = false;
+  document.getElementById("insightOkay").focus();
+}
+
+function closeDailyInsight() {
+  document.getElementById("dailyInsightPopup").hidden = true;
+}
+
+document
+  .getElementById("insightClose")
+  .addEventListener("click", closeDailyInsight);
+
+document
+  .getElementById("insightOkay")
+  .addEventListener("click", closeDailyInsight);
+
+document
+  .getElementById("dailyInsightPopup")
+  .addEventListener("click", function (event) {
+    if (event.target === this) {
+      closeDailyInsight();
+    }
+  });
+
+document.addEventListener("keydown", function (event) {
+  const popup = document.getElementById("dailyInsightPopup");
+
+  if (event.key === "Escape" && !popup.hidden) {
+    closeDailyInsight();
+  }
+});
 "use strict";
 
 /* =========================================================
@@ -2390,107 +2491,6 @@ setInterval(() => {
 setInterval(() => {
   fetchHistory();
 }, CONFIG.HISTORY_REFRESH_MS);
-function showDailyInsight(inhaled, deposited) {
-  const popup = document.getElementById("dailyInsightPopup");
-
-  // Pastikan hasil perhitungan berupa angka yang valid
-  const validInhaled =
-    typeof inhaled === "number" &&
-    Number.isFinite(inhaled) &&
-    inhaled >= 0;
-
-  const validDeposited =
-    typeof deposited === "number" &&
-    Number.isFinite(deposited) &&
-    deposited >= 0;
-
-  if (!validInhaled || !validDeposited) {
-    alert("Hasil estimasi belum tersedia. Silakan hitung kembali.");
-    return;
-  }
-
-  // Tampilkan hasil aktual, bukan angka contoh
-  document.getElementById("insightInhaled").textContent =
-    inhaled.toLocaleString("id-ID", {
-      maximumFractionDigits: 6
-    });
-
-  document.getElementById("insightDeposited").textContent =
-    deposited.toLocaleString("id-ID", {
-      maximumFractionDigits: 6
-    });
-
-  const message = document.getElementById("insightMessage");
-  const fact = document.getElementById("insightFact");
-  const icon = document.getElementById("insightIcon");
-  const title = document.getElementById("insightTitle");
-
-  // Penjelasan disesuaikan dengan hasil estimasi
-  if (inhaled === 0) {
-    icon.textContent = "🌱";
-    title.textContent = "Mari pahami hasilmu";
-    message.textContent =
-      "Model memperkirakan massa PM2.5 terhirup sebesar 0 µg " +
-      "untuk parameter yang dihitung. Hasil ini bergantung pada " +
-      "data konsentrasi dan asumsi model yang digunakan.";
-    fact.textContent =
-      "Nilai nol pada hasil model tidak otomatis membuktikan " +
-      "bahwa udara benar-benar bebas dari partikel.";
-  } else {
-    icon.textContent = "🔬";
-    title.textContent = "Setiap napas punya cerita";
-
-    message.textContent =
-      "Dalam skenario yang kamu pilih, model memperkirakan " +
-      "massa PM2.5 terhirup sebesar " +
-      inhaled.toLocaleString("id-ID", {
-        maximumFractionDigits: 6
-      }) +
-      " µg. Dari jumlah tersebut, estimasi massa yang terdeposit " +
-      "adalah " +
-      deposited.toLocaleString("id-ID", {
-        maximumFractionDigits: 6
-      }) +
-      " µg berdasarkan faktor deposisi yang digunakan.";
-
-    fact.textContent =
-      "PM2.5 merupakan partikel berukuran sangat kecil. " +
-      "Sebagian partikel yang terhirup dapat terdeposit di " +
-      "saluran pernapasan. Besarnya deposisi diperkirakan " +
-      "menggunakan faktor deposisi (DF), bukan diukur langsung.";
-  }
-
-  popup.hidden = false;
-  document.getElementById("insightOkay").focus();
-}
-
-function closeDailyInsight() {
-  document.getElementById("dailyInsightPopup").hidden = true;
-}
-
-document
-  .getElementById("insightClose")
-  .addEventListener("click", closeDailyInsight);
-
-document
-  .getElementById("insightOkay")
-  .addEventListener("click", closeDailyInsight);
-
-document
-  .getElementById("dailyInsightPopup")
-  .addEventListener("click", function (event) {
-    if (event.target === this) {
-      closeDailyInsight();
-    }
-  });
-
-document.addEventListener("keydown", function (event) {
-  const popup = document.getElementById("dailyInsightPopup");
-
-  if (event.key === "Escape" && !popup.hidden) {
-    closeDailyInsight();
-  }
-});
 </script>
 <!-- POPUP: YOUR DAILY INSIGHT -->
 <div id="dailyInsightPopup" class="insight-overlay" hidden>
