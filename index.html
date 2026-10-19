@@ -1327,8 +1327,11 @@ footer {
 
 <footer>
   <div class="container footer-row">
+    <center>
     <span>© PETA — Student Research Prototype</span>
     <span>Physics · Air Quality · Exposure Modeling</span>
+    <span>SMAN 1 Tarakan</span>
+    </center>
   </div>
 </footer>
 
@@ -1431,6 +1434,7 @@ document
 
 document.addEventListener("keydown", function (event) {
   const popup = document.getElementById("dailyInsightPopup");
+  console.log("Popup di temukan:", popup);
 
   if (event.key === "Escape" && !popup.hidden) {
     closeDailyInsight();
