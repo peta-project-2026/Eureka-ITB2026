@@ -1416,22 +1416,6 @@ function closeDailyInsight() {
   document.getElementById("dailyInsightPopup").hidden = true;
 }
 
-document
-  .getElementById("insightClose")
-  .addEventListener("click", closeDailyInsight);
-
-document
-  .getElementById("insightOkay")
-  .addEventListener("click", closeDailyInsight);
-
-document
-  .getElementById("dailyInsightPopup")
-  .addEventListener("click", function (event) {
-    if (event.target === this) {
-      closeDailyInsight();
-    }
-  });
-
 document.addEventListener("keydown", function (event) {
   const popup = document.getElementById("dailyInsightPopup");
   console.log("Popup di temukan:", popup);
@@ -2495,6 +2479,23 @@ setInterval(() => {
 setInterval(() => {
   fetchHistory();
 }, CONFIG.HISTORY_REFRESH_MS);
+
+document
+  .getElementById("insightClose")
+  .addEventListener("click", closeDailyInsight);
+
+document
+  .getElementById("insightOkay")
+  .addEventListener("click", closeDailyInsight);
+
+document
+  .getElementById("dailyInsightPopup")
+  .addEventListener("click", function (event) {
+    if (event.target === this) {
+      closeDailyInsight();
+    }
+  });
+  
 </script>
 
 <!-- POPUP: YOUR DAILY INSIGHT -->
