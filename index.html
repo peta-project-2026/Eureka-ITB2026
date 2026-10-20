@@ -1386,6 +1386,8 @@ function renderLiveData(data) {
   $("pmValue").textContent =
     data.pm25 === null ? "—" : numberFormat(data.pm25, 1);
 
+  $("pollutantValue").textContent = formatPollutant(data.pollutant);
+
   $("tempValue").textContent =
     data.temperature === null ? "—" : `${numberFormat(data.temperature, 1)}°C`;
 
@@ -1399,8 +1401,6 @@ function renderLiveData(data) {
 
   updateEstimate();
 }
-
-$("pollutantValue").textContent = formatPollutant(data.pollutant);
 
 function cacheIQAirData(data) {
   try {
