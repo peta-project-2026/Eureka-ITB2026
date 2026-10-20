@@ -1364,7 +1364,7 @@ try {
 function validIQAirConfig() {
   return (
     CONFIG.IQAIR_API_KEY &&
-    CONFIG.IQAIR_API_KEY !== "6b3bbbe6-af5b-4d41-9286-5cafa899618f"
+    CONFIG.IQAIR_API_KEY !== "ISI_API_KEY_IQAIR"
   );
 }
 
@@ -1633,7 +1633,7 @@ $("calculateBtn").addEventListener("click", () => {
 function validHistoryConfig() {
   return (
     CONFIG.HISTORY_WEB_APP_URL &&
-    CONFIG.HISTORY_WEB_APP_URL !== "https://script.google.com/macros/s/AKfycbz7mWSHTpiA2-sCkqj7p6jM3Xo1Etv8s0rjj35Hvjer/dev" &&
+    CONFIG.HISTORY_WEB_APP_URL !== "ISI_URL_WEB_APP_APPS_SCRIPT" &&
     CONFIG.HISTORY_WEB_APP_URL.startsWith("https://")
   );
 }
