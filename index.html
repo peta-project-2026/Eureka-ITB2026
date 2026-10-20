@@ -1509,18 +1509,6 @@ async function fetchIQAir(force = false) {
 
 $("refreshBtn").addEventListener("click", () => fetchIQAir(true));
 
-function formatPollutant(value) {
-  const pollutantMap = {
-    p1: "PM10",
-    p2: "PM2.5",
-    pm10: "PM10",
-    pm25: "PM2.5",
-    pm2_5: "PM2.5"
-  };
-
-  const key = String(value ?? "").trim().toLowerCase();
-  return pollutantMap[key] || value || "—";
-}
 /* =========================================================
    8. PERHITUNGAN MODEL PAPARAN
    Q (m³/jam) -> Q (m³/menit)
@@ -1942,6 +1930,19 @@ function renderDailyInsight() {
       "Insight akan muncul setelah data harian tersedia.";
     return;
   }
+
+function formatPollutant(value) {
+  const pollutantMap = {
+    p1: "PM10",
+    p2: "PM2.5",
+    pm10: "PM10",
+    pm25: "PM2.5",
+    pm2_5: "PM2.5"
+  };
+
+  const key = String(value ?? "").trim().toLowerCase();
+  return pollutantMap[key] || value || "—";
+}
 
   const latest = state.daily[state.daily.length - 1];
   const category = aqiCategory(latest.aqi);
