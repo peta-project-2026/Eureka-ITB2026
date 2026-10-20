@@ -1923,15 +1923,7 @@ window.addEventListener("resize", drawChart);
    11. INSIGHT HARIAN
    ========================================================= */
 
-function renderDailyInsight() {
-  if (!state.daily.length) {
-    $("dailyInsightTitle").textContent = "Belum ada data harian";
-    $("dailyInsightText").textContent =
-      "Insight akan muncul setelah data harian tersedia.";
-    return;
-  }
-
-function formatPollutant(value) {
+   function formatPollutant(value) {
   const pollutantMap = {
     p1: "PM10",
     p2: "PM2.5",
@@ -1943,6 +1935,14 @@ function formatPollutant(value) {
   const key = String(value ?? "").trim().toLowerCase();
   return pollutantMap[key] || value || "—";
 }
+
+function renderDailyInsight() {
+  if (!state.daily.length) {
+    $("dailyInsightTitle").textContent = "Belum ada data harian";
+    $("dailyInsightText").textContent =
+      "Insight akan muncul setelah data harian tersedia.";
+    return;
+  }
 
   const latest = state.daily[state.daily.length - 1];
   const category = aqiCategory(latest.aqi);
