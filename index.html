@@ -7,212 +7,6 @@
 <title>PETA — Platform Estimasi Takaran Aerosol</title>
 
 <style>
-    /* YOUR DAILY INSIGHT */
-.insight-overlay[hidden] {
-  display: none !important;
-}
-
-.insight-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: grid;
-  place-items: center;
-  overflow-y: auto;
-  padding: 20px;
-  background: rgba(3, 10, 7, 0.82);
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(9px);
-}
-
-.insight-card {
-  position: relative;
-  width: min(440px, 100%);
-  max-height: calc(100dvh - 40px);
-  overflow-y: auto;
-  padding: 27px;
-  border: 1px solid var(--border, #304438);
-  border-radius: 22px;
-  background: var(--surface, #111b16);
-  color: var(--text, #f0f5f1);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
-  animation: insightAppear 0.25s ease-out;
-}
-
-.insight-label {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: #91cba4;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 1.7px;
-}
-
-.insight-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #91cba4;
-  box-shadow: 0 0 10px #91cba4;
-}
-
-.insight-close {
-  position: absolute;
-  top: 14px;
-  right: 15px;
-  width: 34px;
-  height: 34px;
-  border: 1px solid var(--border, #304438);
-  border-radius: 50%;
-  background: transparent;
-  color: var(--text, #f0f5f1);
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.insight-icon {
-  display: grid;
-  place-items: center;
-  width: 62px;
-  height: 62px;
-  margin: 24px 0 17px;
-  border: 1px solid #4d795c;
-  border-radius: 18px;
-  background: rgba(91, 157, 108, 0.12);
-  font-size: 2rem;
-}
-
-.insight-kicker {
-  margin: 0;
-  color: #91cba4;
-  font-size: 0.67rem;
-  font-weight: 800;
-  letter-spacing: 1.3px;
-}
-
-.insight-card h2 {
-  margin: 10px 0;
-  font-size: 1.65rem;
-  line-height: 1.25;
-}
-
-.insight-card p {
-  font-size: 0.87rem;
-  line-height: 1.75;
-}
-
-#insightMessage {
-  color: var(--muted, #a9b9ae);
-}
-
-.insight-results {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  margin-top: 21px;
-}
-
-.insight-result {
-  padding: 14px;
-  border: 1px solid var(--border, #304438);
-  border-radius: 14px;
-  background: rgba(120, 180, 135, 0.06);
-}
-
-.insight-result span,
-.insight-result small {
-  display: block;
-  color: var(--muted, #a9b9ae);
-  font-size: 0.73rem;
-  line-height: 1.5;
-}
-
-.insight-result strong {
-  display: inline-block;
-  margin-top: 9px;
-  color: #91cba4;
-  font-size: clamp(1.15rem, 4vw, 1.55rem);
-  overflow-wrap: anywhere;
-}
-
-.insight-fact {
-  margin-top: 17px;
-  padding: 15px;
-  border-left: 3px solid #91cba4;
-  border-radius: 0 12px 12px 0;
-  background: rgba(120, 180, 135, 0.07);
-}
-
-.insight-fact-title {
-  color: #91cba4;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-}
-
-.insight-fact p {
-  margin: 8px 0 0;
-  color: var(--text, #f0f5f1);
-}
-
-.insight-card .insight-disclaimer {
-  margin: 15px 0;
-  color: var(--muted, #a9b9ae);
-  font-size: 0.7rem;
-}
-
-.insight-button {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-top: 18px;
-  padding: 14px 17px;
-  border: 0;
-  border-radius: 12px;
-  background: #91cba4;
-  color: #102017;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.insight-button:hover {
-  filter: brightness(1.08);
-}
-
-.insight-button:focus-visible,
-.insight-close:focus-visible {
-  outline: 2px solid #91cba4;
-  outline-offset: 3px;
-}
-
-@keyframes insightAppear {
-  from {
-    opacity: 0;
-    transform: translateY(12px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@media (max-width: 380px) {
-  .insight-card {
-    padding: 21px;
-  }
-
-  .insight-results {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .insight-card {
-    animation: none;
-  }
-}
 :root {
   color-scheme: dark;
   --bg: #09100c;
@@ -1091,20 +885,19 @@ footer {
           <div class="field">
             <label for="ageGroup">Kelompok usia</label>
             <select id="ageGroup">
-              <option value="Bayiku"> Bayi (<1 Tahun) </option>
-              <option value="Balita">Balita (1 dan <2 Tahun)
-              </option>
-              <option value="Anak_Kecil">Anak kecil (2 dan <3 Tahun)</option>
-              <option value="Anak (3 dan <6 Tahun)">Anak</option>
-              <option value="Anak_Sekolah">Anak sekolah (6 dan <11 Tahun)</option>
-              <option value="Remaja">Remaja (11 dan <16 tahun)</option>
-              <option value="Remaja_Akhir">Remaja akhir (16 dan <21 tahun)</option>
-              <option value="Dewasa" selected>Dewasa (21 dan <31 tahun)</option>
-              <option value="Dewasa">Dewasa (31 dan <41 tahun)</option>
-              <option value="Dewasa">Dewasa (41 dan <51 tahun)</option>
-              <option value="Dewasa_Tengah">Dewasa tengah (51 dan <61 Tahun)</option>
-              <option value="Lansia">Lansia (61 dan <71 Tahun)</option>
-              <option value="Lansia_Akhir">Lansia akhir (>71 Tahun)</option>
+              <option value="bayi">Bayi</option>
+              <option value="balita">Balita</option>
+              <option value="anak_kecil">Anak kecil</option>
+              <option value="anak">Anak</option>
+              <option value="anak_sekolah">Anak sekolah</option>
+              <option value="remaja">Remaja</option>
+              <option value="remaja_akhir">Remaja akhir</option>
+              <option value="dewasa" selected>Dewasa</option>
+              <option value="dewasa_31">Dewasa 31–40 tahun</option>
+              <option value="dewasa_41">Dewasa 41–50 tahun</option>
+              <option value="dewasa_tengah">Dewasa tengah</option>
+              <option value="lansia">Lansia</option>
+              <option value="lansia_akhir">Lansia akhir</option>
             </select>
           </div>
 
@@ -1328,103 +1121,14 @@ footer {
 
 <footer>
   <div class="container footer-row">
-    <center>
     <span>© PETA — Student Research Prototype</span>
     <span>Physics · Air Quality · Exposure Modeling</span>
-    <span>SMAN 1 Tarakan</span>
-    </center>
   </div>
 </footer>
 
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-    function showDailyInsight(inhaled, deposited) {
-  const popup = document.getElementById("dailyInsightPopup");
-
-  // Pastikan hasil perhitungan berupa angka yang valid
-  const validInhaled =
-    typeof inhaled === "number" &&
-    Number.isFinite(inhaled) &&
-    inhaled >= 0;
-
-  const validDeposited =
-    typeof deposited === "number" &&
-    Number.isFinite(deposited) &&
-    deposited >= 0;
-
-  if (!validInhaled || !validDeposited) {
-    alert("Hasil estimasi belum tersedia. Silakan hitung kembali.");
-    return;
-  }
-
-  // Tampilkan hasil aktual, bukan angka contoh
-  document.getElementById("insightInhaled").textContent =
-    inhaled.toLocaleString("id-ID", {
-      maximumFractionDigits: 6
-    });
-
-  document.getElementById("insightDeposited").textContent =
-    deposited.toLocaleString("id-ID", {
-      maximumFractionDigits: 6
-    });
-
-  const message = document.getElementById("insightMessage");
-  const fact = document.getElementById("insightFact");
-  const icon = document.getElementById("insightIcon");
-  const title = document.getElementById("insightTitle");
-
-  // Penjelasan disesuaikan dengan hasil estimasi
-  if (inhaled === 0) {
-    icon.textContent = "🌱";
-    title.textContent = "Mari pahami hasilmu";
-    message.textContent =
-      "Model memperkirakan massa PM2.5 terhirup sebesar 0 µg " +
-      "untuk parameter yang dihitung. Hasil ini bergantung pada " +
-      "data konsentrasi dan asumsi model yang digunakan.";
-    fact.textContent =
-      "Nilai nol pada hasil model tidak otomatis membuktikan " +
-      "bahwa udara benar-benar bebas dari partikel.";
-  } else {
-    icon.textContent = "🔬";
-    title.textContent = "Setiap napas punya cerita";
-
-    message.textContent =
-      "Dalam skenario yang kamu pilih, model memperkirakan " +
-      "massa PM2.5 terhirup sebesar " +
-      inhaled.toLocaleString("id-ID", {
-        maximumFractionDigits: 6
-      }) +
-      " µg. Dari jumlah tersebut, estimasi massa yang terdeposit " +
-      "adalah " +
-      deposited.toLocaleString("id-ID", {
-        maximumFractionDigits: 6
-      }) +
-      " µg berdasarkan faktor deposisi yang digunakan.";
-
-    fact.textContent =
-      "PM2.5 merupakan partikel berukuran sangat kecil. " +
-      "Sebagian partikel yang terhirup dapat terdeposit di " +
-      "saluran pernapasan. Besarnya deposisi diperkirakan " +
-      "menggunakan faktor deposisi (DF), bukan diukur langsung.";
-  }
-
-  popup.hidden = false;
-  document.getElementById("insightOkay").focus();
-}
-
-function closeDailyInsight() {
-  document.getElementById("dailyInsightPopup").hidden = true;
-}
-
-document.addEventListener("keydown", function (event) {
-  const popup = document.getElementById("dailyInsightPopup");
-  console.log("Popup di temukan:", popup);
-
-  if (event.key === "Escape" && !popup.hidden) {
-    closeDailyInsight();
-  }
-});
 "use strict";
 
 /* =========================================================
@@ -1435,7 +1139,7 @@ const CONFIG = {
   IQAIR_API_KEY: "6b3bbbe6-af5b-4d41-9286-5cafa899618f",
 
   // Tempel URL Web App Apps Script yang berakhir dengan /exec.
-  HISTORY_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbzU9C00Z54b4dxQX-1BqRRgEayWGQ4-1aGWRpnBSUF1hTEE_jmeXgaN98100imdbpZa/exec",
+  HISTORY_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbz7mWSHTpiA2-sCkqj7p6jM3Xo1Etv8s0rjj35Hvjer/dev",
 
   // Koordinat Tarakan.
   LATITUDE: 3.3274,
@@ -1927,12 +1631,10 @@ $("calculateBtn").addEventListener("click", () => {
    ========================================================= */
 
 function validHistoryConfig() {
-  return Boolean(
+  return (
     CONFIG.HISTORY_WEB_APP_URL &&
-    CONFIG.HISTORY_WEB_APP_URL.startsWith(
-      "https://script.google.com/macros/s/"
-    ) &&
-    CONFIG.HISTORY_WEB_APP_URL.endsWith("/exec")
+    CONFIG.HISTORY_WEB_APP_URL !== "https://script.google.com/macros/s/AKfycbz7mWSHTpiA2-sCkqj7p6jM3Xo1Etv8s0rjj35Hvjer/dev" &&
+    CONFIG.HISTORY_WEB_APP_URL.startsWith("https://")
   );
 }
 
@@ -2482,87 +2184,6 @@ setInterval(() => {
 setInterval(() => {
   fetchHistory();
 }, CONFIG.HISTORY_REFRESH_MS);
-
-document
-  .getElementById("insightClose")
-  .addEventListener("click", closeDailyInsight);
-
-document
-  .getElementById("insightOkay")
-  .addEventListener("click", closeDailyInsight);
-
-document
-  .getElementById("dailyInsightPopup")
-  .addEventListener("click", function (event) {
-    if (event.target === this) {
-      closeDailyInsight();
-    }
-  });
-  
 </script>
-
-<!-- POPUP: YOUR DAILY INSIGHT -->
-<div id="dailyInsightPopup" class="insight-overlay" hidden>
-  <section
-    class="insight-card"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="insightTitle"
-  >
-    <button
-      type="button"
-      id="insightClose"
-      class="insight-close"
-      aria-label="Tutup popup"
-    >×</button>
-
-    <div class="insight-label">
-      <span class="insight-dot"></span>
-      YOUR DAILY INSIGHT
-    </div>
-
-    <div class="insight-icon" id="insightIcon">🌿</div>
-
-    <p class="insight-kicker">UNDERSTANDING YOUR ESTIMATE</p>
-    <h2 id="insightTitle">Tahukah kamu?</h2>
-
-    <p id="insightMessage">
-      Hasil estimasi membantu menggambarkan perkiraan paparan PM2.5
-      berdasarkan konsentrasi udara, laju inhalasi, dan durasi aktivitas.
-    </p>
-
-    <div class="insight-results">
-      <div class="insight-result">
-        <span>PM2.5 terhirup</span>
-        <strong id="insightInhaled">—</strong>
-        <small>µg</small>
-      </div>
-
-      <div class="insight-result">
-        <span>PM2.5 terdeposit</span>
-        <strong id="insightDeposited">—</strong>
-        <small>µg</small>
-      </div>
-    </div>
-
-    <div class="insight-fact">
-      <span class="insight-fact-title">DID YOU KNOW?</span>
-      <p id="insightFact">
-        Tidak semua partikel yang terhirup akan terdeposit di saluran
-        pernapasan. Model menggunakan faktor deposisi untuk memperkirakan
-        bagian yang terdeposit.
-      </p>
-    </div>
-
-    <p class="insight-disclaimer">
-      Hasil ini merupakan estimasi model, bukan pengukuran biologis
-      langsung atau diagnosis medis.
-    </p>
-
-    <button type="button" id="insightOkay" class="insight-button">
-      Mengerti <span aria-hidden="true">→</span>
-    </button>
-  </section>
-</div>
 </body>
 </html>
