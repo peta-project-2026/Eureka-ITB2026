@@ -7,19 +7,39 @@
 <title>PETA — Platform Estimasi Takaran Aerosol</title>
 
 <style>
+
 :root {
   color-scheme: dark;
-  --bg: #09100c;
-  --surface: #101a14;
-  --surface2: #152219;
-  --text: #edf5ef;
-  --muted: #9aada0;
-  --border: #293b30;
-  --green: #78dfa0;
-  --green-dark: #183c28;
+
+  /* DARK SCIENTIFIC */
+  --bg: #09130f;
+  --surface: #101e17;
+  --surface2: #16291f;
+  --text: #e8f4eb;
+  --muted: #9bb5a3;
+  --border: #294536;
+  --green: #86e6a5;
+  --green-dark: #1b422d;
   --danger: #ff837e;
-  --shadow: 0 18px 50px #00000020;
+  --shadow: 0 18px 50px #00000035;
 }
+
+/* SOFT FOREST — LIGHT MODE */
+body.light {
+  color-scheme: light;
+
+  --bg: #edf4e9;
+  --surface: #f8fbf5;
+  --surface2: #e1ecdf;
+  --text: #243d2d;
+  --muted: #637968;
+  --border: #cbdcc9;
+  --green: #34774b;
+  --green-dark: #d5e8d5;
+  --danger: #bd4945;
+  --shadow: 0 18px 50px #29453612;
+}
+
 
 body.light {
   color-scheme: light;
@@ -50,7 +70,7 @@ body {
       rgba(4, 17, 11, 0.72),
       rgba(4, 17, 11, 0.85)
     ),
-background: url("bgweb.jpeg") center / cover no-repeat fixed;
+    url("eurekaitb/kebutuhan/bgweb.jpeg") center / cover no-repeat fixed;
 
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, sans-serif;
