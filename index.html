@@ -2287,6 +2287,10 @@ console.log(
       .filter(item => item.aqi !== null)
       .sort((a, b) => a.date - b.date);
 
+    console.log("HASIL NORMALISASI DAILY:", state.daily);
+console.log("JUMLAH DATA DAILY:", state.daily.length);
+console.log("HASIL NORMALISASI MONTHLY:", state.monthly);
+
     // Daily data dipakai untuk grafik dan kalender agar setiap tanggal
     // merepresentasikan data yang tersedia pada tingkat harian.
     // Monthly data dipakai sebagai fallback bila tanggal hanya tersedia
