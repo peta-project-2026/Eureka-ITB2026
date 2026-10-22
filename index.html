@@ -6,43 +6,40 @@
 <meta name="theme-color" content="#0b120e">
 <title>PETA — Platform Estimasi Takaran Aerosol</title>
 
+
 <style>
 
 /* =========================================
-   TEMA DEFAULT — DARK FOREST
-   Warna lama PETA-KARHUTLA
+   PETA-KARHUTLA — LIGHT SAGE THEME
+   Satu tone warna, forest background tetap
    ========================================= */
+
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg-main: #09100c;
-  --bg-section: #101a14;
-  --bg-card: #101a14;
-  --bg-input: #152219;
-  --bg-formula: #111a13;
+  --bg-main: #F4F7F4;
+  --bg-section: #EAF0EB;
+  --bg-card: #FFFFFF;
+  --bg-input: #FFFFFF;
+  --bg-formula: #E1EBE2;
 
-  --border-color: #293b30;
-  --border-hover: #78dfa0;
+  --border-color: #D0DAD1;
+  --border-hover: #4A7C59;
 
-  --text-primary: #edf5ef;
-  --text-secondary: #9aada0;
-  --text-muted: #9aada0;
+  --text-primary: #1C2826;
+  --text-secondary: #354A3D;
+  --text-muted: #5E7365;
 
-  --accent-green: #78dfa0;
-  --accent-bright: #78dfa0;
+  --accent-green: #2D6A4F;
+  --accent-bright: #355E3B;
 
-  --nav-bg: rgba(9, 16, 12, 0.82);
-  --hero-overlay: linear-gradient(
-    90deg,
-    rgba(9, 16, 12, 0.92),
-    rgba(9, 16, 12, 0.65),
-    rgba(9, 16, 12, 0.85)
-  );
+  --nav-bg: rgba(232, 240, 235, 0.88);
+  --hero-overlay: none;
 
-  --danger: #ff837e;
-  --shadow: 0 18px 50px #00000020;
+  --danger: #B42318;
+  --shadow: 0 18px 50px #00000012;
 
-  /* Alias untuk kompatibilitas dengan CSS lama */
+  /* Alias kompatibilitas CSS lama */
   --bg: var(--bg-main);
   --surface: var(--bg-card);
   --surface2: var(--bg-section);
@@ -50,67 +47,24 @@
   --muted: var(--text-muted);
   --border: var(--border-color);
   --green: var(--accent-green);
-  --green-dark: #183c28;
+  --green-dark: #DCEBE0;
 }
 
 /* =========================================
-   TEMA TERANG — LIGHT SAGE
+   RESET DAN DASAR
    ========================================= */
-body.light,
-[data-theme="light"] {
-  color-scheme: light;
 
-  --bg-main: #f4f7f4;
-  --bg-section: #eaf0eb;
-  --bg-card: #ffffff;
-  --bg-input: #ffffff;
-  --bg-formula: #e1ebe2;
-
-  --border-color: #d0dad1;
-  --border-hover: #4a7c59;
-
-  --text-primary: #1c2826;
-  --text-secondary: #354a3d;
-  --text-muted: #5e7365;
-
-  --accent-green: #2d6a4f;
-  --accent-bright: #355e3b;
-
-  --nav-bg: rgba(244, 247, 244, 0.88);
-  --hero-overlay: linear-gradient(
-    90deg,
-    rgba(244, 247, 244, 0.95),
-    rgba(244, 247, 244, 0.70),
-    rgba(244, 247, 244, 0.90)
-  );
-
-  --danger: #b42318;
-  --shadow: 0 18px 50px #00000012;
-
-  /* Alias untuk kompatibilitas dengan CSS lama */
-  --bg: var(--bg-main);
-  --surface: var(--bg-card);
-  --surface2: var(--bg-section);
-  --text: var(--text-primary);
-  --muted: var(--text-muted);
-  --border: var(--border-color);
-  --green: var(--accent-green);
-  --green-dark: #dcebe0;
+* {
+  box-sizing: border-box;
 }
-
-
-* { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 85px;
 }
 
-
-
 body {
   margin: 0;
-
   background:
     linear-gradient(
       180deg,
@@ -119,39 +73,54 @@ body {
     ),
     url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=85")
     center center / cover no-repeat fixed;
+  background-color: #173C2C;
 
-  background-color: #173c2c;
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, sans-serif;
   line-height: 1.65;
   transition: background-color .25s, color .25s;
 }
 
+button,
+select,
+input {
+  font: inherit;
+}
 
+button,
+select {
+  cursor: pointer;
+}
 
-button, select, input { font: inherit; }
-button, select { cursor: pointer; }
-
-button:focus-visible, select:focus-visible, a:focus-visible {
+button:focus-visible,
+select:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--green);
   outline-offset: 3px;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
 .container {
   width: min(1120px, calc(100% - 36px));
   margin: auto;
 }
 
+/* =========================================
+   NAVIGASI UTAMA
+   ========================================= */
+
 header {
   position: sticky;
   z-index: 20;
   top: 0;
   border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  background: color-mix(in srgb, var(--bg) 93%, transparent);
-  backdrop-filter: blur(16px);
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .nav {
@@ -168,7 +137,9 @@ header {
   letter-spacing: .08em;
 }
 
-.brand span { color: var(--green); }
+.brand span {
+  color: var(--green);
+}
 
 .nav-right {
   display: flex;
@@ -183,7 +154,13 @@ header {
   font-size: .86rem;
 }
 
-.nav-links a:hover { color: var(--green); }
+.nav-links a:hover {
+  color: var(--green);
+}
+
+/* =========================================
+   BUTTON
+   ========================================= */
 
 .btn {
   border: 1px solid var(--border);
@@ -195,12 +172,14 @@ header {
   font-size: .86rem;
 }
 
-.btn:hover { border-color: var(--green); }
+.btn:hover {
+  border-color: var(--green);
+}
 
 .btn-primary {
   background: var(--green);
   border-color: var(--green);
-  color: #092012;
+  color: #FFFFFF;
 }
 
 .btn-primary:disabled {
@@ -208,13 +187,26 @@ header {
   cursor: wait;
 }
 
+/* =========================================
+   HERO
+   Background foto hutan tetap dipertahankan
+   ========================================= */
+
 .hero {
   position: relative;
   overflow: hidden;
   padding: 88px 0 72px;
   background:
-    radial-gradient(ellipse at 80% 15%, #2b70432b, transparent 42%),
-    radial-gradient(ellipse at 10% 100%, #17452a33, transparent 50%);
+    radial-gradient(
+      ellipse at 80% 15%,
+      rgba(43, 112, 67, 0.17),
+      transparent 42%
+    ),
+    radial-gradient(
+      ellipse at 10% 100%,
+      rgba(23, 69, 42, 0.20),
+      transparent 50%
+    );
   border-bottom: 1px solid var(--border);
 }
 
@@ -234,11 +226,13 @@ header {
   letter-spacing: -.055em;
 }
 
-.hero h1 span { color: var(--green); }
+.hero h1 span {
+  color: #C8E5CE;
+}
 
 .hero p {
   max-width: 720px;
-  color: var(--muted);
+  color: #F1F7F1;
   font-size: 1.02rem;
 }
 
@@ -253,10 +247,10 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 99px;
   padding: 7px 12px;
-  color: var(--muted);
+  color: #F1F7F1;
   font-size: .73rem;
 }
 
@@ -264,25 +258,38 @@ header {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--green);
+  background: #B8DCC0;
 }
 
-section { padding: 66px 0; }
+/* =========================================
+   SECTION
+   ========================================= */
 
-.section-head { margin-bottom: 25px; }
+section {
+  padding: 66px 0;
+}
+
+.section-head {
+  margin-bottom: 25px;
+}
 
 .section-head h2 {
   font-size: clamp(1.65rem, 4vw, 2.4rem);
   line-height: 1.2;
   margin: 8px 0;
   letter-spacing: -.035em;
+  color: var(--text-primary);
 }
 
 .section-head p {
   max-width: 720px;
   margin: 0;
-  color: var(--muted);
+  color: var(--text-secondary);
 }
+
+/* =========================================
+   GRID DAN CARD
+   ========================================= */
 
 .grid {
   display: grid;
@@ -295,7 +302,8 @@ section { padding: 66px 0; }
   padding: 22px;
   border: 1px solid var(--border);
   border-radius: 18px;
-  background: var(--surface);
+  background: #FFFFFF;
+  color: var(--text-primary);
   box-shadow: var(--shadow);
 }
 
@@ -308,7 +316,7 @@ section { padding: 66px 0; }
 
 .card-label {
   font-size: .74rem;
-  color: var(--muted);
+  color: var(--text-muted);
   font-weight: 800;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -323,9 +331,21 @@ section { padding: 66px 0; }
   overflow-wrap: anywhere;
 }
 
-.green { color: var(--green); }
-.muted { color: var(--muted); }
-.small { font-size: .82rem; }
+.green {
+  color: var(--green);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: .82rem;
+}
+
+/* =========================================
+   STATUS KUALITAS UDARA
+   ========================================= */
 
 .status {
   display: inline-block;
@@ -336,21 +356,28 @@ section { padding: 66px 0; }
   font-weight: 800;
 }
 
-.status.good { color: #6cdb96; }
-.status.moderate { color: #e8ca70; }
-.status.bad { color: #ffab75; }
-.status.verybad { color: #ff837e; }
+.status.good { color: #267342; }
+.status.moderate { color: #85650B; }
+.status.bad { color: #A65322; }
+.status.verybad { color: #A52B2B; }
 
 .notice {
   margin-top: 16px;
   padding: 13px 15px;
-  background: var(--surface2);
+  background: var(--bg-formula);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .83rem;
 }
 
-.notice strong { color: var(--text); }
+.notice strong {
+  color: var(--text-primary);
+}
+
+/* =========================================
+   TOOLBAR
+   ========================================= */
 
 .section-toolbar {
   display: flex;
@@ -367,6 +394,10 @@ section { padding: 66px 0; }
   gap: 8px;
 }
 
+/* =========================================
+   GRAFIK
+   ========================================= */
+
 .chart-wrap {
   height: 300px;
   position: relative;
@@ -379,6 +410,10 @@ canvas {
   height: 100%;
 }
 
+/* =========================================
+   INSIGHT BANNER
+   ========================================= */
+
 .insight-banner {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -386,11 +421,9 @@ canvas {
   align-items: start;
   margin-top: 18px;
   padding: 22px;
-  border: 1px solid #78dfa044;
+  border: 1px solid #D0DAD1;
   border-radius: 17px;
-  background:
-    radial-gradient(ellipse at 100% 0%, #78dfa018, transparent 55%),
-    var(--surface);
+  background: #FFFFFF;
 }
 
 .insight-symbol {
@@ -399,14 +432,28 @@ canvas {
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: var(--green-dark);
+  background: #DCEBE0;
+  color: #2D6A4F;
   font-size: 1.45rem;
 }
 
-.insight-banner h3 { margin: 2px 0 6px; }
-.insight-banner p { margin: 0; color: var(--muted); }
+.insight-banner h3 {
+  margin: 2px 0 6px;
+  color: var(--text-primary);
+}
 
-.monthly-panel { margin-top: 18px; }
+.insight-banner p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+/* =========================================
+   KALENDER
+   ========================================= */
+
+.monthly-panel {
+  margin-top: 18px;
+}
 
 .month-nav {
   display: flex;
@@ -416,7 +463,9 @@ canvas {
   margin: 12px 0 20px;
 }
 
-.month-nav h3 { margin: 0; }
+.month-nav h3 {
+  margin: 0;
+}
 
 .calendar {
   display: grid;
@@ -427,7 +476,7 @@ canvas {
 .weekday {
   text-align: center;
   font-size: .72rem;
-  color: var(--muted);
+  color: var(--text-muted);
   padding: 7px 0;
 }
 
@@ -441,8 +490,8 @@ canvas {
   gap: 2px;
   border-radius: 11px;
   border: 1px solid var(--border);
-  color: var(--text);
-  background: var(--surface2);
+  color: var(--text-primary);
+  background: #FFFFFF;
   padding: 4px;
 }
 
@@ -451,22 +500,55 @@ canvas {
   cursor: default;
 }
 
-.day:not(:disabled):hover { outline: 1px solid var(--green); }
+.day:not(:disabled):hover {
+  outline: 1px solid var(--green);
+}
 
 .day.selected {
   outline: 2px solid var(--green);
   outline-offset: 1px;
 }
 
-.day .date-num { font-weight: 900; font-size: .91rem; }
-.day .date-aqi { font-size: .65rem; }
+.day .date-num {
+  font-weight: 900;
+  font-size: .91rem;
+}
 
-.day.level-good { background: #164b30; color: #d6ffe3; }
-.day.level-moderate { background: #66531b; color: #fff1bc; }
-.day.level-sensitive { background: #713d20; color: #ffe0c9; }
-.day.level-unhealthy { background: #6d2828; color: #ffe0df; }
-.day.level-verybad { background: #57204c; color: #ffe1f8; }
-.day.level-hazardous { background: #532020; color: #fff; }
+.day .date-aqi {
+  font-size: .65rem;
+}
+
+/* Warna status kalender versi terang */
+
+.day.level-good {
+  background: #D8EBDD;
+  color: #205C38;
+}
+
+.day.level-moderate {
+  background: #F6EBC5;
+  color: #71530A;
+}
+
+.day.level-sensitive {
+  background: #F8DDC8;
+  color: #87451E;
+}
+
+.day.level-unhealthy {
+  background: #F4D5D5;
+  color: #8B2929;
+}
+
+.day.level-verybad {
+  background: #EED8EA;
+  color: #79376C;
+}
+
+.day.level-hazardous {
+  background: #EBCBCB;
+  color: #702020;
+}
 
 .legend {
   display: flex;
@@ -474,10 +556,14 @@ canvas {
   gap: 12px;
   margin-top: 15px;
   font-size: .74rem;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
-.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 
 .legend-dot {
   width: 10px;
@@ -485,15 +571,21 @@ canvas {
   border-radius: 3px;
 }
 
+/* =========================================
+   DETAIL KALENDER
+   ========================================= */
+
 .detail-box {
   margin-top: 20px;
   border: 1px solid var(--border);
-  background: var(--surface2);
+  background: #FFFFFF;
   padding: 18px;
   border-radius: 15px;
 }
 
-.detail-box h4 { margin: 0 0 12px; }
+.detail-box h4 {
+  margin: 0 0 12px;
+}
 
 .detail-grid {
   display: grid;
@@ -505,11 +597,12 @@ canvas {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px;
+  background: var(--bg-section);
 }
 
 .detail-item span {
   display: block;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: .75rem;
 }
 
@@ -517,7 +610,12 @@ canvas {
   display: block;
   margin-top: 4px;
   overflow-wrap: anywhere;
+  color: var(--text-primary);
 }
+
+/* =========================================
+   FORM ESTIMASI
+   ========================================= */
 
 .form-grid {
   display: grid;
@@ -530,6 +628,7 @@ canvas {
   margin-bottom: 8px;
   font-size: .83rem;
   font-weight: 800;
+  color: var(--text-primary);
 }
 
 .field select {
@@ -538,8 +637,8 @@ canvas {
   padding: 10px;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: var(--surface2);
-  color: var(--text);
+  background: #FFFFFF;
+  color: var(--text-primary);
 }
 
 .field .readonly {
@@ -548,19 +647,27 @@ canvas {
   align-items: center;
   padding: 10px;
   border: 1px solid var(--border);
-  background: var(--surface2);
+  background: var(--bg-section);
   border-radius: 10px;
+  color: var(--text-primary);
 }
+
+/* =========================================
+   HASIL ESTIMASI
+   ========================================= */
 
 .result-main {
   padding: 24px;
   margin-top: 18px;
   border-radius: 16px;
-  background: var(--green-dark);
-  border: 1px solid #78dfa044;
+  background: #E1EBE2;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
 }
 
-.result-main .big-number { color: var(--green); }
+.result-main .big-number {
+  color: var(--green);
+}
 
 .result-pair {
   display: grid;
@@ -573,17 +680,25 @@ canvas {
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 15px;
+  background: #FFFFFF;
+  color: var(--text-primary);
 }
 
-.result-mini .big-number { font-size: 1.5rem; }
-  
-  /* Indikator kualitas udara pada kartu hasil estimasi */
+.result-mini .big-number {
+  font-size: 1.5rem;
+}
+
+/* =========================================
+   INDIKATOR UDARA PADA HASIL ESTIMASI
+   ========================================= */
+
 .air-insight {
   margin-top: 18px;
   padding: 18px;
   border: 1px solid var(--border);
   border-radius: 15px;
-  background: var(--surface2);
+  background: #FFFFFF;
+  color: var(--text-primary);
   min-width: 0;
 }
 
@@ -633,7 +748,7 @@ canvas {
 
 .air-guidance p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .88rem;
 }
 
@@ -651,11 +766,26 @@ canvas {
   }
 }
 
-.exposure-insight { margin-top: 25px; }
+/* =========================================
+   EXPOSURE INSIGHT
+   ========================================= */
 
-.insight-heading { margin-bottom: 20px; }
-.insight-heading h3 { margin: 8px 0; font-size: 1.55rem; }
-.insight-heading p { color: var(--muted); }
+.exposure-insight {
+  margin-top: 25px;
+}
+
+.insight-heading {
+  margin-bottom: 20px;
+}
+
+.insight-heading h3 {
+  margin: 8px 0;
+  font-size: 1.55rem;
+}
+
+.insight-heading p {
+  color: var(--text-secondary);
+}
 
 .insight-label {
   font-size: .7rem;
@@ -669,14 +799,22 @@ canvas {
   align-items: flex-start;
   gap: 15px;
   padding: 20px;
-  background: var(--surface2);
+  background: #FFFFFF;
+  color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: 15px;
   margin-bottom: 16px;
 }
 
-.insight-result h4 { margin: 5px 0; font-size: 1.1rem; }
-.insight-result p { margin: 0; color: var(--muted); }
+.insight-result h4 {
+  margin: 5px 0;
+  font-size: 1.1rem;
+}
+
+.insight-result p {
+  margin: 0;
+  color: var(--text-secondary);
+}
 
 .insight-small {
   font-size: .7rem;
@@ -693,29 +831,43 @@ canvas {
 
 .insight-card {
   padding: 18px;
-  background: var(--surface);
+  background: #FFFFFF;
+  color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: 14px;
 }
 
-.insight-card h4 { margin: 8px 0; }
-.insight-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+.insight-card h4 {
+  margin: 8px 0;
+}
+
+.insight-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: .88rem;
+}
 
 .insight-flow {
   padding: 20px;
   margin-top: 17px;
   border: 1px solid var(--border);
   border-radius: 15px;
-  background: var(--surface);
+  background: #FFFFFF;
+  color: var(--text-primary);
 }
 
-.flow-title h4 { margin: 4px 0 17px; }
+.flow-title h4 {
+  margin: 4px 0 17px;
+}
 
-/* The Science Behind It: tahapan vertikal */
+/* =========================================
+   THE SCIENCE BEHIND IT
+   ========================================= */
+
 .flow-steps {
   display: flex;
   flex-direction: column;
-  gap: 24x;
+  gap: 24px;
 }
 
 .flow-step {
@@ -727,7 +879,8 @@ canvas {
   padding: 18px;
   border: 1px solid var(--border);
   border-radius: 13px;
-  background: var(--surface2);
+  background: #FFFFFF;
+  color: var(--text-primary);
   margin-bottom: 12px;
 }
 
@@ -748,11 +901,12 @@ canvas {
   margin: 6px 0;
   font-size: .98rem;
   line-height: 1.4;
+  color: var(--text-primary);
 }
 
 .flow-step small {
   display: block;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .8rem;
   line-height: 1.5;
 }
@@ -771,7 +925,7 @@ canvas {
   padding: 9px 11px;
   border: 1px solid var(--border);
   border-radius: 9px;
-  background: var(--surface);
+  background: var(--bg-section);
   color: var(--green);
   font-size: .8rem;
   font-weight: 800;
@@ -796,7 +950,7 @@ canvas {
 .flow-details p {
   grid-column: 1 / -1;
   margin: 12px 0 0;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .85rem;
   line-height: 1.7;
 }
@@ -807,7 +961,7 @@ canvas {
   border: 1px solid var(--border);
   border-radius: 9px;
   color: var(--green);
-  background: var(--surface);
+  background: var(--bg-formula);
   font-size: .86rem;
   font-weight: 800;
 }
@@ -828,19 +982,33 @@ canvas {
   }
 }
 
+/* =========================================
+   CATATAN INSIGHT
+   ========================================= */
+
 .insight-note {
   display: flex;
   gap: 10px;
   padding: 15px;
   margin-top: 16px;
-  background: var(--surface2);
+  background: var(--bg-formula);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .82rem;
 }
 
-.insight-note p { margin: 0; }
-.insight-note strong { color: var(--text); }
+.insight-note p {
+  margin: 0;
+}
+
+.insight-note strong {
+  color: var(--text-primary);
+}
+
+/* =========================================
+   ABOUT
+   ========================================= */
 
 .about-grid {
   display: grid;
@@ -851,18 +1019,30 @@ canvas {
 .about-card {
   padding: 20px;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: #FFFFFF;
+  color: var(--text-primary);
   border-radius: 15px;
 }
 
-.about-card h3 { margin-top: 0; }
-.about-card p { color: var(--muted); font-size: .9rem; }
+.about-card h3 {
+  margin-top: 0;
+}
+
+.about-card p {
+  color: var(--text-secondary);
+  font-size: .9rem;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
 
 footer {
   border-top: 1px solid var(--border);
   padding: 30px 0;
-  color: var(--muted);
+  color: var(--text-secondary);
   font-size: .8rem;
+  background: rgba(232, 240, 235, 0.92);
 }
 
 .footer-row {
@@ -871,6 +1051,10 @@ footer {
   flex-wrap: wrap;
   gap: 12px;
 }
+
+/* =========================================
+   TOAST
+   ========================================= */
 
 #toast {
   position: fixed;
@@ -881,93 +1065,22 @@ footer {
   width: max-content;
   max-width: calc(100% - 32px);
   padding: 12px 17px;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--text-primary);
+  color: #FFFFFF;
   border-radius: 12px;
   box-shadow: var(--shadow);
   font-size: .85rem;
   display: none;
 }
 
-@media (max-width: 760px) {
-  .nav-links { display: none; }
-  .hero { padding: 60px 0; }
-  section { padding: 48px 0; }
+/* =========================================
+   NAVIGASI SECTION 01–04
+   ========================================= */
 
-  .span-8, .span-7, .span-6, .span-5, .span-4 {
-    grid-column: span 12;
-  }
-
-  .about-grid { grid-template-columns: 1fr; }
-  .flow-steps { flex-direction: column; }
-  .flow-arrow { transform: rotate(90deg); text-align: center; }
-}
-
-@media (max-width: 480px) {
-  .container { width: calc(100% - 24px); }
-  .card { padding: 17px; }
-  .form-grid, .result-pair, .insight-grid { grid-template-columns: 1fr; }
-  .detail-grid { grid-template-columns: 1fr; }
-  .day { min-height: 48px; }
-  .day .date-aqi { font-size: .57rem; }
-  .calendar { gap: 4px; }
-}
-  
-  /* ==================================
-   PETA — FOREST BACKGROUND THEME
-   ================================== */
-
-/* Area utama dibuat transparan */
-main,
-section,
-.container {
-  background-color: transparent;
-}
-
-/* Navbar */
-header,
-nav,
-.navbar {
-  background: rgba(9, 24, 17, 0.88);
-  backdrop-filter: blur(12px);
-}
-
-/* Kartu mengikuti tema aktif */
-.card,
-.flow-step,
-.air-insight,
-.result-card {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-  backdrop-filter: blur(8px);
-}
-
-/* Teks sekunder mengikuti tema aktif */
-.card p,
-.flow-step small,
-.air-insight p {
-  color: var(--muted);
-}
-
-/* Hero: hilangkan overlay lama yang terlalu gelap */
-.hero {
-  background: transparent !important;
-}
-
-/* Tampilan HP */
-@media (max-width: 768px) {
-  body {
-    background-attachment: scroll !important;
-    background-position: center top;
-  }
-}
-  
-/* NAVIGASI SECTION 01-04 */
 .section-nav {
   position: sticky;
-  top: 62px;
-  z-index: 100;
+  top: 70px;
+  z-index: 19;
   display: flex;
   align-items: center;
   gap: 28px;
@@ -975,11 +1088,11 @@ nav,
   overflow-x: auto;
   white-space: nowrap;
 
-  background: rgba(10, 18, 15, 0.92);
+  background: rgba(232, 240, 235, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid var(--border);
   scrollbar-width: none;
 }
 
@@ -989,33 +1102,20 @@ nav,
 
 .section-nav a {
   flex-shrink: 0;
-  color: #c5d0c7;
+  color: var(--text-secondary);
   text-decoration: none;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.2px;
-  transition: color 0.2s ease;
+  transition: color .2s ease;
 }
 
 .section-nav a:hover {
-  color: #b6d89b;
+  color: var(--green);
 }
 
-/* TAMPILAN HP */
-@media (max-width: 600px) {
-  .section-nav {
-    top: 58px;
-    gap: 24px;
-    padding: 14px 18px;
-  }
+/* Jarak saat navigasi section diklik */
 
-  .section-nav a {
-    font-size: 10px;
-    letter-spacing: 0.8px;
-  }
-}
-
-/* JARAK SAAT MENU DIKLIK */
 #monitor,
 #history,
 #estimate,
@@ -1023,20 +1123,17 @@ nav,
   scroll-margin-top: 140px;
 }
 
-
 /* =========================================
-   LIGHT SAGE — SOLID SURFACES
+   PERATAAN WARNA LIGHT SAGE
    ========================================= */
 
-header,
-header .section-nav {
-  background: #ffffff;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+main,
+.container {
+  background-color: transparent;
 }
 
 main section:not(.hero) {
-  background-color: var(--bg-section);
+  background-color: rgba(234, 240, 235, 0.96);
 }
 
 .card,
@@ -1047,8 +1144,9 @@ main section:not(.hero) {
 .metric-card,
 .chart-card,
 .calendar-card {
-  background: #ffffff;
-  border-color: var(--border-color);
+  background: #FFFFFF;
+  color: var(--text-primary);
+  border-color: var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -1060,15 +1158,16 @@ main section:not(.hero) {
 .insight,
 .info-panel {
   background: var(--bg-formula);
-  border-color: var(--border-color);
+  border-color: var(--border);
+  color: var(--text-secondary);
 }
 
 input,
 select,
 textarea {
   color: var(--text-primary);
-  background: var(--bg-input);
-  border-color: var(--border-color);
+  background: #FFFFFF;
+  border: 1px solid var(--border);
 }
 
 input::placeholder,
@@ -1076,7 +1175,97 @@ textarea::placeholder {
   color: var(--text-muted);
 }
 
+/* =========================================
+   RESPONSIVE TABLET DAN HP
+   ========================================= */
+
+@media (max-width: 760px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    padding: 60px 0;
+  }
+
+  section {
+    padding: 48px 0;
+  }
+
+  .span-8,
+  .span-7,
+  .span-6,
+  .span-5,
+  .span-4 {
+    grid-column: span 12;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow-steps {
+    flex-direction: column;
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .section-nav {
+    top: 58px;
+    gap: 24px;
+    padding: 14px 18px;
+  }
+
+  .section-nav a {
+    font-size: 10px;
+    letter-spacing: .8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+
+  .card {
+    padding: 17px;
+  }
+
+  .form-grid,
+  .result-pair,
+  .insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .day {
+    min-height: 48px;
+  }
+
+  .day .date-aqi {
+    font-size: .57rem;
+  }
+
+  .calendar {
+    gap: 4px;
+  }
+
+  body {
+    background-attachment: scroll;
+    background-position: center top;
+  }
+}
+
 </style>
+
 </head>
 
 <body>
