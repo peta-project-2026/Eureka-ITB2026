@@ -2250,8 +2250,23 @@ async function fetchHistory() {
       fetchHistoryType("monthly")
     ]);
 
-    console.log("DAILY PAYLOAD:", dailyPayload.data);
-    console.log("MONTHLY PAYLOAD:", monthlyPayload.data);
+    console.log(
+  "DAILY RINGKAS:",
+  dailyPayload.data.map(row => ({
+    tanggal: row[0],
+    jumlah: row[1],
+    aqi: row[4]
+  }))
+);
+
+console.log(
+  "MONTHLY RINGKAS:",
+  monthlyPayload.data.map(row => ({
+    bulan: row[0],
+    jumlah: row[1],
+    aqi: row[4]
+  }))
+);
 
     state.daily = normalizeHistoryPayload(dailyPayload, "daily")
       .filter(item => item.aqi !== null)
