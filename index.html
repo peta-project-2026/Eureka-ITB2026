@@ -56,6 +56,7 @@
 /* =========================================
    TEMA TERANG — LIGHT SAGE
    ========================================= */
+body.light,
 [data-theme="light"] {
   color-scheme: light;
 
@@ -931,22 +932,22 @@ nav,
   backdrop-filter: blur(12px);
 }
 
-/* Kartu agar tetap terbaca */
+/* Kartu mengikuti tema aktif */
 .card,
 .flow-step,
 .air-insight,
 .result-card {
-  background: rgba(232, 240, 232, 0.94);
-  color: #203127;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
   backdrop-filter: blur(8px);
 }
 
-/* Teks sekunder di dalam kartu */
+/* Teks sekunder mengikuti tema aktif */
 .card p,
 .flow-step small,
 .air-insight p {
-  color: #53665a;
+  color: var(--muted);
 }
 
 /* Hero: hilangkan overlay lama yang terlalu gelap */
