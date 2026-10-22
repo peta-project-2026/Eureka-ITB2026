@@ -8,67 +8,147 @@
 
 <style>
 
-
 /* ==========================================
-   PETA-KARHUTLA — SINGLE LIGHT THEME
+   LIGHT SAGE — SOLID SURFACES
+   Letakkan tepat sebelum </style>
 ========================================== */
 
-:root {
-    color-scheme: light;
-
-    --bg-main: #F3F7F0;
-    --bg-section: #E7EFE4;
-    --bg-card: #FFFFFF;
-    --bg-input: #F8FAF7;
-    --bg-formula: #EAF2E7;
-
-    --border-color: #D2DED0;
-    --border-hover: #4A7C59;
-
-    --text-primary: #203528;
-    --text-secondary: #405B47;
-    --text-muted: #667C69;
-
-    --accent-green: #34764A;
-    --accent-bright: #2D6A4F;
-
-    --nav-bg: rgba(243, 247, 240, 0.94);
-
-    --hero-overlay: linear-gradient(
-        90deg,
-        rgba(243, 247, 240, 0.94),
-        rgba(243, 247, 240, 0.78),
-        rgba(243, 247, 240, 0.55)
-    );
-}
-
-
-* { box-sizing: border-box; }
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 85px;
-}
-
-
-
+/* Latar halaman */
 body {
-  margin: 0;
+    background: var(--bg-main) !important;
+    color: var(--text-primary);
+}
 
-  background:
-    linear-gradient(
-      180deg,
-      rgba(8, 35, 25, 0.20),
-      rgba(8, 35, 25, 0.45)
-    ),
-    url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=85")
-    center center / cover no-repeat fixed;
+/* Navbar selalu putih */
+nav,
+nav * {
+    --nav-bg: #FFFFFF;
+}
 
-  background-color: #173c2c;
-  color: var(--text);
-  font-family: Inter, system-ui, -apple-system, sans-serif;
-  line-height: 1.65;
-  transition: background-color .25s, color .25s;
+nav {
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Kartu dan panel putih solid */
+.card,
+.info-card,
+.data-card,
+.stat-card,
+.panel,
+.modal,
+.modalhead,
+.modalbody,
+.form-container,
+.result-card,
+.metric-card {
+    background-color: #FFFFFF;
+    background-image: none;
+    opacity: 1;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Input dan pilihan */
+input,
+select,
+textarea,
+button:not(.primary-button) {
+    color: var(--text-primary);
+}
+
+/* Field putih solid */
+input,
+select,
+textarea {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-color);
+}
+
+/* Section sekunder memakai sage muda */
+section:not(.hero) {
+    color: var(--text-primary);
+}
+
+/* Area rumus */
+.formula,
+.formula-box,
+.equation,
+.notice {
+    background-color: var(--bg-formula);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Tabel terang */
+table {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+}
+
+th {
+    background-color: #EAF2E7;
+    color: var(--text-primary);
+}
+
+td {
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+/* Link dan tombol utama */
+a {
+    color: var(--accent-green);
+}
+
+button.primary-button,
+.btn-primary {
+    background-color: var(--accent-green);
+    color: #FFFFFF;
+    border-color: var(--accent-green);
+}
+
+/* Hero tetap menggunakan gambar hutan */
+.hero {
+    background-image:
+        var(--hero-overlay),
+        url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Teks utama tetap terbaca */
+h1,
+h2,
+h3,
+h4,
+strong,
+label {
+    color: var(--text-primary);
+}
+
+/* Teks sekunder */
+small,
+.caption,
+.description {
+    color: var(--text-muted);
+}
+
+/* Tidak memakai transparansi atau blur untuk permukaan UI */
+.card,
+.info-card,
+.data-card,
+.stat-card,
+.panel,
+.form-container,
+.result-card,
+.metric-card {
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
 
@@ -967,6 +1047,148 @@ nav,
   scroll-margin-top: 140px;
 }
 
+/* ==========================================
+   LIGHT SAGE — SOLID SURFACES
+   Letakkan tepat sebelum </style>
+========================================== */
+
+/* Latar halaman */
+body {
+    background: var(--bg-main) !important;
+    color: var(--text-primary);
+}
+
+/* Navbar selalu putih */
+nav,
+nav * {
+    --nav-bg: #FFFFFF;
+}
+
+nav {
+    background-color: #FFFFFF !important;
+    background-image: none !important;
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Kartu dan panel putih solid */
+.card,
+.info-card,
+.data-card,
+.stat-card,
+.panel,
+.modal,
+.modalhead,
+.modalbody,
+.form-container,
+.result-card,
+.metric-card {
+    background-color: #FFFFFF;
+    background-image: none;
+    opacity: 1;
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Input dan pilihan */
+input,
+select,
+textarea,
+button:not(.primary-button) {
+    color: var(--text-primary);
+}
+
+/* Field putih solid */
+input,
+select,
+textarea {
+    background-color: #FFFFFF !important;
+    border-color: var(--border-color);
+}
+
+/* Section sekunder memakai sage muda */
+section:not(.hero) {
+    color: var(--text-primary);
+}
+
+/* Area rumus */
+.formula,
+.formula-box,
+.equation,
+.notice {
+    background-color: var(--bg-formula);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Tabel terang */
+table {
+    background-color: #FFFFFF;
+    color: var(--text-primary);
+}
+
+th {
+    background-color: #EAF2E7;
+    color: var(--text-primary);
+}
+
+td {
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+/* Link dan tombol utama */
+a {
+    color: var(--accent-green);
+}
+
+button.primary-button,
+.btn-primary {
+    background-color: var(--accent-green);
+    color: #FFFFFF;
+    border-color: var(--accent-green);
+}
+
+/* Hero tetap menggunakan gambar hutan */
+.hero {
+    background-image:
+        var(--hero-overlay),
+        url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=80");
+    background-size: cover;
+    background-position: center;
+}
+
+/* Teks utama tetap terbaca */
+h1,
+h2,
+h3,
+h4,
+strong,
+label {
+    color: var(--text-primary);
+}
+
+/* Teks sekunder */
+small,
+.caption,
+.description {
+    color: var(--text-muted);
+}
+
+/* Tidak memakai transparansi atau blur untuk permukaan UI */
+.card,
+.info-card,
+.data-card,
+.stat-card,
+.panel,
+.form-container,
+.result-card,
+.metric-card {
+    opacity: 1 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
 </style>
 </head>
 
@@ -982,6 +1204,7 @@ nav,
         <a href="#estimate">Estimasi</a>
         <a href="#about">Project</a>
       </nav>
+      <button class="btn" id="themeToggle" type="button" aria-label="Ubah tema">☀️</button>
     </div>
   </div>
 
