@@ -7,95 +7,47 @@
 <title>PETA — Platform Estimasi Takaran Aerosol</title>
 
 <style>
-
-/* =========================================
-   TEMA DEFAULT — DARK FOREST
-   Warna lama PETA-KARHUTLA
-   ========================================= */
 :root {
   color-scheme: dark;
-
-  --bg-main: #09100c;
-  --bg-section: #101a14;
-  --bg-card: #101a14;
-  --bg-input: #152219;
-  --bg-formula: #111a13;
-
-  --border-color: #293b30;
-  --border-hover: #78dfa0;
-
-  --text-primary: #edf5ef;
-  --text-secondary: #9aada0;
-  --text-muted: #9aada0;
-
-  --accent-green: #78dfa0;
-  --accent-bright: #78dfa0;
-
-  --nav-bg: rgba(9, 16, 12, 0.82);
-  --hero-overlay: linear-gradient(
-    90deg,
-    rgba(9, 16, 12, 0.92),
-    rgba(9, 16, 12, 0.65),
-    rgba(9, 16, 12, 0.85)
-  );
-
+  --bg: #09100c;
+  --surface: #101a14;
+  --surface2: #152219;
+  --text: #edf5ef;
+  --muted: #9aada0;
+  --border: #293b30;
+  --green: #78dfa0;
+  --green-dark: #183c28;
   --danger: #ff837e;
   --shadow: 0 18px 50px #00000020;
-
-  /* Alias untuk kompatibilitas dengan CSS lama */
-  --bg: var(--bg-main);
-  --surface: var(--bg-card);
-  --surface2: var(--bg-section);
-  --text: var(--text-primary);
-  --muted: var(--text-muted);
-  --border: var(--border-color);
-  --green: var(--accent-green);
-  --green-dark: #183c28;
-}
-
-/* =========================================
-   TEMA TERANG — LIGHT SAGE
-   ========================================= */
-body.light,
-[data-theme="light"] {
-  color-scheme: light;
-
-  --bg-main: #f4f7f4;
-  --bg-section: #eaf0eb;
-  --bg-card: #ffffff;
-  --bg-input: #ffffff;
-  --bg-formula: #e1ebe2;
-
-  --border-color: #d0dad1;
-  --border-hover: #4a7c59;
-
-  --text-primary: #1c2826;
-  --text-secondary: #354a3d;
-  --text-muted: #5e7365;
-
-  --accent-green: #2d6a4f;
-  --accent-bright: #355e3b;
-
-  --nav-bg: rgba(244, 247, 244, 0.88);
+  
   --hero-overlay: linear-gradient(
-    90deg,
-    rgba(244, 247, 244, 0.95),
-    rgba(244, 247, 244, 0.70),
-    rgba(244, 247, 244, 0.90)
+    180deg,
+    rgba(5, 103, 57, 0.55),
+    rgba(2, 103, 56, 0.86)
   );
 
-  --danger: #b42318;
-  --shadow: 0 18px 50px #00000012;
+}
 
-  /* Alias untuk kompatibilitas dengan CSS lama */
-  --bg: var(--bg-main);
-  --surface: var(--bg-card);
-  --surface2: var(--bg-section);
-  --text: var(--text-primary);
-  --muted: var(--text-muted);
-  --border: var(--border-color);
-  --green: var(--accent-green);
-  --green-dark: #dcebe0;
+
+body.light {
+  color-scheme: light;
+
+  --bg: #caf3b2;
+  --surface: #f8fbf5;
+  --surface2: #e1ecdf;
+  --text: #243d2d;
+  --muted: #8cd29d;
+  --border: #c4fbbd;
+  --green: #34774b;
+  --green-dark: #d5e8d5;
+  --danger: #bd4945;
+  --shadow: 0 18px 50px #29453612;
+
+  --hero-overlay: linear-gradient(
+    180deg,
+    rgba(187, 254, 153, 0.48),
+    rgba(218, 234, 211, 0.72)
+  );
 }
 
 
@@ -932,22 +884,22 @@ nav,
   backdrop-filter: blur(12px);
 }
 
-/* Kartu mengikuti tema aktif */
+/* Kartu agar tetap terbaca */
 .card,
 .flow-step,
 .air-insight,
 .result-card {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
+  background: rgba(232, 240, 232, 0.94);
+  color: #203127;
+  border: 1px solid rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(8px);
 }
 
-/* Teks sekunder mengikuti tema aktif */
+/* Teks sekunder di dalam kartu */
 .card p,
 .flow-step small,
 .air-insight p {
-  color: var(--muted);
+  color: #53665a;
 }
 
 /* Hero: hilangkan overlay lama yang terlalu gelap */
@@ -1021,59 +973,6 @@ nav,
 #estimate,
 #about {
   scroll-margin-top: 140px;
-}
-
-
-/* =========================================
-   LIGHT SAGE — SOLID SURFACES
-   ========================================= */
-
-header,
-header .section-nav {
-  background: #ffffff;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-main section:not(.hero) {
-  background-color: var(--bg-section);
-}
-
-.card,
-.panel,
-.stat-card,
-.info-card,
-.result-card,
-.metric-card,
-.chart-card,
-.calendar-card {
-  background: #ffffff;
-  border-color: var(--border-color);
-  box-shadow: var(--shadow);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.notice,
-.eq,
-.formula,
-.insight,
-.info-panel {
-  background: var(--bg-formula);
-  border-color: var(--border-color);
-}
-
-input,
-select,
-textarea {
-  color: var(--text-primary);
-  background: var(--bg-input);
-  border-color: var(--border-color);
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: var(--text-muted);
 }
 
 </style>
@@ -1710,19 +1609,8 @@ function numberFormat(value, digits = 2) {
 }
 
 function validNumber(value) {
-  if (value === null || value === undefined || value === "") {
-    return null;
-  }
-
-  let normalized = String(value).trim();
-
-  // Mendukung desimal dengan koma, misalnya 64,2 atau 71,75.
-  if (normalized.includes(",") && !normalized.includes(".")) {
-    normalized = normalized.replace(",", ".");
-  }
-
-  const n = Number(normalized);
-  return Number.isFinite(n) ? n : null;
+  const n = Number(value);
+  return value !== null && value !== "" && Number.isFinite(n) ? n : null;
 }
 
 function safeDate(value) {
@@ -2362,24 +2250,6 @@ async function fetchHistory() {
       fetchHistoryType("monthly")
     ]);
 
-    console.log(
-  "DAILY RINGKAS:",
-  dailyPayload.data.map(row => ({
-    tanggal: row[0],
-    jumlah: row[1],
-    aqi: row[4]
-  }))
-);
-
-console.log(
-  "MONTHLY RINGKAS:",
-  monthlyPayload.data.map(row => ({
-    bulan: row[0],
-    jumlah: row[1],
-    aqi: row[4]
-  }))
-);
-
     state.daily = normalizeHistoryPayload(dailyPayload, "daily")
       .filter(item => item.aqi !== null)
       .sort((a, b) => a.date - b.date);
@@ -2387,10 +2257,6 @@ console.log(
     state.monthly = normalizeHistoryPayload(monthlyPayload, "monthly")
       .filter(item => item.aqi !== null)
       .sort((a, b) => a.date - b.date);
-
-    console.log("HASIL NORMALISASI DAILY:", state.daily);
-console.log("JUMLAH DATA DAILY:", state.daily.length);
-console.log("HASIL NORMALISASI MONTHLY:", state.monthly);
 
     // Daily data dipakai untuk grafik dan kalender agar setiap tanggal
     // merepresentasikan data yang tersedia pada tingkat harian.
