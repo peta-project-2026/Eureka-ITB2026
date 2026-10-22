@@ -9,146 +9,53 @@
 <style>
 
 /* ==========================================
-   LIGHT SAGE — SOLID SURFACES
-   Letakkan tepat sebelum </style>
+   PETA-KARHUTLA — LIGHT SAGE PERMANEN
 ========================================== */
 
-/* Latar halaman */
-body {
-    background: var(--bg-main) !important;
-    color: var(--text-primary);
-}
+:root,
+[data-theme="light"],
+[data-theme="dark"] {
+    color-scheme: light;
 
-/* Navbar selalu putih */
-nav,
-nav * {
+    --bg-main: #F5F8F3;
+    --bg-section: #EDF3EA;
+    --bg-card: #FFFFFF;
+    --bg-input: #FFFFFF;
+    --bg-formula: #EAF2E7;
+
+    --border-color: #D8E3D5;
+    --border-hover: #4A7C59;
+
+    --text-primary: #294533;
+    --text-secondary: #45614B;
+    --text-muted: #718274;
+
+    --accent-green: #34764A;
+    --accent-bright: #2D6A4F;
+
+    /* Semua permukaan utama solid */
     --nav-bg: #FFFFFF;
-}
 
-nav {
-    background-color: #FFFFFF !important;
-    background-image: none !important;
-    opacity: 1 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
+    /* Hero tetap menampilkan gambar hutan */
+    --hero-overlay: linear-gradient(
+        90deg,
+        rgba(237, 243, 234, 0.94),
+        rgba(237, 243, 234, 0.78),
+        rgba(237, 243, 234, 0.48)
+    );
 
-/* Kartu dan panel putih solid */
-.card,
-.info-card,
-.data-card,
-.stat-card,
-.panel,
-.modal,
-.modalhead,
-.modalbody,
-.form-container,
-.result-card,
-.metric-card {
-    background-color: #FFFFFF;
-    background-image: none;
-    opacity: 1;
-    color: var(--text-primary);
-    border-color: var(--border-color);
-}
+    --danger: #B42318;
+    --shadow: 0 12px 32px #29453312;
 
-/* Input dan pilihan */
-input,
-select,
-textarea,
-button:not(.primary-button) {
-    color: var(--text-primary);
-}
-
-/* Field putih solid */
-input,
-select,
-textarea {
-    background-color: #FFFFFF !important;
-    border-color: var(--border-color);
-}
-
-/* Section sekunder memakai sage muda */
-section:not(.hero) {
-    color: var(--text-primary);
-}
-
-/* Area rumus */
-.formula,
-.formula-box,
-.equation,
-.notice {
-    background-color: var(--bg-formula);
-    color: var(--text-primary);
-    border-color: var(--border-color);
-}
-
-/* Tabel terang */
-table {
-    background-color: #FFFFFF;
-    color: var(--text-primary);
-}
-
-th {
-    background-color: #EAF2E7;
-    color: var(--text-primary);
-}
-
-td {
-    color: var(--text-secondary);
-    border-color: var(--border-color);
-}
-
-/* Link dan tombol utama */
-a {
-    color: var(--accent-green);
-}
-
-button.primary-button,
-.btn-primary {
-    background-color: var(--accent-green);
-    color: #FFFFFF;
-    border-color: var(--accent-green);
-}
-
-/* Hero tetap menggunakan gambar hutan */
-.hero {
-    background-image:
-        var(--hero-overlay),
-        url("https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=80");
-    background-size: cover;
-    background-position: center;
-}
-
-/* Teks utama tetap terbaca */
-h1,
-h2,
-h3,
-h4,
-strong,
-label {
-    color: var(--text-primary);
-}
-
-/* Teks sekunder */
-small,
-.caption,
-.description {
-    color: var(--text-muted);
-}
-
-/* Tidak memakai transparansi atau blur untuk permukaan UI */
-.card,
-.info-card,
-.data-card,
-.stat-card,
-.panel,
-.form-container,
-.result-card,
-.metric-card {
-    opacity: 1 !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    /* Alias untuk CSS lama */
+    --bg: var(--bg-main);
+    --surface: var(--bg-card);
+    --surface2: var(--bg-section);
+    --text: var(--text-primary);
+    --muted: var(--text-muted);
+    --border: var(--border-color);
+    --green: var(--accent-green);
+    --green-dark: #294533;
 }
 
 
@@ -1065,13 +972,13 @@ nav * {
 }
 
 nav {
-    background: #FFFFFF !important;
+    background-color: #FFFFFF !important;
+    background-image: none !important;
     opacity: 1 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-
-    border-bottom: 1px solid #D8E3D5;
 }
+
 /* Kartu dan panel putih solid */
 .card,
 .info-card,
