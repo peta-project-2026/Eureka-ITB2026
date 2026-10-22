@@ -1609,8 +1609,19 @@ function numberFormat(value, digits = 2) {
 }
 
 function validNumber(value) {
-  const n = Number(value);
-  return value !== null && value !== "" && Number.isFinite(n) ? n : null;
+  if (value === null || value === undefined || value === "") {
+    return null;
+  }
+
+  let normalized = String(value).trim();
+
+  // Mendukung desimal dengan koma, misalnya 64,2 atau 71,75.
+  if (normalized.includes(",") && !normalized.includes(".")) {
+    normalized = normalized.replace(",", ".");
+  }
+
+  const n = Number(normalized);
+  return Number.isFinite(n) ? n : null;
 }
 
 function safeDate(value) {
