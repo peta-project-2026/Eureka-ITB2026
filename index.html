@@ -1,5370 +1,2663 @@
 <!DOCTYPE html>
-
-<html lang=”id”>
-
+<html lang="id">
 <head>
-
-<meta charset=”UTF-8”>
-
-<meta name=”viewport” content=”width=device-width, initial-scale=1.0”>
-
-<meta name=”theme-color” content=”#0b120e”>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b120e">
 <title>PETA — Platform Estimasi Takaran Aerosol</title>
 
-
-
 <style>
-
-
-
 :root {
-
-  Color-scheme: dark;
-
-
-
-  /* DARK SCIENTIFIC */
-
-  --bg: #09130f;
-
-  --surface: #101e17;
-
-  --surface2: #16291f;
-
-  --text: #e8f4eb;
-
-  --muted: #9bb5a3;
-
-  --border: #294536;
-
-  --green: #86e6a5;
-
-  --green-dark: #1b422d;
-
+  color-scheme: dark;
+  --bg: #09100c;
+  --surface: #101a14;
+  --surface2: #152219;
+  --text: #edf5ef;
+  --muted: #9aada0;
+  --border: #293b30;
+  --green: #78dfa0;
+  --green-dark: #183c28;
   --danger: #ff837e;
-
-  --shadow: 0 18px 50px #00000035;
-
+  --shadow: 0 18px 50px #00000020;
 }
 
-
-
-/* SOFT FOREST — LIGHT MODE */
-
-Body.light {
-
-  Color-scheme: light;
-
-
-
-  --bg: #edf4e9;
-
-  --surface: #f8fbf5;
-
-  --surface2: #e1ecdf;
-
-  --text: #83bb97;
-
-  --muted: #637968;
-
-  --border: #cbdcc9;
-
-  --green: #60bc80;
-
-  --green-dark: #d5e8d5;
-
-  --danger: #bd4945;
-
-  --shadow: 0 18px 50px #29453612;
-
-}
-
-
-
-
-
-Body.light {
-
-  Color-scheme: light;
-
+body.light {
+  color-scheme: light;
   --bg: #f1f5f0;
-
   --surface: #ffffff;
-
   --surface2: #e8f0e9;
-
   --text: #17251b;
-
   --muted: #617166;
-
   --border: #d4e0d5;
-
   --green: #20834b;
-
   --green-dark: #dcefe1;
-
   --shadow: 0 18px 50px #142d1910;
+}
 
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
 }
 
 
+body {
+  margin: 0;
 
-•	{ box-sizing: border-box; }
-
-
-
-Html {
-
-  Scroll-behavior: smooth;
-
-  Scroll-padding-top: 85px;
-
-}
-
-
-
-
-
-Body {
-
-  Margin: 0;
-
-
-
-  Background:
-
-    Linear-gradient(
-
-      Rgba(4, 17, 11, 0.72),
-
-      Rgba(4, 17, 11, 0.85)
-
+  background:
+    linear-gradient(
+      rgba(4, 17, 11, 0.72),
+      rgba(4, 17, 11, 0.85)
     ),
-
-background:
-
-                var(--hero-overlay),
-
-                url(
-                    "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=2000&q=80"
-                );
-
+    url("eurekaitb/kebutuhan/bgweb.jpeg") center / cover no-repeat fixed;
 
   color: var(--text);
-
   font-family: Inter, system-ui, -apple-system, sans-serif;
-
   line-height: 1.65;
-
   transition: background .25s, color .25s;
-
 }
 
 
+button, select, input { font: inherit; }
+button, select { cursor: pointer; }
 
-
-
-Button, select, input { font: inherit; }
-
-Button, select { cursor: pointer; }
-
-
-
-Button:focus-visible, select:focus-visible, a:focus-visible {
-
-  Outline: 2px solid var(--green);
-
-  Outline-offset: 3px;
-
+button:focus-visible, select:focus-visible, a:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
 }
 
-
-
-A { color: inherit; text-decoration: none; }
-
-
+a { color: inherit; text-decoration: none; }
 
 .container {
-
-  Width: min(1120px, calc(100% - 36px));
-
-  Margin: auto;
-
+  width: min(1120px, calc(100% - 36px));
+  margin: auto;
 }
 
-
-
-Header {
-
-  Position: sticky;
-
+header {
+  position: sticky;
   z-index: 20;
-
   top: 0;
-
   border-bottom: 1px solid var(--border);
-
   background: var(--bg);
-
   background: color-mix(in srgb, var(--bg) 93%, transparent);
-
   backdrop-filter: blur(16px);
-
 }
-
-
 
 .nav {
-
-  Min-height: 70px;
-
-  Display: flex;
-
-  Justify-content: space-between;
-
-  Align-items: center;
-
-  Gap: 18px;
-
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
 }
-
-
 
 .brand {
-
-  Font-size: 1.12rem;
-
-  Font-weight: 900;
-
-  Letter-spacing: .08em;
-
+  font-size: 1.12rem;
+  font-weight: 900;
+  letter-spacing: .08em;
 }
-
-
 
 .brand span { color: var(--green); }
 
-
-
 .nav-right {
-
-  Display: flex;
-
-  Align-items: center;
-
-  Gap: 18px;
-
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
-
-
 
 .nav-links {
-
-  Display: flex;
-
-  Gap: 20px;
-
-  Color: var(--muted);
-
-  Font-size: .86rem;
-
+  display: flex;
+  gap: 20px;
+  color: var(--muted);
+  font-size: .86rem;
 }
-
-
 
 .nav-links a:hover { color: var(--green); }
 
-
-
 .btn {
-
-  Border: 1px solid var(--border);
-
-  Color: var(--text);
-
-  Background: var(--surface2);
-
-  Padding: 10px 15px;
-
-  Border-radius: 10px;
-
-  Font-weight: 700;
-
-  Font-size: .86rem;
-
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: var(--surface2);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: .86rem;
 }
-
-
 
 .btn:hover { border-color: var(--green); }
 
-
-
 .btn-primary {
-
-  Background: var(--green);
-
-  Border-color: var(--green);
-
-  Color: #092012;
-
+  background: var(--green);
+  border-color: var(--green);
+  color: #092012;
 }
-
-
 
 .btn-primary:disabled {
-
-  Opacity: .5;
-
-  Cursor: wait;
-
+  opacity: .5;
+  cursor: wait;
 }
-
-
 
 .hero {
-
-  Position: relative;
-
-  Overflow: hidden;
-
-  Padding: 88px 0 72px;
-
-  Background:
-
-    Radial-gradient(ellipse at 80% 15%, #2b70432b, transparent 42%),
-
-    Radial-gradient(ellipse at 10% 100%, #17452a33, transparent 50%);
-
-  Border-bottom: 1px solid var(--border);
-
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0 72px;
+  background:
+    radial-gradient(ellipse at 80% 15%, #2b70432b, transparent 42%),
+    radial-gradient(ellipse at 10% 100%, #17452a33, transparent 50%);
+  border-bottom: 1px solid var(--border);
 }
-
-
 
 .eyebrow {
-
-  Color: var(--green);
-
-  Font-size: .72rem;
-
-  Font-weight: 900;
-
-  Letter-spacing: .16em;
-
-  Text-transform: uppercase;
-
+  color: var(--green);
+  font-size: .72rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
 }
-
-
 
 .hero h1 {
-
-  Max-width: 800px;
-
-  Margin: 18px 0;
-
-  Font-size: clamp(2.4rem, 7vw, 5rem);
-
-  Line-height: 1.05;
-
-  Letter-spacing: -.055em;
-
+  max-width: 800px;
+  margin: 18px 0;
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -.055em;
 }
-
-
 
 .hero h1 span { color: var(--green); }
 
-
-
 .hero p {
-
-  Max-width: 720px;
-
-  Color: var(--muted);
-
-  Font-size: 1.02rem;
-
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 1.02rem;
 }
-
-
 
 .hero-actions {
-
-  Display: flex;
-
-  Flex-wrap: wrap;
-
-  Gap: 12px;
-
-  Margin-top: 28px;
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
 }
-
-
 
 .alpha {
-
-  Display: inline-flex;
-
-  Align-items: center;
-
-  Gap: 8px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 99px;
-
-  Padding: 7px 12px;
-
-  Color: var(--muted);
-
-  Font-size: .73rem;
-
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 7px 12px;
+  color: var(--muted);
+  font-size: .73rem;
 }
-
-
 
 .dot {
-
-  Width: 7px;
-
-  Height: 7px;
-
-  Border-radius: 50%;
-
-  Background: var(--green);
-
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
 }
 
-
-
-Section { padding: 66px 0; }
-
-
+section { padding: 66px 0; }
 
 .section-head { margin-bottom: 25px; }
 
-
-
 .section-head h2 {
-
-  Font-size: clamp(1.65rem, 4vw, 2.4rem);
-
-  Line-height: 1.2;
-
-  Margin: 8px 0;
-
-  Letter-spacing: -.035em;
-
+  font-size: clamp(1.65rem, 4vw, 2.4rem);
+  line-height: 1.2;
+  margin: 8px 0;
+  letter-spacing: -.035em;
 }
-
-
 
 .section-head p {
-
-  Max-width: 720px;
-
-  Margin: 0;
-
-  Color: var(--muted);
-
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
 }
-
-
 
 .grid {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(12, minmax(0, 1fr));
-
-  Gap: 16px;
-
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 16px;
 }
-
-
 
 .card {
-
-  Min-width: 0;
-
-  Padding: 22px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 18px;
-
-  Background: var(--surface);
-
-  Box-shadow: var(--shadow);
-
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
 }
-
-
 
 .span-12 { grid-column: span 12; }
-
 .span-8 { grid-column: span 8; }
-
 .span-7 { grid-column: span 7; }
-
 .span-6 { grid-column: span 6; }
-
 .span-5 { grid-column: span 5; }
-
 .span-4 { grid-column: span 4; }
 
-
-
 .card-label {
-
-  Font-size: .74rem;
-
-  Color: var(--muted);
-
-  Font-weight: 800;
-
-  Letter-spacing: .08em;
-
-  Text-transform: uppercase;
-
+  font-size: .74rem;
+  color: var(--muted);
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
 }
-
-
 
 .big-number {
-
-  Font-size: clamp(2rem, 5vw, 3.4rem);
-
-  Line-height: 1.2;
-
-  Font-weight: 900;
-
-  Margin: 10px 0;
-
-  Letter-spacing: -.045em;
-
-  Overflow-wrap: anywhere;
-
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.2;
+  font-weight: 900;
+  margin: 10px 0;
+  letter-spacing: -.045em;
+  overflow-wrap: anywhere;
 }
-
-
 
 .green { color: var(--green); }
-
 .muted { color: var(--muted); }
-
 .small { font-size: .82rem; }
 
-
-
 .status {
-
-  Display: inline-block;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 99px;
-
-  Padding: 4px 10px;
-
-  Font-size: .75rem;
-
-  Font-weight: 800;
-
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 4px 10px;
+  font-size: .75rem;
+  font-weight: 800;
 }
-
-
 
 .status.good { color: #6cdb96; }
-
 .status.moderate { color: #e8ca70; }
-
 .status.bad { color: #ffab75; }
-
 .status.verybad { color: #ff837e; }
 
-
-
 .notice {
-
-  Margin-top: 16px;
-
-  Padding: 13px 15px;
-
-  Background: var(--surface2);
-
-  Border-radius: 12px;
-
-  Color: var(--muted);
-
-  Font-size: .83rem;
-
+  margin-top: 16px;
+  padding: 13px 15px;
+  background: var(--surface2);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: .83rem;
 }
-
-
 
 .notice strong { color: var(--text); }
 
-
-
 .section-toolbar {
-
-  Display: flex;
-
-  Justify-content: space-between;
-
-  Align-items: center;
-
-  Flex-wrap: wrap;
-
-  Gap: 12px;
-
-  Margin-bottom: 16px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
 }
-
-
 
 .toolbar-actions {
-
-  Display: flex;
-
-  Flex-wrap: wrap;
-
-  Gap: 8px;
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-
-
 
 .chart-wrap {
-
-  Height: 300px;
-
-  Position: relative;
-
-  Width: 100%;
-
+  height: 300px;
+  position: relative;
+  width: 100%;
 }
 
-
-
-Canvas {
-
-  Display: block;
-
-  Width: 100%;
-
-  Height: 100%;
-
+canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
-
-
 
 .insight-banner {
-
-  Display: grid;
-
-  Grid-template-columns: auto 1fr;
-
-  Gap: 16px;
-
-  Align-items: start;
-
-  Margin-top: 18px;
-
-  Padding: 22px;
-
-  Border: 1px solid #78dfa044;
-
-  Border-radius: 17px;
-
-  Background:
-
-    Radial-gradient(ellipse at 100% 0%, #78dfa018, transparent 55%),
-
-    Var(--surface);
-
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 18px;
+  padding: 22px;
+  border: 1px solid #78dfa044;
+  border-radius: 17px;
+  background:
+    radial-gradient(ellipse at 100% 0%, #78dfa018, transparent 55%),
+    var(--surface);
 }
-
-
 
 .insight-symbol {
-
-  Display: grid;
-
-  Place-items: center;
-
-  Width: 48px;
-
-  Height: 48px;
-
-  Border-radius: 14px;
-
-  Background: var(--green-dark);
-
-  Font-size: 1.45rem;
-
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--green-dark);
+  font-size: 1.45rem;
 }
 
-
-
 .insight-banner h3 { margin: 2px 0 6px; }
-
 .insight-banner p { margin: 0; color: var(--muted); }
-
-
 
 .monthly-panel { margin-top: 18px; }
 
-
-
 .month-nav {
-
-  Display: flex;
-
-  Justify-content: space-between;
-
-  Align-items: center;
-
-  Gap: 12px;
-
-  Margin: 12px 0 20px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 20px;
 }
-
-
 
 .month-nav h3 { margin: 0; }
 
-
-
 .calendar {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(7, minmax(0, 1fr));
-
-  Gap: 7px;
-
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 7px;
 }
-
-
 
 .weekday {
-
-  Text-align: center;
-
-  Font-size: .72rem;
-
-  Color: var(--muted);
-
-  Padding: 7px 0;
-
+  text-align: center;
+  font-size: .72rem;
+  color: var(--muted);
+  padding: 7px 0;
 }
-
-
 
 .day {
-
-  Min-width: 0;
-
-  Min-height: 63px;
-
-  Display: flex;
-
-  Flex-direction: column;
-
-  Align-items: center;
-
-  Justify-content: center;
-
-  Gap: 2px;
-
-  Border-radius: 11px;
-
-  Border: 1px solid var(--border);
-
-  Color: var(--text);
-
-  Background: var(--surface2);
-
-  Padding: 4px;
-
+  min-width: 0;
+  min-height: 63px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 11px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: var(--surface2);
+  padding: 4px;
 }
-
-
 
 .day:disabled {
-
-  Opacity: .25;
-
-  Cursor: default;
-
+  opacity: .25;
+  cursor: default;
 }
-
-
 
 .day:not(:disabled):hover { outline: 1px solid var(--green); }
 
-
-
 .day.selected {
-
-  Outline: 2px solid var(--green);
-
-  Outline-offset: 1px;
-
+  outline: 2px solid var(--green);
+  outline-offset: 1px;
 }
-
-
 
 .day .date-num { font-weight: 900; font-size: .91rem; }
-
 .day .date-aqi { font-size: .65rem; }
 
-
-
 .day.level-good { background: #164b30; color: #d6ffe3; }
-
 .day.level-moderate { background: #66531b; color: #fff1bc; }
-
 .day.level-sensitive { background: #713d20; color: #ffe0c9; }
-
 .day.level-unhealthy { background: #6d2828; color: #ffe0df; }
-
 .day.level-verybad { background: #57204c; color: #ffe1f8; }
-
 .day.level-hazardous { background: #532020; color: #fff; }
 
-
-
 .legend {
-
-  Display: flex;
-
-  Flex-wrap: wrap;
-
-  Gap: 12px;
-
-  Margin-top: 15px;
-
-  Font-size: .74rem;
-
-  Color: var(--muted);
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+  font-size: .74rem;
+  color: var(--muted);
 }
-
-
 
 .legend-item { display: flex; align-items: center; gap: 6px; }
 
-
-
 .legend-dot {
-
-  Width: 10px;
-
-  Height: 10px;
-
-  Border-radius: 3px;
-
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
 }
-
-
 
 .detail-box {
-
-  Margin-top: 20px;
-
-  Border: 1px solid var(--border);
-
-  Background: var(--surface2);
-
-  Padding: 18px;
-
-  Border-radius: 15px;
-
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  padding: 18px;
+  border-radius: 15px;
 }
-
-
 
 .detail-box h4 { margin: 0 0 12px; }
 
-
-
 .detail-grid {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  Gap: 10px;
-
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
-
-
 
 .detail-item {
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 10px;
-
-  Padding: 12px;
-
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
 }
-
-
 
 .detail-item span {
-
-  Display: block;
-
-  Color: var(--muted);
-
-  Font-size: .75rem;
-
+  display: block;
+  color: var(--muted);
+  font-size: .75rem;
 }
-
-
 
 .detail-item strong {
-
-  Display: block;
-
-  Margin-top: 4px;
-
-  Overflow-wrap: anywhere;
-
+  display: block;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
 }
-
-
 
 .form-grid {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  Gap: 16px;
-
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
 }
-
-
 
 .field label {
-
-  Display: block;
-
-  Margin-bottom: 8px;
-
-  Font-size: .83rem;
-
-  Font-weight: 800;
-
+  display: block;
+  margin-bottom: 8px;
+  font-size: .83rem;
+  font-weight: 800;
 }
-
-
 
 .field select {
-
-  Width: 100%;
-
-  Min-height: 47px;
-
-  Padding: 10px;
-
-  Border-radius: 10px;
-
-  Border: 1px solid var(--border);
-
-  Background: var(--surface2);
-
-  Color: var(--text);
-
+  width: 100%;
+  min-height: 47px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text);
 }
-
-
 
 .field .readonly {
-
-  Min-height: 47px;
-
-  Display: flex;
-
-  Align-items: center;
-
-  Padding: 10px;
-
-  Border: 1px solid var(--border);
-
-  Background: var(--surface2);
-
-  Border-radius: 10px;
-
+  min-height: 47px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  border-radius: 10px;
 }
-
-
 
 .result-main {
-
-  Padding: 24px;
-
-  Margin-top: 18px;
-
-  Border-radius: 16px;
-
-  Background: var(--green-dark);
-
-  Border: 1px solid #78dfa044;
-
+  padding: 24px;
+  margin-top: 18px;
+  border-radius: 16px;
+  background: var(--green-dark);
+  border: 1px solid #78dfa044;
 }
-
-
 
 .result-main .big-number { color: var(--green); }
 
-
-
 .result-pair {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  Gap: 12px;
-
-  Margin-top: 16px;
-
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
 }
-
-
 
 .result-mini {
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 12px;
-
-  Padding: 15px;
-
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 15px;
 }
-
-
 
 .result-mini .big-number { font-size: 1.5rem; }
-
   
-
   /* Indikator kualitas udara pada kartu hasil estimasi */
-
 .air-insight {
-
-  Margin-top: 18px;
-
-  Padding: 18px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 15px;
-
-  Background: var(--surface2);
-
-  Min-width: 0;
-
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--surface2);
+  min-width: 0;
 }
-
-
 
 .air-insight-top {
-
-  Display: flex;
-
-  Justify-content: space-between;
-
-  Align-items: flex-start;
-
-  Flex-wrap: wrap;
-
-  Gap: 12px;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
 }
-
-
 
 .air-insight-top h3 {
-
-  Font-size: 1.05rem;
-
+  font-size: 1.05rem;
 }
-
-
 
 .air-insight-value {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  Gap: 14px;
-
-  Margin: 16px 0;
-
-  Padding: 15px 0;
-
-  Border-top: 1px solid var(--border);
-
-  Border-bottom: 1px solid var(--border);
-
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+  padding: 15px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
 }
-
-
 
 .air-insight-value .big-number {
-
-  Font-size: clamp(1.7rem, 4vw, 2.5rem);
-
-  Margin: 4px 0;
-
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  margin: 4px 0;
 }
-
-
 
 .air-guidance {
-
-  Display: flex;
-
-  Align-items: flex-start;
-
-  Gap: 13px;
-
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
 }
-
-
 
 .air-guidance .insight-symbol {
-
-  Flex: 0 0 42px;
-
-  Width: 42px;
-
-  Height: 42px;
-
-  Font-size: 1.2rem;
-
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  font-size: 1.2rem;
 }
-
-
 
 .air-guidance h4 {
-
-  Margin: 2px 0 6px;
-
+  margin: 2px 0 6px;
 }
-
-
 
 .air-guidance p {
-
-  Margin: 0;
-
-  Color: var(--muted);
-
-  Font-size: .88rem;
-
+  margin: 0;
+  color: var(--muted);
+  font-size: .88rem;
 }
-
-
 
 #resultAirTimestamp {
-
-  Margin: 15px 0 0;
-
+  margin: 15px 0 0;
 }
-
-
 
 @media (max-width: 480px) {
-
   .air-insight {
-
-    Padding: 14px;
-
+    padding: 14px;
   }
-
-
 
   .air-insight-value {
-
-    Gap: 8px;
-
+    gap: 8px;
   }
-
 }
-
-
 
 .exposure-insight { margin-top: 25px; }
 
-
-
 .insight-heading { margin-bottom: 20px; }
-
 .insight-heading h3 { margin: 8px 0; font-size: 1.55rem; }
-
 .insight-heading p { color: var(--muted); }
 
-
-
 .insight-label {
-
-  Font-size: .7rem;
-
-  Font-weight: 900;
-
-  Letter-spacing: .14em;
-
-  Color: var(--green);
-
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .14em;
+  color: var(--green);
 }
-
-
 
 .insight-result {
-
-  Display: flex;
-
-  Align-items: flex-start;
-
-  Gap: 15px;
-
-  Padding: 20px;
-
-  Background: var(--surface2);
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 15px;
-
-  Margin-bottom: 16px;
-
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  padding: 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  margin-bottom: 16px;
 }
-
-
 
 .insight-result h4 { margin: 5px 0; font-size: 1.1rem; }
-
 .insight-result p { margin: 0; color: var(--muted); }
 
-
-
 .insight-small {
-
-  Font-size: .7rem;
-
-  Color: var(--green);
-
-  Font-weight: 900;
-
-  Letter-spacing: .1em;
-
+  font-size: .7rem;
+  color: var(--green);
+  font-weight: 900;
+  letter-spacing: .1em;
 }
-
-
 
 .insight-grid {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  Gap: 13px;
-
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
 }
-
-
 
 .insight-card {
-
-  Padding: 18px;
-
-  Background: var(--surface);
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 14px;
-
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
 }
-
-
 
 .insight-card h4 { margin: 8px 0; }
-
 .insight-card p { margin: 0; color: var(--muted); font-size: .88rem; }
 
-
-
 .insight-flow {
-
-  Padding: 20px;
-
-  Margin-top: 17px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 15px;
-
-  Background: var(--surface);
-
+  padding: 20px;
+  margin-top: 17px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--surface);
 }
-
-
 
 .flow-title h4 { margin: 4px 0 17px; }
 
-
-
 ./* The Science Behind It: tahapan vertikal */
-
 .flow-steps {
-
-  Display: flex;
-
-  Flex-direction: column;
-
-  Gap: 24x;
-
+  display: flex;
+  flex-direction: column;
+  gap: 24x;
 }
-
-
 
 .flow-step {
-
-  Display: grid;
-
-  Grid-template-columns: minmax(0, 1fr) auto;
-
-  Align-items: start;
-
-  Gap: 16px;
-
-  Min-width: 0;
-
-  Padding: 18px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 13px;
-
-  Background: var(--surface2);
-
-  Margin-bottom: 12px;
-
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--surface2);
+  margin-bottom: 12px;
 }
-
-
 
 .flow-step-main {
-
-  Min-width: 0;
-
+  min-width: 0;
 }
-
-
 
 .flow-step span {
-
-  Display: block;
-
-  Color: var(--green);
-
-  Font-size: .7rem;
-
-  Font-weight: 900;
-
-  Letter-spacing: .1em;
-
+  display: block;
+  color: var(--green);
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .1em;
 }
-
-
 
 .flow-step strong {
-
-  Display: block;
-
-  Margin: 6px 0;
-
-  Font-size: .98rem;
-
-  Line-height: 1.4;
-
+  display: block;
+  margin: 6px 0;
+  font-size: .98rem;
+  line-height: 1.4;
 }
-
-
 
 .flow-step small {
-
-  Display: block;
-
-  Color: var(--muted);
-
-  Font-size: .8rem;
-
-  Line-height: 1.5;
-
+  display: block;
+  color: var(--muted);
+  font-size: .8rem;
+  line-height: 1.5;
 }
-
-
 
 .flow-details {
-
-  Width: 155px;
-
-  Max-width: 100%;
-
-  Min-width: 0;
-
+  width: 155px;
+  max-width: 100%;
+  min-width: 0;
 }
-
-
 
 .flow-details summary {
-
-  Display: flex;
-
-  Justify-content: space-between;
-
-  Align-items: center;
-
-  Gap: 8px;
-
-  Padding: 9px 11px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 9px;
-
-  Background: var(--surface);
-
-  Color: var(--green);
-
-  Font-size: .8rem;
-
-  Font-weight: 800;
-
-  Cursor: pointer;
-
-  List-style: none;
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--green);
+  font-size: .8rem;
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
 }
-
-
 
 .flow-details summary::-webkit-details-marker {
-
-  Display: none;
-
+  display: none;
 }
-
-
 
 .flow-details summary span {
-
-  Display: inline-block;
-
-  Font-size: 1rem;
-
-  Transition: transform .2s;
-
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform .2s;
 }
-
-
 
 .flow-details[open] summary span {
-
-  Transform: rotate(45deg);
-
+  transform: rotate(45deg);
 }
-
-
 
 .flow-details p {
-
-  Grid-column: 1 / -1;
-
-  Margin: 12px 0 0;
-
-  Color: var(--muted);
-
-  Font-size: .85rem;
-
-  Line-height: 1.7;
-
+  grid-column: 1 / -1;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.7;
 }
-
-
 
 .flow-formula {
-
-  Margin-top: 12px;
-
-  Padding: 10px 12px;
-
-  Border: 1px solid var(--border);
-
-  Border-radius: 9px;
-
-  Color: var(--green);
-
-  Background: var(--surface);
-
-  Font-size: .86rem;
-
-  Font-weight: 800;
-
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--green);
+  background: var(--surface);
+  font-size: .86rem;
+  font-weight: 800;
 }
 
-
-
 @media (max-width: 600px) {
-
   .flow-step {
-
-    Grid-template-columns: minmax(0, 1fr);
-
-    Gap: 13px;
-
-    Padding: 15px;
-
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+    padding: 15px;
   }
-
-
 
   .flow-details {
-
-    Width: 100%;
-
+    width: 100%;
   }
-
-
 
   .flow-details summary {
-
-    Width: 100%;
-
+    width: 100%;
   }
-
 }
-
-
 
 .insight-note {
-
-  Display: flex;
-
-  Gap: 10px;
-
-  Padding: 15px;
-
-  Margin-top: 16px;
-
-  Background: var(--surface2);
-
-  Border-radius: 12px;
-
-  Color: var(--muted);
-
-  Font-size: .82rem;
-
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  margin-top: 16px;
+  background: var(--surface2);
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: .82rem;
 }
-
-
 
 .insight-note p { margin: 0; }
-
 .insight-note strong { color: var(--text); }
 
-
-
 .about-grid {
-
-  Display: grid;
-
-  Grid-template-columns: repeat(3, minmax(0, 1fr));
-
-  Gap: 15px;
-
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
 }
-
-
 
 .about-card {
-
-  Padding: 20px;
-
-  Border: 1px solid var(--border);
-
-  Background: var(--surface);
-
-  Border-radius: 15px;
-
+  padding: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 15px;
 }
-
-
 
 .about-card h3 { margin-top: 0; }
-
 .about-card p { color: var(--muted); font-size: .9rem; }
 
-
-
-Footer {
-
-  Border-top: 1px solid var(--border);
-
-  Padding: 30px 0;
-
-  Color: var(--muted);
-
-  Font-size: .8rem;
-
+footer {
+  border-top: 1px solid var(--border);
+  padding: 30px 0;
+  color: var(--muted);
+  font-size: .8rem;
 }
-
-
 
 .footer-row {
-
-  Display: flex;
-
-  Justify-content: space-between;
-
-  Flex-wrap: wrap;
-
-  Gap: 12px;
-
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
 }
-
-
 
 #toast {
-
-  Position: fixed;
-
-  Bottom: 20px;
-
-  Left: 50%;
-
-  Transform: translateX(-50%);
-
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 50;
-
   width: max-content;
-
   max-width: calc(100% - 32px);
-
   padding: 12px 17px;
-
   background: var(--text);
-
   color: var(--bg);
-
   border-radius: 12px;
-
   box-shadow: var(--shadow);
-
   font-size: .85rem;
-
   display: none;
-
 }
-
-
 
 @media (max-width: 760px) {
-
   .nav-links { display: none; }
-
   .hero { padding: 60px 0; }
-
-  Section { padding: 48px 0; }
-
-
+  section { padding: 48px 0; }
 
   .span-8, .span-7, .span-6, .span-5, .span-4 {
-
-    Grid-column: span 12;
-
+    grid-column: span 12;
   }
-
-
 
   .about-grid { grid-template-columns: 1fr; }
-
   .flow-steps { flex-direction: column; }
-
   .flow-arrow { transform: rotate(90deg); text-align: center; }
-
 }
-
-
 
 @media (max-width: 480px) {
-
   .container { width: calc(100% - 24px); }
-
   .card { padding: 17px; }
-
   .form-grid, .result-pair, .insight-grid { grid-template-columns: 1fr; }
-
   .detail-grid { grid-template-columns: 1fr; }
-
   .day { min-height: 48px; }
-
   .day .date-aqi { font-size: .57rem; }
-
   .calendar { gap: 4px; }
-
 }
-
   
-
   /* ==================================
-
    PETA — FOREST BACKGROUND THEME
-
    ================================== */
 
-
-
 /* Background seluruh halaman */
-
-Body {
-
-  Background:
-
-    Linear-gradient(
-
-      Rgba(7, 22, 15, 0.76),
-
-      Rgba(7, 22, 15, 0.84)
-
+body {
+  background:
+    linear-gradient(
+      rgba(7, 22, 15, 0.76),
+      rgba(7, 22, 15, 0.84)
     ),
-
-    url(“images/hutan.jpg”) center center / cover fixed no-repeat !important;
-
+    url("images/hutan.jpg") center center / cover fixed no-repeat !important;
   color: #f1f5ef;
-
 }
-
-
 
 /* Area utama dibuat transparan */
-
-Main,
-
-Section,
-
+main,
+section,
 .container {
-
-  Background-color: transparent;
-
+  background-color: transparent;
 }
-
-
 
 /* Navbar */
-
-Header,
-
-Nav,
-
+header,
+nav,
 .navbar {
-
-  Background: rgba(9, 24, 17, 0.88);
-
-  Backdrop-filter: blur(12px);
-
+  background: rgba(9, 24, 17, 0.88);
+  backdrop-filter: blur(12px);
 }
-
-
 
 /* Kartu agar tetap terbaca */
-
 .card,
-
 .flow-step,
-
 .air-insight,
-
 .result-card {
-
-  Background: rgba(232, 240, 232, 0.94);
-
-  Color: #203127;
-
-  Border: 1px solid rgba(255, 255, 255, 0.22);
-
-  Backdrop-filter: blur(8px);
-
+  background: rgba(232, 240, 232, 0.94);
+  color: #203127;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
 }
-
-
 
 /* Teks sekunder di dalam kartu */
-
 .card p,
-
 .flow-step small,
-
 .air-insight p {
-
-  Color: #53665a;
-
+  color: #53665a;
 }
-
-
 
 /* Hero: hilangkan overlay lama yang terlalu gelap */
-
 .hero {
-
-  Background: transparent !important;
-
+  background: transparent !important;
 }
-
-
 
 /* Tampilan HP */
-
 @media (max-width: 768px) {
-
-  Body {
-
-    Background-attachment: scroll !important;
-
-    Background-position: center top;
-
+  body {
+    background-attachment: scroll !important;
+    background-position: center top;
   }
-
 }
-
   
-
 /* NAVIGASI SECTION 01-04 */
-
 .section-nav {
-
-  Position: sticky;
-
-  Top: 62px;
-
+  position: sticky;
+  top: 62px;
   z-index: 100;
-
   display: flex;
-
   align-items: center;
-
   gap: 28px;
-
   padding: 16px 24px;
-
   overflow-x: auto;
-
   white-space: nowrap;
 
-
-
   background: rgba(10, 18, 15, 0.92);
-
   backdrop-filter: blur(12px);
-
   -webkit-backdrop-filter: blur(12px);
 
-
-
-  Border-bottom: 1px solid rgba(255,255,255,0.12);
-
-  Scrollbar-width: none;
-
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  scrollbar-width: none;
 }
-
-
 
 .section-nav::-webkit-scrollbar {
-
-  Display: none;
-
+  display: none;
 }
-
-
 
 .section-nav a {
-
-  Flex-shrink: 0;
-
-  Color: #c5d0c7;
-
-  Text-decoration: none;
-
-  Font-size: 11px;
-
-  Font-weight: 600;
-
-  Letter-spacing: 1.2px;
-
-  Transition: color 0.2s ease;
-
+  flex-shrink: 0;
+  color: #c5d0c7;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  transition: color 0.2s ease;
 }
-
-
 
 .section-nav a:hover {
-
-  Color: #b6d89b;
-
+  color: #b6d89b;
 }
-
-
 
 /* TAMPILAN HP */
-
 @media (max-width: 600px) {
-
   .section-nav {
-
-    Top: 58px;
-
-    Gap: 24px;
-
-    Padding: 14px 18px;
-
+    top: 58px;
+    gap: 24px;
+    padding: 14px 18px;
   }
-
-
 
   .section-nav a {
-
-    Font-size: 10px;
-
-    Letter-spacing: 0.8px;
-
+    font-size: 10px;
+    letter-spacing: 0.8px;
   }
-
 }
-
-
 
 /* JARAK SAAT MENU DIKLIK */
-
 #monitor,
-
 #history,
-
 #estimate,
-
 #about {
-
-  Scroll-margin-top: 140px;
-
+  scroll-margin-top: 140px;
 }
 
-
-
 </style>
-
 </head>
 
-
-
 <body>
-
 <header>
+  <div class="container nav">
+    <a class="brand" href="#home">PETA<span>.</span></a>
 
-  <div class=”container nav”>
-
-    <a class=”brand” href=”#home”>PETA<span>.</span></a>
-
-
-
-    <div class=”nav-right”>
-
-      <nav class=”nav-links”>
-
-        <a href=”#monitor”>Monitor</a>
-
-        <a href=”#history”>Riwayat</a>
-
-        <a href=”#estimate”>Estimasi</a>
-
-        <a href=”#about”>Project</a>
-
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#monitor">Monitor</a>
+        <a href="#history">Riwayat</a>
+        <a href="#estimate">Estimasi</a>
+        <a href="#about">Project</a>
       </nav>
-
-      <button class=”btn” id=”themeToggle” type=”button” aria-label=”Ubah tema”>☀️</button>
-
+      <button class="btn" id="themeToggle" type="button" aria-label="Ubah tema">☀️</button>
     </div>
-
   </div>
 
-
-
-  <!—NAVIGASI SECTION BARU 
-
-  <nav class=”section-nav”>
-
-    <a href=”#monitor”>01 / LIVE MONITORING</a>
-
-    <a href=”#history”>02 / HISTORICAL DATA</a>
-
-    <a href=”#estimate”>03 / EXPOSURE MODEL</a>
-
-    <a href=”#about”>04 / ABOUT THE PROJECT</a>
-
+  <!-- NAVIGASI SECTION BARU -->
+  <nav class="section-nav">
+    <a href="#monitor">01 / LIVE MONITORING</a>
+    <a href="#history">02 / HISTORICAL DATA</a>
+    <a href="#estimate">03 / EXPOSURE MODEL</a>
+    <a href="#about">04 / ABOUT THE PROJECT</a>
   </nav>
-
-
 
 </header>
 
-
-
 <main>
-
-<section class=”hero” id=”home”>
-
-  <div class=”container”>
-
-    <div class=”alpha”><span class=”dot”></span> PROJECT ALPHA · STUDENT RESEARCH PROTOTYPE</div>
-
-
+<section class="hero" id="home">
+  <div class="container">
+    <div class="alpha"><span class="dot"></span> PROJECT ALPHA · STUDENT RESEARCH PROTOTYPE</div>
 
     <h1>Memahami udara.<br><span>Memodelkan paparan.</span></h1>
 
-
-
     <p>
-
       PETA — Platform Estimasi Takaran Aerosol. Prototype penelitian
-
-      Siswa yang menghubungkan data kualitas udara dengan estimasi
-
-      Paparan PM2.5 melalui pemodelan komputasi dan konsep fisika.
-
+      siswa yang menghubungkan data kualitas udara dengan estimasi
+      paparan PM2.5 melalui pemodelan komputasi dan konsep fisika.
     </p>
 
-
-
-    <div class=”hero-actions”>
-
-      <a class=”btn btn-primary” href=”#monitor”>Lihat kondisi udara ↘</a>
-
-      <a class=”btn” href=”#estimate”>Pelajari estimasi</a>
-
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#monitor">Lihat kondisi udara ↘</a>
+      <a class="btn" href="#estimate">Pelajari estimasi</a>
     </div>
 
-
-
-    <p class=”small”>📍 Tarakan, Kalimantan Utara · Sumber pemantauan: IQAir</p>
-
+    <p class="small">📍 Tarakan, Kalimantan Utara · Sumber pemantauan: IQAir</p>
   </div>
-
 </section>
 
-
-
-<section id=”monitor”>
-
-  <div class=”container”>
-
-    <div class=”section-head”>
-
-      <div class=”eyebrow”>01 / LIVE MONITORING</div>
-
+<section id="monitor">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">01 / LIVE MONITORING</div>
       <h2>Kondisi udara saat ini</h2>
-
       <p>
-
         Data kualitas udara dan cuaca untuk membantu memahami kondisi
-
-        Lingkungan sebelum mempelajari estimasi paparan.
-
+        lingkungan sebelum mempelajari estimasi paparan.
       </p>
-
     </div>
 
-
-
-    <div class=”section-toolbar”>
-
-      <span class=”small muted” id=”liveStatus” role=”status”>Menunggu data...</span>
-
-      <button class=”btn btn-primary” id=”refreshBtn” type=”button”>↻ Perbarui data</button>
-
+    <div class="section-toolbar">
+      <span class="small muted" id="liveStatus" role="status">Menunggu data...</span>
+      <button class="btn btn-primary" id="refreshBtn" type="button">↻ Perbarui data</button>
     </div>
 
-
-
-    <div class=”grid”>
-
-      <article class=”card span-4”>
-
-        <div class=”card-label”>AQI US</div>
-
-        <div class=”big-number” id=”aqiValue”>—</div>
-
-        <span class=”status” id=”aqiCategory”>Belum tersedia</span>
-
-        <p class=”small muted”>Indeks kualitas udara, bukan konsentrasi langsung dalam µg/m³.</p>
-
+    <div class="grid">
+      <article class="card span-4">
+        <div class="card-label">AQI US</div>
+        <div class="big-number" id="aqiValue">—</div>
+        <span class="status" id="aqiCategory">Belum tersedia</span>
+        <p class="small muted">Indeks kualitas udara, bukan konsentrasi langsung dalam µg/m³.</p>
       </article>
 
-
-
-      <article class=”card span-4”>
-
-        <div class=”card-label”>Estimasi konsentrasi PM2.5</div>
-
-        <div class=”big-number” id=”pmValue”>—</div>
-
-        <span class=”muted small”>µg/m³ · hasil konversi AQI</span>
-
-        <p class=”small muted”>Bukan pengukuran konsentrasi mentah dari sensor.</p>
-
+      <article class="card span-4">
+        <div class="card-label">Estimasi konsentrasi PM2.5</div>
+        <div class="big-number" id="pmValue">—</div>
+        <span class="muted small">µg/m³ · hasil konversi AQI</span>
+        <p class="small muted">Bukan pengukuran konsentrasi mentah dari sensor.</p>
       </article>
 
-
-
-      <article class=”card span-4”>
-
-        <div class=”card-label”>Polutan dominan</div>
-
-        <div class=”big-number” id=”pollutantValue”>—</div>
-
-        <p class=”small muted”>Kategori polutan dominan dari respons API.</p>
-
+      <article class="card span-4">
+        <div class="card-label">Polutan dominan</div>
+        <div class="big-number" id="pollutantValue">—</div>
+        <p class="small muted">Kategori polutan dominan dari respons API.</p>
       </article>
 
-
-
-      <article class=”card span-6”>
-
-        <div class=”card-label”>Suhu udara</div>
-
-        <div class=”big-number” id=”tempValue”>—</div>
-
-        <p class=”small muted”>Data cuaca dari respons IQAir.</p>
-
+      <article class="card span-6">
+        <div class="card-label">Suhu udara</div>
+        <div class="big-number" id="tempValue">—</div>
+        <p class="small muted">Data cuaca dari respons IQAir.</p>
       </article>
 
-
-
-      <article class=”card span-6”>
-
-        <div class=”card-label”>Kelembapan</div>
-
-        <div class=”big-number” id=”humidityValue”>—</div>
-
-        <p class=”small muted”>Kelembapan relatif udara.</p>
-
+      <article class="card span-6">
+        <div class="card-label">Kelembapan</div>
+        <div class="big-number" id="humidityValue">—</div>
+        <p class="small muted">Kelembapan relatif udara.</p>
       </article>
-
     </div>
 
-
-
-    <div class=”notice”>
-
+    <div class="notice">
       <strong>Catatan data:</strong> PETA menggunakan AQI US untuk
-
-      Memperkirakan konsentrasi PM2.5 melalui breakpoint EPA. Jika
-
-      Data AQI tidak tersedia, estimasi PM2.5 tidak akan dibuat dari
-
-      Angka AQI yang tidak valid.
-
+      memperkirakan konsentrasi PM2.5 melalui breakpoint EPA. Jika
+      data AQI tidak tersedia, estimasi PM2.5 tidak akan dibuat dari
+      angka AQI yang tidak valid.
     </div>
-
   </div>
-
 </section>
 
-
-
-<section id=”history”>
-
-  <div class=”container”>
-
-    <div class=”section-head”>
-
-      <div class=”eyebrow”>02 / HISTORICAL DATA</div>
-
+<section id="history">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">02 / HISTORICAL DATA</div>
       <h2>Riwayat kualitas udara</h2>
-
       <p>
-
         Amati perubahan data harian dan telusuri catatan bulanan.
-
         Riwayat bergantung pada data yang berhasil dikumpulkan dan
-
-        Disimpan oleh Google Apps Script.
-
+        disimpan oleh Google Apps Script.
       </p>
-
     </div>
 
-
-
-    <article class=”card”>
-
-      <div class=”section-toolbar”>
-
+    <article class="card">
+      <div class="section-toolbar">
         <div>
-
-          <div class=”card-label”>Daily trend</div>
-
-          <h3 style=”margin:5px 0”>Grafik AQI harian</h3>
-
+          <div class="card-label">Daily trend</div>
+          <h3 style="margin:5px 0">Grafik AQI harian</h3>
         </div>
-
-        <span class=”small muted” id=”historyStatus”>Menunggu riwayat...</span>
-
+        <span class="small muted" id="historyStatus">Menunggu riwayat...</span>
       </div>
 
-
-
-      <div class=”chart-wrap”>
-
-        <canvas id=”dailyChart” aria-label=”Grafik AQI harian”></canvas>
-
+      <div class="chart-wrap">
+        <canvas id="dailyChart" aria-label="Grafik AQI harian"></canvas>
       </div>
 
-
-
-      <div class=”notice”>
-
+      <div class="notice">
         Grafik menggunakan rata-rata AQI harian dari data historis,
-
-        Bukan hasil pengukuran setiap menit.
-
+        bukan hasil pengukuran setiap menit.
       </div>
-
     </article>
 
-
-
-    <div class=”insight-banner”>
-
-      <div class=”insight-symbol”>🌿</div>
-
+    <div class="insight-banner">
+      <div class="insight-symbol">🌿</div>
       <div>
-
-        <div class=”eyebrow”>DAILY INSIGHT</div>
-
-        <h3 id=”dailyInsightTitle”>Menunggu data harian</h3>
-
-        <p id=”dailyInsightText”>
-
+        <div class="eyebrow">DAILY INSIGHT</div>
+        <h3 id="dailyInsightTitle">Menunggu data harian</h3>
+        <p id="dailyInsightText">
           Insight akan ditampilkan setelah data historis tersedia.
-
         </p>
-
-        <div style=”margin-top:15px”>
-
-          <button class=”btn btn-primary” id=”showCalendarBtn” type=”button”>
-
+        <div style="margin-top:15px">
+          <button class="btn btn-primary" id="showCalendarBtn" type="button">
             Lihat kalender bulanan ↗
-
           </button>
-
         </div>
-
       </div>
-
     </div>
 
-
-
-    <div class=”monthly-panel” id=”monthlyPanel” hidden>
-
-      <article class=”card”>
-
-        <div class=”section-toolbar”>
-
+    <div class="monthly-panel" id="monthlyPanel" hidden>
+      <article class="card">
+        <div class="section-toolbar">
           <div>
-
-            <div class=”card-label”>Monthly exploration</div>
-
-            <h3 style=”margin:5px 0”>Kalender kualitas udara</h3>
-
+            <div class="card-label">Monthly exploration</div>
+            <h3 style="margin:5px 0">Kalender kualitas udara</h3>
           </div>
-
-          <button class=”btn” id=”hideCalendarBtn” type=”button”>Tutup ×</button>
-
+          <button class="btn" id="hideCalendarBtn" type="button">Tutup ×</button>
         </div>
 
-
-
-        <div class=”month-nav”>
-
-          <button class=”btn” id=”prevMonthBtn” type=”button” aria-label=”Bulan sebelumnya”>←</button>
-
-          <h3 id=”monthTitle”>—</h3>
-
-          <button class=”btn” id=”nextMonthBtn” type=”button” aria-label=”Bulan berikutnya”>→</button>
-
+        <div class="month-nav">
+          <button class="btn" id="prevMonthBtn" type="button" aria-label="Bulan sebelumnya">←</button>
+          <h3 id="monthTitle">—</h3>
+          <button class="btn" id="nextMonthBtn" type="button" aria-label="Bulan berikutnya">→</button>
         </div>
 
+        <div class="calendar" id="calendarGrid"></div>
 
-
-        <div class=”calendar” id=”calendarGrid”></div>
-
-
-
-        <div class=”legend”>
-
-          <span class=”legend-item”><span class=”legend-dot” style=”background:#164b30”></span>Baik</span>
-
-          <span class=”legend-item”><span class=”legend-dot” style=”background:#66531b”></span>Sedang</span>
-
-          <span class=”legend-item”><span class=”legend-dot” style=”background:#713d20”></span>Tidak sehat bagi kelompok sensitif</span>
-
-          <span class=”legend-item”><span class=”legend-dot” style=”background:#6d2828”></span>Tidak sehat</span>
-
-          <span class=”legend-item”><span class=”legend-dot” style=”background:#57204c”></span>Sangat tidak sehat</span>
-
-          <span class=”legend-item”><span class=”legend-dot” style=”background:#532020”></span>Berbahaya</span>
-
+        <div class="legend">
+          <span class="legend-item"><span class="legend-dot" style="background:#164b30"></span>Baik</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#66531b"></span>Sedang</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#713d20"></span>Tidak sehat bagi kelompok sensitif</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#6d2828"></span>Tidak sehat</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#57204c"></span>Sangat tidak sehat</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#532020"></span>Berbahaya</span>
         </div>
 
-
-
-        <div class=”detail-box” id=”dayDetail” aria-live=”polite”>
-
+        <div class="detail-box" id="dayDetail" aria-live="polite">
           <h4>Pilih tanggal pada kalender</h4>
-
-          <p class=”muted small”>Detail harian akan muncul di sini.</p>
-
+          <p class="muted small">Detail harian akan muncul di sini.</p>
         </div>
-
       </article>
-
     </div>
-
   </div>
-
 </section>
 
-
-
-<section id=”estimate”>
-
-  <div class=”container”>
-
-    <div class=”section-head”>
-
-      <div class=”eyebrow”>03 / EXPOSURE MODEL</div>
-
+<section id="estimate">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">03 / EXPOSURE MODEL</div>
       <h2>Estimasi paparan PM2.5</h2>
-
       <p>
-
         Model memperkirakan massa partikel yang terhirup dan bagian
-
-        Massa tersebut yang diperkirakan terdeposit, berdasarkan
-
-        Konsentrasi PM2.5, laju inhalasi, durasi, dan faktor deposisi.
-
+        massa tersebut yang diperkirakan terdeposit, berdasarkan
+        konsentrasi PM2.5, laju inhalasi, durasi, dan faktor deposisi.
       </p>
-
     </div>
 
+    <div class="grid">
+      <article class="card span-5">
+        <h3 style="margin-top:0">Parameter model</h3>
 
-
-    <div class=”grid”>
-
-      <article class=”card span-5”>
-
-        <h3 style=”margin-top:0”>Parameter model</h3>
-
-
-
-        <div class=”form-grid” style=”grid-template-columns:1fr”>
-
-          <div class=”field”>
-
-            <label for=”ageGroup”>Kelompok usia</label>
-
-            <select id=”ageGroup”>
-
-              <option value=”bayi”>Usia <1 tahun</option>
-
-              <option value=”balita”>Usia (1 - <2 tahun)</option>
-
-              <option value=”anak_kecil”>Usia 2 - <3 tahun</option>
-
-              <option value=”anak”>Usia 3 - <6 tahun</option>
-
-              <option value=”anak_sekolah”>Usia 6 - <11 tahun</option>
-
-              <option value=”remaja”>Usia 11 - <16 tahun</option>
-
-              <option value=”remaja_akhir”>Usia 16 - <21 tahun</option>
-
-              <option value=”dewasa” selected>Usia 21 - <31 tahun</option>
-
-              <option value=”dewasa_31”>Usia 31 - <41 tahun</option>
-
-              <option value=”dewasa_41”>Usia 41 - <51 tahun</option>
-
-              <option value=”dewasa_tengah”>Usia 51 - <61 tahun</option>
-
-              <option value=”lansia”>Usia 61 - <71 tahun</option>
-
-              <option value=”lansia_akhir”>Usia >71 tahun</option>
-
+        <div class="form-grid" style="grid-template-columns:1fr">
+          <div class="field">
+            <label for="ageGroup">Kelompok usia</label>
+            <select id="ageGroup">
+              <option value="bayi">Usia <1 tahun</option>
+              <option value="balita">Usia (1 - <2 tahun)</option>
+              <option value="anak_kecil">Usia 2 - <3 tahun</option>
+              <option value="anak">Usia 3 - <6 tahun</option>
+              <option value="anak_sekolah">Usia 6 - <11 tahun</option>
+              <option value="remaja">Usia 11 - <16 tahun</option>
+              <option value="remaja_akhir">Usia 16 - <21 tahun</option>
+              <option value="dewasa" selected>Usia 21 - <31 tahun</option>
+              <option value="dewasa_31">Usia 31 - <41 tahun</option>
+              <option value="dewasa_41">Usia 41 - <51 tahun</option>
+              <option value="dewasa_tengah">Usia 51 - <61 tahun</option>
+              <option value="lansia">Usia 61 - <71 tahun</option>
+              <option value="lansia_akhir">Usia >71 tahun</option>
             </select>
-
           </div>
 
-
-
-          <div class=”field”>
-
-            <label for=”duration”>Durasi paparan</label>
-
-            <select id=”duration”>
-
-              <option value=”15”>15 menit</option>
-
-              <option value=”30”>30 menit</option>
-
-              <option value=”60” selected>1 jam</option>
-
-              <option value=”120”>2 jam</option>
-
-              <option value=”240”>4 jam</option>
-
-              <option value=”480”>8 jam</option>
-
+          <div class="field">
+            <label for="duration">Durasi paparan</label>
+            <select id="duration">
+              <option value="15">15 menit</option>
+              <option value="30">30 menit</option>
+              <option value="60" selected>1 jam</option>
+              <option value="120">2 jam</option>
+              <option value="240">4 jam</option>
+              <option value="480">8 jam</option>
             </select>
-
           </div>
 
-
-
-          <div class=”field”>
-
+          <div class="field">
             <label>Konsentrasi PM2.5 yang digunakan</label>
-
-            <div class=”readonly” id=”modelPm25”>Menunggu data...</div>
-
+            <div class="readonly" id="modelPm25">Menunggu data...</div>
           </div>
 
-
-
-          <div class=”field”>
-
+          <div class="field">
             <label>Laju inhalasi Q</label>
-
-            <div class=”readonly” id=”modelQ”>—</div>
-
+            <div class="readonly" id="modelQ">—</div>
           </div>
 
-
-
-          <div class=”field”>
-
+          <div class="field">
             <label>Faktor deposisi (DF)</label>
-
-            <div class=”readonly” id=”modelDF”>—</div>
-
+            <div class="readonly" id="modelDF">—</div>
           </div>
-
         </div>
 
-
-
-        <div class=”notice”>
-
+        <div class="notice">
           Q dan DF ditetapkan otomatis berdasarkan tabel parameter
-
-          Model. Pengguna tidak dapat mengubah nilainya secara manual.
-
+          model. Pengguna tidak dapat mengubah nilainya secara manual.
         </div>
 
-
-
-        <button class=”btn btn-primary” id=”calculateBtn” type=”button” style=”width:100%;margin-top:18px”>
-
+        <button class="btn btn-primary" id="calculateBtn" type="button" style="width:100%;margin-top:18px">
           Hitung estimasi ↗
-
         </button>
-
       </article>
 
+      <article class="card span-7">
+        <div class="card-label">ESTIMATION OUTPUT</div>
+        <h3 style="margin:5px 0">Hasil pemodelan</h3>
+        <p class="muted small">Hasil akan diperbarui saat parameter berubah.</p>
 
-
-      <article class=”card span-7”>
-
-        <div class=”card-label”>ESTIMATION OUTPUT</div>
-
-        <h3 style=”margin:5px 0”>Hasil pemodelan</h3>
-
-        <p class=”muted small”>Hasil akan diperbarui saat parameter berubah.</p>
-
-
-
-        <div class=”result-main”>
-
-          <div class=”card-label”>Estimasi massa terdeposit</div>
-
-          <div class=”big-number” id=”depositedResult”>—</div>
-
-          <div class=”small muted”>µg PM2.5 · hasil model</div>
-
+        <div class="result-main">
+          <div class="card-label">Estimasi massa terdeposit</div>
+          <div class="big-number" id="depositedResult">—</div>
+          <div class="small muted">µg PM2.5 · hasil model</div>
         </div>
 
-
-
-        <div class=”result-pair”>
-
-          <div class=”result-mini”>
-
-            <div class=”card-label”>Massa terhirup</div>
-
-            <div class=”big-number” id=”inhaledResult”>—</div>
-
-            <div class=”small muted”>µg PM2.5</div>
-
+        <div class="result-pair">
+          <div class="result-mini">
+            <div class="card-label">Massa terhirup</div>
+            <div class="big-number" id="inhaledResult">—</div>
+            <div class="small muted">µg PM2.5</div>
           </div>
 
-
-
-          <div class=”result-mini”>
-
-            <div class=”card-label”>Volume udara terhirup</div>
-
-            <div class=”big-number” id=”volumeResult”>—</div>
-
-            <div class=”small muted”>m³</div>
-
+          <div class="result-mini">
+            <div class="card-label">Volume udara terhirup</div>
+            <div class="big-number" id="volumeResult">—</div>
+            <div class="small muted">m³</div>
           </div>
-
         </div>
-
         
-
-        <!—INDIKATOR KUALITAS UDARA 
-
-<div class=”air-insight”>
-
-  <div class=”air-insight-top”>
-
+        <!-- INDIKATOR KUALITAS UDARA -->
+<div class="air-insight">
+  <div class="air-insight-top">
     <div>
-
-      <div class=”card-label”>KONDISI UDARA SAAT INI</div>
-
-      <h3 style=”margin:6px 0”>Apa artinya?</h3>
-
+      <div class="card-label">KONDISI UDARA SAAT INI</div>
+      <h3 style="margin:6px 0">Apa artinya?</h3>
     </div>
-
-    <span class=”status” id=”resultAqiCategory”>Menunggu data</span>
-
+    <span class="status" id="resultAqiCategory">Menunggu data</span>
   </div>
 
-
-
-  <div class=”air-insight-value”>
-
+  <div class="air-insight-value">
     <div>
-
-      <div class=”small muted”>Indeks kualitas udara (AQI US)</div>
-
-      <div class=”big-number” id=”resultAqi”>—</div>
-
+      <div class="small muted">Indeks kualitas udara (AQI US)</div>
+      <div class="big-number" id="resultAqi">—</div>
     </div>
-
     <div>
-
-      <div class=”small muted”>Estimasi PM2.5</div>
-
-      <div class=”big-number” id=”resultPm25”>—</div>
-
-      <div class=”small muted”>µg/m³</div>
-
+      <div class="small muted">Estimasi PM2.5</div>
+      <div class="big-number" id="resultPm25">—</div>
+      <div class="small muted">µg/m³</div>
     </div>
-
   </div>
 
-
-
-  <div class=”air-guidance”>
-
-    <div class=”insight-symbol” id=”resultAirIcon”>🌿</div>
-
+  <div class="air-guidance">
+    <div class="insight-symbol" id="resultAirIcon">🌿</div>
     <div>
-
-      <h4 id=”resultAirTitle”>Menunggu data kualitas udara</h4>
-
-      <p id=”resultAirText”>
-
+      <h4 id="resultAirTitle">Menunggu data kualitas udara</h4>
+      <p id="resultAirText">
         Informasi kategori dan panduan aktivitas akan muncul setelah
-
-        Data kualitas udara tersedia.
-
+        data kualitas udara tersedia.
       </p>
-
     </div>
-
   </div>
 
-
-
-  <p class=”small muted” id=”resultAirTimestamp”>
-
+  <p class="small muted" id="resultAirTimestamp">
     Waktu observasi belum tersedia.
-
   </p>
-
 </div>
 
-
-
-        <div class=”notice”>
-
+        <div class="notice">
           Hasil ini adalah estimasi berdasarkan asumsi konsentrasi
-
-          Dan parameter model, bukan pengukuran langsung pada tubuh.
-
+          dan parameter model, bukan pengukuran langsung pada tubuh.
         </div>
-
       </article>
-
     </div>
 
-
-
-    <section class=”exposure-insight” style=”padding:28px 0 0”>
-
-      <div class=”insight-heading”>
-
-        <div class=”insight-label”>UNDERSTANDING YOUR RESULT</div>
-
+    <section class="exposure-insight" style="padding:28px 0 0">
+      <div class="insight-heading">
+        <div class="insight-label">UNDERSTANDING YOUR RESULT</div>
         <h3>Jadi, apa arti angka ini?</h3>
-
         <p>
-
           Angka hasil estimasi bukan sekadar nilai perhitungan.
-
           Angka ini membantu menghubungkan kondisi udara dengan
-
-          Perkiraan paparan partikel yang dialami manusia.
-
+          perkiraan paparan partikel yang dialami manusia.
         </p>
-
       </div>
 
-
-
-      <div class=”insight-result”>
-
-        <div class=”insight-symbol”>🔬</div>
-
+      <div class="insight-result">
+        <div class="insight-symbol">🔬</div>
         <div>
-
-          <div class=”insight-small”>ESTIMASI MASSA TERDEPOSIT</div>
-
-          <h4 id=”insightMass”>Menunggu hasil perhitungan</h4>
-
-          <p id=”insightSummary”>
-
+          <div class="insight-small">ESTIMASI MASSA TERDEPOSIT</div>
+          <h4 id="insightMass">Menunggu hasil perhitungan</h4>
+          <p id="insightSummary">
             Pilih kelompok usia dan durasi paparan untuk melihat
-
-            Penjelasan berdasarkan hasil model.
-
+            penjelasan berdasarkan hasil model.
           </p>
-
         </div>
-
       </div>
 
-
-
-      <div class=”insight-grid”>
-
-        <article class=”insight-card”>
-
-          <div style=”font-size:1.5rem”>🌫️</div>
-
+      <div class="insight-grid">
+        <article class="insight-card">
+          <div style="font-size:1.5rem">🌫️</div>
           <h4>Berawal dari udara</h4>
-
           <p>
-
             Konsentrasi PM2.5 menggambarkan massa partikel halus
-
-            Per volume udara. Nilai konsentrasi menjadi dasar
-
-            Untuk memperkirakan massa yang terhirup.
-
+            per volume udara. Nilai konsentrasi menjadi dasar
+            untuk memperkirakan massa yang terhirup.
           </p>
-
         </article>
 
-
-
-        <article class=”insight-card”>
-
-          <div style=”font-size:1.5rem”>⏳</div>
-
+        <article class="insight-card">
+          <div style="font-size:1.5rem">⏳</div>
           <h4>Durasi ikut berpengaruh</h4>
-
-          <p id=”durationInsight”>
-
+          <p id="durationInsight">
             Durasi digunakan untuk memperkirakan volume udara
-
-            Yang dihirup selama periode paparan.
-
+            yang dihirup selama periode paparan.
           </p>
-
         </article>
 
-
-
-        <article class=”insight-card”>
-
-          <div style=”font-size:1.5rem”>🫁</div>
-
+        <article class="insight-card">
+          <div style="font-size:1.5rem">🫁</div>
           <h4>Terhirup ≠ terdeposit</h4>
-
           <p>
-
             Model menggunakan faktor deposisi untuk memperkirakan
-
-            Bagian massa terhirup yang terdeposit, bukan menganggap
-
-            Seluruh massa terhirup akan terdeposit.
-
+            bagian massa terhirup yang terdeposit, bukan menganggap
+            seluruh massa terhirup akan terdeposit.
           </p>
-
         </article>
 
-
-
-        <article class=”insight-card”>
-
-          <div style=”font-size:1.5rem”>💡</div>
-
+        <article class="insight-card">
+          <div style="font-size:1.5rem">💡</div>
           <h4>Kenapa perlu dihitung?</h4>
-
           <p>
-
             Agar data kualitas udara dapat dipelajari bersama
-
-            Durasi paparan dan parameter kelompok usia, bukan
-
-            Hanya dilihat sebagai angka indeks.
-
+            durasi paparan dan parameter kelompok usia, bukan
+            hanya dilihat sebagai angka indeks.
           </p>
-
         </article>
-
       </div>
 
-
-
-      <div class=”section-heading”>
-
-  <span class=”eyebrow”><br>THE SCIENCE</span>
-
+      <div class="section-heading">
+  <span class="eyebrow"><br>THE SCIENCE</span>
   <h2>The Science Behind It</h2>
-
   <p>
-
     Memahami bagaimana konsentrasi PM2.5 digunakan untuk
-
-    Memperkirakan massa partikel yang terhirup dan terdeposit.
-
+    memperkirakan massa partikel yang terhirup dan terdeposit.
   </p>
-
 </div>
-
       
-
-      <div class=”flow-steps”>
-
-  <article class=”flow-step”>
-
-    <div class=”flow-step-main”>
-
+      <div class="flow-steps">
+  <article class="flow-step">
+    <div class="flow-step-main">
       <span>01 / INPUT</span>
-
       <strong>Konsentrasi PM2.5</strong>
-
       <small>Massa partikel per volume udara.</small>
-
     </div>
-
-    <details class=”flow-details”>
-
+    <details class="flow-details">
       <summary>Selengkapnya <span>＋</span></summary>
-
       <p>
-
         Konsentrasi PM2.5 menunjukkan perkiraan massa partikel halus
-
-        Dalam setiap meter kubik udara. Pada prototype ini, nilai
-
-        Konsentrasi diperoleh melalui estimasi dari AQI US, bukan
-
-        Pembacaan konsentrasi mentah dari sensor.
-
+        dalam setiap meter kubik udara. Pada prototype ini, nilai
+        konsentrasi diperoleh melalui estimasi dari AQI US, bukan
+        pembacaan konsentrasi mentah dari sensor.
       </p>
-
     </details>
-
   </article>
 
-
-
-  <article class=”flow-step”>
-
-    <div class=”flow-step-main”>
-
+  <article class="flow-step">
+    <div class="flow-step-main">
       <span>02 / INHALATION</span>
-
       <strong>Volume udara terhirup</strong>
-
       <small>Q × durasi paparan.</small>
-
     </div>
-
-    <details class=”flow-details”>
-
+    <details class="flow-details">
       <summary>Selengkapnya <span>＋</span></summary>
-
       <p>
-
         Laju inhalasi Q dinyatakan dalam m³/jam. Nilai tersebut
-
-        Dikonversi menjadi m³/menit, kemudian dikalikan dengan durasi
-
-        Paparan dalam menit untuk memperkirakan volume udara yang
-
-        Dihirup selama periode tersebut.
-
+        dikonversi menjadi m³/menit, kemudian dikalikan dengan durasi
+        paparan dalam menit untuk memperkirakan volume udara yang
+        dihirup selama periode tersebut.
       </p>
-
-      <div class=”flow-formula”>V = (Q / 60) × t</div>
-
+      <div class="flow-formula">V = (Q / 60) × t</div>
     </details>
-
   </article>
 
-
-
-  <article class=”flow-step”>
-
-    <div class=”flow-step-main”>
-
+  <article class="flow-step">
+    <div class="flow-step-main">
       <span>03 / INHALED MASS</span>
-
       <strong>Massa PM2.5 terhirup</strong>
-
       <small>Konsentrasi × volume udara.</small>
-
     </div>
-
-    <details class=”flow-details”>
-
+    <details class="flow-details">
       <summary>Selengkapnya <span>＋</span></summary>
-
       <p>
-
         Estimasi massa terhirup diperoleh dengan mengalikan konsentrasi
-
         PM2.5 dengan volume udara terhirup. Hasilnya dinyatakan dalam
-
-        Mikrogram (µg), dengan asumsi konsentrasi tetap selama durasi
-
-        Yang dipilih.
-
+        mikrogram (µg), dengan asumsi konsentrasi tetap selama durasi
+        yang dipilih.
       </p>
-
-      <div class=”flow-formula”>M terhirup = C × V</div>
-
+      <div class="flow-formula">M terhirup = C × V</div>
     </details>
-
   </article>
 
-
-
-  <article class=”flow-step”>
-
-    <div class=”flow-step-main”>
-
+  <article class="flow-step">
+    <div class="flow-step-main">
       <span>04 / DEPOSITION</span>
-
       <strong>Massa PM2.5 terdeposit</strong>
-
       <small>Massa terhirup × faktor deposisi.</small>
-
     </div>
-
-    <details class=”flow-details”>
-
+    <details class="flow-details">
       <summary>Selengkapnya <span>＋</span></summary>
-
       <p>
-
         Faktor deposisi (DF) digunakan untuk memperkirakan bagian
-
-        Massa yang terhirup dan kemudian terdeposit. Nilai DF
-
-        Ditetapkan oleh model berdasarkan kelompok usia dan tidak
-
-        Dapat diubah secara manual oleh pengguna.
-
+        massa yang terhirup dan kemudian terdeposit. Nilai DF
+        ditetapkan oleh model berdasarkan kelompok usia dan tidak
+        dapat diubah secara manual oleh pengguna.
       </p>
-
-      <div class=”flow-formula”>M terdeposit = M terhirup × DF</div>
-
+      <div class="flow-formula">M terdeposit = M terhirup × DF</div>
     </details>
-
   </article>
-
 </div>
 
-
-
-      <div class=”insight-note”>
-
+      <div class="insight-note">
         <span>ⓘ</span>
-
         <p>
-
           <strong>Catatan ilmiah:</strong> hasil ini merupakan estimasi
-
-          Berbasis model. Nilainya bukan pengukuran langsung partikel
-
-          Di dalam tubuh, bukan diagnosis, dan tidak dapat digunakan
-
-          Sendiri untuk menentukan apakah paparan aman atau berbahaya.
-
+          berbasis model. Nilainya bukan pengukuran langsung partikel
+          di dalam tubuh, bukan diagnosis, dan tidak dapat digunakan
+          sendiri untuk menentukan apakah paparan aman atau berbahaya.
         </p>
-
       </div>
-
     </section>
-
   </div>
-
 </section>
 
-
-
-<section id=”about”>
-
-  <div class=”container”>
-
-    <div class=”section-head”>
-
-      <div class=”eyebrow”>04 / ABOUT THE PROJECT</div>
-
+<section id="about">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">04 / ABOUT THE PROJECT</div>
       <h2>Data bertemu konsep fisika</h2>
-
       <p>
-
         PETA merupakan prototype penelitian siswa untuk mempelajari
-
-        Hubungan antara kualitas udara, paparan PM2.5, dan pendekatan
-
-        Pemodelan berbasis komputasi.
-
+        hubungan antara kualitas udara, paparan PM2.5, dan pendekatan
+        pemodelan berbasis komputasi.
       </p>
-
     </div>
 
-
-
-    <div class=”about-grid”>
-
-      <article class=”about-card”>
-
-        <div class=”eyebrow”>01 / MONITOR</div>
-
+    <div class="about-grid">
+      <article class="about-card">
+        <div class="eyebrow">01 / MONITOR</div>
         <h3>Pemantauan</h3>
-
         <p>Menyajikan data kualitas udara dan cuaca dari sumber API.</p>
-
       </article>
-
-      <article class=”about-card”>
-
-        <div class=”eyebrow”>02 / MODEL</div>
-
+      <article class="about-card">
+        <div class="eyebrow">02 / MODEL</div>
         <h3>Pemodelan</h3>
-
         <p>Menggunakan konsentrasi, laju inhalasi, durasi, dan faktor deposisi.</p>
-
       </article>
-
-      <article class=”about-card”>
-
-        <div class=”eyebrow”>03 / LEARN</div>
-
+      <article class="about-card">
+        <div class="eyebrow">03 / LEARN</div>
         <h3>Edukasi</h3>
-
         <p>Membantu pengguna memahami arti dan keterbatasan estimasi paparan.</p>
-
       </article>
-
     </div>
 
-
-
-    <div class=”notice”>
-
+    <div class="notice">
       PETA adalah prototype penelitian siswa, bukan layanan pemantauan
-
-      Resmi, alat ukur biologis, atau layanan diagnosis medis.
-
+      resmi, alat ukur biologis, atau layanan diagnosis medis.
     </div>
-
   </div>
-
 </section>
-
 </main>
 
-
-
 <footer>
-
-  <div class=”container footer-row”>
-
+  <div class="container footer-row">
     <span>© PETA — Student Research Prototype</span>
-
     <span>Physics · Air Quality · Exposure Modeling</span>
-
   </div>
-
 </footer>
 
-
-
-<div id=”toast” role=”status” aria-live=”polite”></div>
-
-
+<div id="toast" role="status" aria-live="polite"></div>
 
 <script>
-
-“use strict”;
-
-
+"use strict";
 
 /* =========================================================
-
-1.	KONFIGURASI
-
+   1. KONFIGURASI
    ========================================================= */
 
-
-
-Const CONFIG = {
-
-  IQAIR_API_KEY: “6b3bbbe6-af5b-4d41-9286-5cafa899618f”,
-
-
+const CONFIG = {
+  IQAIR_API_KEY: "6b3bbbe6-af5b-4d41-9286-5cafa899618f",
 
   // Tempel URL Web App Apps Script yang berakhir dengan /exec.
-
-  HISTORY_WEB_APP_URL: https://script.google.com/macros/s/AKfycbzU9C00Z54b4dxQX-1BqRRgEayWGQ4-1aGWRpnBSUF1hTEE_jmeXgaN98100imdbpZa/exec,
-
-
+  HISTORY_WEB_APP_URL: "https://script.google.com/macros/s/AKfycbzU9C00Z54b4dxQX-1BqRRgEayWGQ4-1aGWRpnBSUF1hTEE_jmeXgaN98100imdbpZa/exec",
 
   // Koordinat Tarakan.
-
   LATITUDE: 3.3274,
-
   LONGITUDE: 117.5785,
 
-
-
-  IQAIR_CACHE_KEY: “peta_iqair_cache”,
-
-  IQAIR_CACHE_TIME_KEY: “peta_iqair_cache_time”,
-
-
+  IQAIR_CACHE_KEY: "peta_iqair_cache",
+  IQAIR_CACHE_TIME_KEY: "peta_iqair_cache_time",
 
   IQAIR_REFRESH_MS: 10 * 60 * 1000,
-
   IQAIR_CACHE_MAX_AGE_MS: 15 * 60 * 1000,
-
   HISTORY_REFRESH_MS: 5 * 60 * 1000
-
 };
 
-
-
 /* =========================================================
-
-2.	PARAMETER MODEL TERKUNCI
-
+   2. PARAMETER MODEL TERKUNCI
    Q dalam m³/jam; DF tanpa satuan.
-
    ========================================================= */
 
-
-
-Const MODEL_PARAMETERS = {
-
-  Bayi:            { label: “Bayi”,                  Q: 0.32, DF: 0.75 },
-
-  Balita:           { label: “Balita”,                Q: 0.41, DF: 0.75 },
-
-  Anak_kecil:       { label: “Anak kecil”,            Q: 0.45, DF: 0.75 },
-
-  Anak:             { label: “Anak”,                  Q: 0.53, DF: 0.75 },
-
-  Anak_sekolah:     { label: “Anak sekolah”,          Q: 0.63, DF: 0.75 },
-
-  Remaja:           { label: “Remaja”,                Q: 0.75, DF: 0.75 },
-
-  Remaja_akhir:     { label: “Remaja akhir”,          Q: 0.84, DF: 0.75 },
-
-  Dewasa:           { label: “Dewasa”,                Q: 0.82, DF: 0.65 },
-
-  Dewasa_31:        { label: “Dewasa 31–40 tahun”,     Q: 0.85, DF: 0.65 },
-
-  Dewasa_41:        { label: “Dewasa 41–50 tahun”,     Q: 0.86, DF: 0.65 },
-
-  Dewasa_tengah:    { label: “Dewasa tengah”,         Q: 0.85, DF: 0.65 },
-
-  Lansia:           { label: “Lansia”,                Q: 0.81, DF: 0.65 },
-
-  Lansia_akhir:     { label: “Lansia akhir”,          Q: 0.76, DF: 0.65 }
-
+const MODEL_PARAMETERS = {
+  bayi:            { label: "Bayi",                  Q: 0.32, DF: 0.75 },
+  balita:           { label: "Balita",                Q: 0.41, DF: 0.75 },
+  anak_kecil:       { label: "Anak kecil",            Q: 0.45, DF: 0.75 },
+  anak:             { label: "Anak",                  Q: 0.53, DF: 0.75 },
+  anak_sekolah:     { label: "Anak sekolah",          Q: 0.63, DF: 0.75 },
+  remaja:           { label: "Remaja",                Q: 0.75, DF: 0.75 },
+  remaja_akhir:     { label: "Remaja akhir",          Q: 0.84, DF: 0.75 },
+  dewasa:           { label: "Dewasa",                Q: 0.82, DF: 0.65 },
+  dewasa_31:        { label: "Dewasa 31–40 tahun",     Q: 0.85, DF: 0.65 },
+  dewasa_41:        { label: "Dewasa 41–50 tahun",     Q: 0.86, DF: 0.65 },
+  dewasa_tengah:    { label: "Dewasa tengah",         Q: 0.85, DF: 0.65 },
+  lansia:           { label: "Lansia",                Q: 0.81, DF: 0.65 },
+  lansia_akhir:     { label: "Lansia akhir",          Q: 0.76, DF: 0.65 }
 };
 
-
-
 /* =========================================================
-
-3.	STATE
-
+   3. STATE
    ========================================================= */
 
-
-
-Const state = {
-
-  Aqi: null,
-
-  Pm25: null,
-
-  Temperature: null,
-
-  Humidity: null,
-
-  Pollutant: null,
-
+const state = {
+  aqi: null,
+  pm25: null,
+  temperature: null,
+  humidity: null,
+  pollutant: null,
   observationTime: null,
 
-
-
   daily: [],
-
   monthly: [],
 
-
-
   selectedDate: null,
-
   calendarYear: new Date().getFullYear(),
-
   calendarMonth: new Date().getMonth(),
 
-
-
   lastEstimate: null,
-
   toastTimer: null
-
 };
 
+const $ = id => document.getElementById(id);
 
-
-Const $ = id => document.getElementById(id);
-
-
-
-Function showToast(message) {
-
-  Const el = $(“toast”);
-
-  El.textContent = message;
-
-  El.style.display = “block”;
-
-
+function showToast(message) {
+  const el = $("toast");
+  el.textContent = message;
+  el.style.display = "block";
 
   clearTimeout(state.toastTimer);
-
   state.toastTimer = setTimeout(() => {
-
-    el.style.display = “none”;
-
+    el.style.display = "none";
   }, 3200);
-
 }
 
+function numberFormat(value, digits = 2) {
+  if (typeof value !== "number" || !Number.isFinite(value)) return "—";
 
-
-Function numberFormat(value, digits = 2) {
-
-  If (typeof value !== “number” || !Number.isFinite(value)) return “—“;
-
-
-
-  Return value.toLocaleString(“id-ID”, {
-
+  return value.toLocaleString("id-ID", {
     maximumFractionDigits: digits
-
   });
-
 }
 
-
-
-Function validNumber(value) {
-
-  Const n = Number(value);
-
-  Return value !== null && value !== “” && Number.isFinite(n) ? n : null;
-
+function validNumber(value) {
+  const n = Number(value);
+  return value !== null && value !== "" && Number.isFinite(n) ? n : null;
 }
 
-
-
-Function safeDate(value) {
-
-  If (!value) return null;
-
-
+function safeDate(value) {
+  if (!value) return null;
 
   // Menghindari pergeseran tanggal untuk string YYYY-MM-DD.
+  const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
 
-  Const match = String(value).match(/^(\d{4})-(\d{2})-(\d{2})$/);
-
-
-
-  If (match) {
-
-    Return new Date(
-
+  if (match) {
+    return new Date(
       Number(match[1]),
-
-      Number(match[2]) – 1,
-
+      Number(match[2]) - 1,
       Number(match[3])
-
     );
-
   }
 
-
-
-  Const date = new Date(value);
-
-  Return Number.isNaN(date.getTime()) ? null : date;
-
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
-
-
-Function localDateKey(date) {
-
-  Const y = date.getFullYear();
-
-  Const m = String(date.getMonth() + 1).padStart(2, “0”);
-
-  Const d = String(date.getDate()).padStart(2, “0”);
-
-  Return `${y}-${m}-${d}`;
-
+function localDateKey(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}`;
 }
 
-
-
-Function formatLongDate(date) {
-
-  Return date.toLocaleDateString(“id-ID”, {
-
-    Day: “numeric”,
-
-    Month: “long”,
-
-    Year: “numeric”
-
+function formatLongDate(date) {
+  return date.toLocaleDateString("id-ID", {
+    day: "numeric",
+    month: "long",
+    year: "numeric"
   });
-
 }
-
   
+  function formatPollutant(value) {
+  if (!value) return "—";
 
-  Function formatPollutant(value) {
-
-  If (!value) return “—“;
-
-
-
-  Const names = {
-
-    P1: “PM10”,
-
-    P2: “PM2.5”,
-
-    Pm10: “PM10”,
-
-    Pm25: “PM2.5”,
-
-    O3: “O₃”,
-
-    No2: “NO₂”,
-
-    So2: “SO₂”,
-
-    Co: “CO”
-
+  const names = {
+    p1: "PM10",
+    p2: "PM2.5",
+    pm10: "PM10",
+    pm25: "PM2.5",
+    o3: "O₃",
+    no2: "NO₂",
+    so2: "SO₂",
+    co: "CO"
   };
 
+  const key = String(value).trim().toLowerCase();
 
-
-  Const key = String(value).trim().toLowerCase();
-
-
-
-  Return names[key] || String(value).toUpperCase();
-
+  return names[key] || String(value).toUpperCase();
 }
-
-
 
 /* =========================================================
-
-4.	KATEGORI AQI US
-
+   4. KATEGORI AQI US
    ========================================================= */
 
-
-
-Function aqiCategory(aqi) {
-
-  If (aqi === null || !Number.isFinite(aqi)) {
-
-    Return { label: “Belum tersedia”, className: “” };
-
+function aqiCategory(aqi) {
+  if (aqi === null || !Number.isFinite(aqi)) {
+    return { label: "Belum tersedia", className: "" };
   }
 
-
-
-  If (aqi <= 50) {
-
-    Return { label: “Baik”, className: “good” };
-
+  if (aqi <= 50) {
+    return { label: "Baik", className: "good" };
   }
 
-
-
-  If (aqi <= 100) {
-
-    Return { label: “Sedang”, className: “moderate” };
-
+  if (aqi <= 100) {
+    return { label: "Sedang", className: "moderate" };
   }
 
-
-
-  If (aqi <= 150) {
-
-    Return { label: “Tidak sehat bagi kelompok sensitif”, className: “bad” };
-
+  if (aqi <= 150) {
+    return { label: "Tidak sehat bagi kelompok sensitif", className: "bad" };
   }
 
-
-
-  If (aqi <= 200) {
-
-    Return { label: “Tidak sehat”, className: “verybad” };
-
+  if (aqi <= 200) {
+    return { label: "Tidak sehat", className: "verybad" };
   }
 
-
-
-  If (aqi <= 300) {
-
-    Return { label: “Sangat tidak sehat”, className: “verybad” };
-
+  if (aqi <= 300) {
+    return { label: "Sangat tidak sehat", className: "verybad" };
   }
 
-
-
-  Return { label: “Berbahaya”, className: “verybad” };
-
+  return { label: "Berbahaya", className: "verybad" };
 }
-
   
+  function renderResultAirInsight() {
+  const aqi = state.aqi;
+  const pm25 = state.pm25;
+  const category = aqiCategory(aqi);
 
-  Function renderResultAirInsight() {
+  $("resultAqi").textContent =
+    aqi === null ? "—" : numberFormat(aqi, 0);
 
-  Const aqi = state.aqi;
+  $("resultPm25").textContent =
+    pm25 === null ? "—" : numberFormat(pm25, 1);
 
-  Const pm25 = state.pm25;
+  $("resultAqiCategory").textContent = category.label;
+  $("resultAqiCategory").className = `status ${category.className}`;
 
-  Const category = aqiCategory(aqi);
+  let title = "Data kualitas udara belum tersedia";
+  let message = "Periksa koneksi atau tunggu data kualitas udara yang valid.";
+  let icon = "ℹ️";
 
-
-
-  $(“resultAqi”).textContent =
-
-    Aqi === null ? “—“ : numberFormat(aqi, 0);
-
-
-
-  $(“resultPm25”).textContent =
-
-    Pm25 === null ? “—“ : numberFormat(pm25, 1);
-
-
-
-  $(“resultAqiCategory”).textContent = category.label;
-
-  $(“resultAqiCategory”).className = `status ${category.className}`;
-
-
-
-  Let title = “Data kualitas udara belum tersedia”;
-
-  Let message = “Periksa koneksi atau tunggu data kualitas udara yang valid.”;
-
-  Let icon = “ℹ️”;
-
-
-
-  If (aqi !== null && Number.isFinite(aqi)) {
-
-    If (aqi <= 50) {
-
-      Title = “Kategori baik”;
-
-      Message =
-
-        “Kualitas udara berada pada kategori baik menurut AQI US. “ +
-
-        “Tetap perhatikan perubahan kondisi udara dan informasi setempat.”;
-
-      Icon = “🌿”;
-
+  if (aqi !== null && Number.isFinite(aqi)) {
+    if (aqi <= 50) {
+      title = "Kategori baik";
+      message =
+        "Kualitas udara berada pada kategori baik menurut AQI US. " +
+        "Tetap perhatikan perubahan kondisi udara dan informasi setempat.";
+      icon = "🌿";
     } else if (aqi <= 100) {
-
-      Title = “Kategori sedang”;
-
-      Message =
-
-        “Kualitas udara berada pada kategori sedang. “ +
-
-        “Sebagian besar orang biasanya dapat beraktivitas seperti biasa, “ +
-
-        “tetapi orang yang lebih sensitif dapat memperhatikan gejala “ +
-
-        “dan mengurangi aktivitas luar ruang bila merasa tidak nyaman.”;
-
-      Icon = “🌤️”;
-
+      title = "Kategori sedang";
+      message =
+        "Kualitas udara berada pada kategori sedang. " +
+        "Sebagian besar orang biasanya dapat beraktivitas seperti biasa, " +
+        "tetapi orang yang lebih sensitif dapat memperhatikan gejala " +
+        "dan mengurangi aktivitas luar ruang bila merasa tidak nyaman.";
+      icon = "🌤️";
     } else if (aqi <= 150) {
-
-      Title = “Perhatian bagi kelompok sensitif”;
-
-      Message =
-
-        “Kelompok yang lebih sensitif terhadap polusi dapat membatasi “ +
-
-        “aktivitas luar ruang yang berat atau berkepanjangan. “ +
-
-        “Perhatikan informasi kualitas udara setempat.”;
-
-      Icon = “⚠️”;
-
+      title = "Perhatian bagi kelompok sensitif";
+      message =
+        "Kelompok yang lebih sensitif terhadap polusi dapat membatasi " +
+        "aktivitas luar ruang yang berat atau berkepanjangan. " +
+        "Perhatikan informasi kualitas udara setempat.";
+      icon = "⚠️";
     } else if (aqi <= 200) {
-
-      Title = “Kategori tidak sehat”;
-
-      Message =
-
-        “Pertimbangkan mengurangi aktivitas luar ruang, terutama “ +
-
-        “aktivitas berat atau berkepanjangan. Kelompok sensitif sebaiknya “ +
-
-        “lebih berhati-hati dan mengikuti informasi kesehatan setempat.”;
-
-      Icon = “🌫️”;
-
+      title = "Kategori tidak sehat";
+      message =
+        "Pertimbangkan mengurangi aktivitas luar ruang, terutama " +
+        "aktivitas berat atau berkepanjangan. Kelompok sensitif sebaiknya " +
+        "lebih berhati-hati dan mengikuti informasi kesehatan setempat.";
+      icon = "🌫️";
     } else if (aqi <= 300) {
-
-      Title = “Kategori sangat tidak sehat”;
-
-      Message =
-
-        “Kurangi paparan udara luar ruang sebisa mungkin dan ikuti “ +
-
-        “anjuran otoritas setempat. Pertimbangkan memindahkan aktivitas “ +
-
-        “ke dalam ruang dengan udara yang lebih bersih.”;
-
-      Icon = “⚠️”;
-
+      title = "Kategori sangat tidak sehat";
+      message =
+        "Kurangi paparan udara luar ruang sebisa mungkin dan ikuti " +
+        "anjuran otoritas setempat. Pertimbangkan memindahkan aktivitas " +
+        "ke dalam ruang dengan udara yang lebih bersih.";
+      icon = "⚠️";
     } else {
-
-      Title = “Kategori berbahaya”;
-
-      Message =
-
-        “Hindari aktivitas luar ruang yang tidak diperlukan dan ikuti “ +
-
-        “anjuran otoritas setempat mengenai perlindungan dari polusi udara.”;
-
-      Icon = “🚨”;
-
+      title = "Kategori berbahaya";
+      message =
+        "Hindari aktivitas luar ruang yang tidak diperlukan dan ikuti " +
+        "anjuran otoritas setempat mengenai perlindungan dari polusi udara.";
+      icon = "🚨";
     }
-
   }
 
+  $("resultAirTitle").textContent = title;
+  $("resultAirText").textContent = message;
+  $("resultAirIcon").textContent = icon;
 
+  const observed = safeDate(state.observationTime);
 
-  $(“resultAirTitle”).textContent = title;
-
-  $(“resultAirText”).textContent = message;
-
-  $(“resultAirIcon”).textContent = icon;
-
-
-
-  Const observed = safeDate(state.observationTime);
-
-
-
-  $(“resultAirTimestamp”).textContent = observed
-
-    ? `Waktu observasi sumber: ${observed.toLocaleString(“id-ID”)}`
-
-    : “Waktu observasi sumber belum tersedia.”;
-
+  $("resultAirTimestamp").textContent = observed
+    ? `Waktu observasi sumber: ${observed.toLocaleString("id-ID")}`
+    : "Waktu observasi sumber belum tersedia.";
 }
 
+function calendarLevel(aqi) {
+  if (aqi === null || !Number.isFinite(aqi)) return "";
 
+  if (aqi <= 50) return "level-good";
+  if (aqi <= 100) return "level-moderate";
+  if (aqi <= 150) return "level-sensitive";
+  if (aqi <= 200) return "level-unhealthy";
+  if (aqi <= 300) return "level-verybad";
 
-Function calendarLevel(aqi) {
-
-  If (aqi === null || !Number.isFinite(aqi)) return “”;
-
-
-
-  If (aqi <= 50) return “level-good”;
-
-  If (aqi <= 100) return “level-moderate”;
-
-  If (aqi <= 150) return “level-sensitive”;
-
-  If (aqi <= 200) return “level-unhealthy”;
-
-  If (aqi <= 300) return “level-verybad”;
-
-
-
-  Return “level-hazardous”;
-
+  return "level-hazardous";
 }
-
-
 
 /* =========================================================
-
-5.	KONVERSI AQI US KE PM2.5 ESTIMASI
-
+   5. KONVERSI AQI US KE PM2.5 ESTIMASI
    Breakpoint EPA untuk PM2.5.
-
    Bukan pembacaan langsung sensor µg/m³.
-
    ========================================================= */
 
-
-
-Const PM25_BREAKPOINTS = [
-
+const PM25_BREAKPOINTS = [
   { cLow: 0.0,   cHigh: 9.0,   iLow: 0,   iHigh: 50 },
-
   { cLow: 9.1,   cHigh: 35.4,  iLow: 51,  iHigh: 100 },
-
   { cLow: 35.5,  cHigh: 55.4,  iLow: 101, iHigh: 150 },
-
   { cLow: 55.5,  cHigh: 125.4, iLow: 151, iHigh: 200 },
-
   { cLow: 125.5, cHigh: 225.4, iLow: 201, iHigh: 300 },
-
   { cLow: 225.5, cHigh: 325.4, iLow: 301, iHigh: 500 }
-
 ];
 
-
-
-Function estimatePM25FromAQI(aqi) {
-
-  If (typeof aqi !== “number” || !Number.isFinite(aqi) || aqi < 0) {
-
-    Return null;
-
+function estimatePM25FromAQI(aqi) {
+  if (typeof aqi !== "number" || !Number.isFinite(aqi) || aqi < 0) {
+    return null;
   }
 
-
-
-  Const bp = PM25_BREAKPOINTS.find(
-
-    Item => aqi >= item.iLow && aqi <= item.iHigh
-
+  const bp = PM25_BREAKPOINTS.find(
+    item => aqi >= item.iLow && aqi <= item.iHigh
   );
 
+  if (!bp) return null;
 
-
-  If (!bp) return null;
-
-
-
-  Const concentration =
-
-    ((bp.cHigh – bp.cLow) / (bp.iHigh – bp.iLow)) *
-
-    (aqi – bp.iLow) + bp.cLow;
-
-
+  const concentration =
+    ((bp.cHigh - bp.cLow) / (bp.iHigh - bp.iLow)) *
+    (aqi - bp.iLow) + bp.cLow;
 
   // Pendekatan estimasi pada resolusi 0,1 µg/m³.
-
-  Return Math.round(concentration * 10) / 10;
-
+  return Math.round(concentration * 10) / 10;
 }
-
-
 
 /* =========================================================
-
-6.	TEMA
-
+   6. TEMA
    ========================================================= */
 
-
-
-Function applyTheme(theme) {
-
-  Document.body.classList.toggle(“light”, theme === “light”);
-
-  $(“themeToggle”).textContent = theme === “light” ? “🌙” : “☀️”;
-
-
-
-  Try {
-
-    localStorage.setItem(“peta_theme”, theme);
-
-  } catch (_) {}
-
-}
-
-
-
-$(“themeToggle”).addEventListener(“click”, () => {
-
-  applyTheme(document.body.classList.contains(“light”) ? “dark” : “light”);
-
-});
-
-
-
-Try {
-
-  applyTheme(localStorage.getItem(“peta_theme”) || “dark”);
-
-} catch (_) {
-
-  applyTheme(“dark”);
-
-}
-
-
-
-/* =========================================================
-
-7.	IQAIR LIVE DATA
-
-   ========================================================= */
-
-
-
-Function validIQAirConfig() {
-
-  Return (
-
-    CONFIG.IQAIR_API_KEY &&
-
-    CONFIG.IQAIR_API_KEY !== “ISI_API_KEY_IQAIR”
-
-  );
-
-}
-
-
-
-Function renderLiveData(data) {
-
-  State.aqi = data.aqi;
-
-  State.pm25 = data.pm25;
-
-  State.temperature = data.temperature;
-
-  State.humidity = data.humidity;
-
-  State.pollutant = data.pollutant;
-
-  State.observationTime = data.observationTime;
-
-
-
-  $(“aqiValue”).textContent =
-
-    Data.aqi === null ? “—“ : numberFormat(data.aqi, 0);
-
-
-
-  Const category = aqiCategory(data.aqi);
-
-  $(“aqiCategory”).textContent = category.label;
-
-  $(“aqiCategory”).className = `status ${category.className}`;
-
-
-
-  $(“pmValue”).textContent =
-
-    Data.pm25 === null ? “—“ : numberFormat(data.pm25, 1);
-
-
-
-  $(“pollutantValue”).textContent = formatPollutant(data.pollutant);
-
-
-
-  $(“tempValue”).textContent =
-
-    Data.temperature === null ? “—“ : `${numberFormat(data.temperature, 1)}°C`;
-
-
-
-  $(“humidityValue”).textContent =
-
-    Data.humidity === null ? “—“ : `${numberFormat(data.humidity, 0)}%`;
-
-
-
-  $(“modelPm25”).textContent =
-
-    Data.pm25 === null
-
-      ? “Data belum tersedia”
-
-      : `${numberFormat(data.pm25, 1)} µg/m³ (estimasi)`;
-
-
-
-  updateEstimate();
-
-  renderResultAirInsight();
-
-  
-
-}
-
-
-
-Function cacheIQAirData(data) {
-
-  Try {
-
-    localStorage.setItem(CONFIG.IQAIR_CACHE_KEY, JSON.stringify(data));
-
-    localStorage.setItem(CONFIG.IQAIR_CACHE_TIME_KEY, String(Date.now()));
-
-  } catch (_) {}
-
-}
-
-
-
-Function readIQAirCache() {
-
-  Try {
-
-    Const raw = localStorage.getItem(CONFIG.IQAIR_CACHE_KEY);
-
-    Const savedAt = Number(localStorage.getItem(CONFIG.IQAIR_CACHE_TIME_KEY));
-
-
-
-    If (!raw || !savedAt) return null;
-
-    If (Date.now() – savedAt > CONFIG.IQAIR_CACHE_MAX_AGE_MS) return null;
-
-
-
-    Return JSON.parse(raw);
-
-  } catch (_) {
-
-    Return null;
-
-  }
-
-}
-
-
-
-Async function fetchIQAir(force = false) {
-
-  If (!validIQAirConfig()) {
-
-    Const cache = readIQAirCache();
-
-
-
-    If (cache) {
-
-      renderLiveData(cache);
-
-      $(“liveStatus”).textContent = “Menampilkan cache · API key belum dikonfigurasi”;
-
-    } else {
-
-      $(“liveStatus”).textContent = “Masukkan API key IQAir untuk memulai.”;
-
-    }
-
-
-
-    Return;
-
-  }
-
-
-
-  If (!force) {
-
-    Const cache = readIQAirCache();
-
-
-
-    If (cache) {
-
-      renderLiveData(cache);
-
-      $(“liveStatus”).textContent = “Menampilkan data cache sementara...”;
-
-    }
-
-  }
-
-
-
-  $(“refreshBtn”).disabled = true;
-
-  $(“liveStatus”).textContent = “Mengambil data IQAir...”;
-
-
-
-  Const url = new URL(
-
-    https://api.airvisual.com/v2/nearest_city
-
-  );
-
-
-
-  url.searchParams.set(“lat”, String(CONFIG.LATITUDE));
-
-  url.searchParams.set(“lon”, String(CONFIG.LONGITUDE));
-
-  url.searchParams.set(“key”, CONFIG.IQAIR_API_KEY);
-
-
+function applyTheme(theme) {
+  document.body.classList.toggle("light", theme === "light");
+  $("themeToggle").textContent = theme === "light" ? "🌙" : "☀️";
 
   try {
-
-    const response = await fetch(url.toString());
-
-
-
-    if (!response.ok) {
-
-      throw new Error(`HTTP ${response.status}`);
-
-    }
-
-
-
-    Const json = await response.json();
-
-
-
-    If (json.status !== “success” || !json.data) {
-
-      Throw new Error(json.data?.message || “Respons IQAir tidak valid.”);
-
-    }
-
-
-
-    Const pollution = json.data.current?.pollution;
-
-    Const weather = json.data.current?.weather;
-
-
-
-    Const rawAQI = validNumber(pollution?.aqius);
-
-    Const aqi = rawAQI !== null && rawAQI >= 0 ? rawAQI : null;
-
-
-
-    Const data = {
-
-      Aqi,
-
-      Pm25: aqi === null ? null : estimatePM25FromAQI(aqi),
-
-      Temperature: validNumber(weather?.tp),
-
-      Humidity: validNumber(weather?.hu),
-
-      Pollutant: pollution?.mainus || null,
-
-      observationTime: pollution?.ts || weather?.ts || new Date().toISOString()
-
-    };
-
-
-
-    cacheIQAirData(data);
-
-    renderLiveData(data);
-
-
-
-    $(“liveStatus”).textContent =
-
-      `Diperbarui ${new Date().toLocaleTimeString(“id-ID”)} · IQAir`;
-
-  } catch (error) {
-
-    Console.error(“IQAir error:”, error);
-
-
-
-    Const cache = readIQAirCache();
-
-
-
-    If (cache) {
-
-      renderLiveData(cache);
-
-      $(“liveStatus”).textContent = “Koneksi gagal · menampilkan cache”;
-
-    } else {
-
-      $(“liveStatus”).textContent =
-
-        “Data belum tersedia. Periksa koneksi, API key, atau batas API.”;
-
-    }
-
-  } finally {
-
-    $(“refreshBtn”).disabled = false;
-
-  }
-
+    localStorage.setItem("peta_theme", theme);
+  } catch (_) {}
 }
 
-
-
-$(“refreshBtn”).addEventListener(“click”, () => fetchIQAir(true));
-
-
-
-/* =========================================================
-
-8.	PERHITUNGAN MODEL PAPARAN
-
-   Q (m³/jam) -> Q (m³/menit)
-
-   Volume = Q/60 × durasi menit
-
-   Massa terhirup = PM2.5 × volume
-
-   Massa terdeposit = massa terhirup × DF
-
-   ========================================================= */
-
-
-
-Function updateEstimate() {
-
-  Const ageKey = $(“ageGroup”).value;
-
-  Const durationMinutes = Number($(“duration”).value);
-
-  Const params = MODEL_PARAMETERS[ageKey];
-
-
-
-  $(“modelQ”).textContent =
-
-    `${numberFormat(params.Q, 2)} m³/jam · parameter tetap`;
-
-
-
-  $(“modelDF”).textContent =
-
-    `${numberFormat(params.DF, 2)} · parameter tetap`;
-
-
-
-  If (
-
-    State.pm25 === null ||
-
-    !Number.isFinite(state.pm25) ||
-
-    State.pm25 < 0
-
-  ) {
-
-    $(“depositedResult”).textContent = “—“;
-
-    $(“inhaledResult”).textContent = “—“;
-
-    $(“volumeResult”).textContent = “—“;
-
-
-
-    $(“insightMass”).textContent = “Data PM2.5 belum tersedia”;
-
-    $(“insightSummary”).textContent =
-
-      “Estimasi belum dapat dihitung. Tunggu data kualitas udara yang valid.”;
-
-    $(“durationInsight”).textContent =
-
-      “Durasi akan digunakan untuk memperkirakan volume udara yang dihirup.”;
-
-
-
-    State.lastEstimate = null;
-
-    Return;
-
-  }
-
-
-
-  Const qPerMinute = params.Q / 60;
-
-  Const volumeM3 = qPerMinute * durationMinutes;
-
-  Const inhaledMassUg = state.pm25 * volumeM3;
-
-  Const depositedMassUg = inhaledMassUg * params.DF;
-
-
-
-  State.lastEstimate = {
-
-    ageKey,
-
-    ageLabel: params.label,
-
-    qPerHour: params.Q,
-
-    df: params.DF,
-
-    durationMinutes,
-
-    pm25: state.pm25,
-
-    volumeM3,
-
-    inhaledMassUg,
-
-    depositedMassUg
-
-  };
-
-
-
-  $(“depositedResult”).textContent = `${numberFormat(depositedMassUg, 6)} µg`;
-
-  $(“inhaledResult”).textContent = `${numberFormat(inhaledMassUg, 6)} µg`;
-
-  $(“volumeResult”).textContent = `${numberFormat(volumeM3, 4)} m³`;
-
-
-
-  updateExposureInsight(state.lastEstimate);
-
-}
-
-
-
-Function updateExposureInsight(result) {
-
-  If (!result) return;
-
-
-
-  Const {
-
-    ageLabel,
-
-    durationMinutes,
-
-    pm25,
-
-    volumeM3,
-
-    inhaledMassUg,
-
-    depositedMassUg,
-
-    df
-
-  } = result;
-
-
-
-  Const durationText =
-
-    durationMinutes % 60 === 0
-
-      ? `${durationMinutes / 60} jam`
-
-      : `${durationMinutes} menit`;
-
-
-
-  $(“insightMass”).textContent =
-
-    `${numberFormat(depositedMassUg, 6)} µg`;
-
-
-
-  $(“insightSummary”).textContent =
-
-    `Untuk kelompok ${ageLabel.toLowerCase()} dengan durasi paparan ` +
-
-    `${durationText}, model memperkirakan massa PM2.5 terdeposit ` +
-
-    `sebesar ${numberFormat(depositedMassUg, 6)} µg. ` +
-
-    `Angka ini dihitung dari estimasi konsentrasi PM2.5, ` +
-
-    `volume udara terhirup, dan faktor deposisi.`;
-
-
-
-  $(“durationInsight”).textContent =
-
-    `Pada konsentrasi yang diasumsikan tetap sebesar ` +
-
-    `${numberFormat(pm25, 1)} µg/m³, durasi ${durationText} ` +
-
-    `menghasilkan estimasi volume udara terhirup ` +
-
-    `${numberFormat(volumeM3, 4)} m³. Jika durasi berubah, ` +
-
-    `hasil estimasi juga dapat berubah.`;
-
-
-
-  // Menyimpan nilai untuk memudahkan inspeksi saat mengembangkan prototype.
-
-  $(“insightMass”).title =
-
-    `Massa terhirup: ${numberFormat(inhaledMassUg, 6)} µg; DF: ${df}`;
-
-}
-
-
-
-$(“ageGroup”).addEventListener(“change”, updateEstimate);
-
-$(“duration”).addEventListener(“change”, updateEstimate);
-
-$(“calculateBtn”).addEventListener(“click”, () => {
-
-  updateEstimate();
-
-  showToast(“Estimasi diperbarui berdasarkan parameter model.”);
-
+$("themeToggle").addEventListener("click", () => {
+  applyTheme(document.body.classList.contains("light") ? "dark" : "light");
 });
 
-
+try {
+  applyTheme(localStorage.getItem("peta_theme") || "dark");
+} catch (_) {
+  applyTheme("dark");
+}
 
 /* =========================================================
-
-9.	RIWAYAT DARI GOOGLE APPS SCRIPT
-
-   Endpoint yang diharapkan:
-
-   ?type=daily
-
-   ?type=monthly
-
-   ?type=raw
-
-
-
-   Kode ini menggunakan daily dan monthly.
-
-   Format JSON yang disarankan:
-
-   {“headers”:[“tanggal_wita”,”rata2_aqius”,...],”data”:[...]}
-
+   7. IQAIR LIVE DATA
    ========================================================= */
 
-
-
-Function validHistoryConfig() {
-
-  Return (
-
-    CONFIG.HISTORY_WEB_APP_URL &&
-
-    CONFIG.HISTORY_WEB_APP_URL !== “ISI_URL_WEB_APP_APPS_SCRIPT” &&
-
-    CONFIG.HISTORY_WEB_APP_URL.startsWith(https://)
-
+function validIQAirConfig() {
+  return (
+    CONFIG.IQAIR_API_KEY &&
+    CONFIG.IQAIR_API_KEY !== "ISI_API_KEY_IQAIR"
   );
-
 }
 
+function renderLiveData(data) {
+  state.aqi = data.aqi;
+  state.pm25 = data.pm25;
+  state.temperature = data.temperature;
+  state.humidity = data.humidity;
+  state.pollutant = data.pollutant;
+  state.observationTime = data.observationTime;
 
+  $("aqiValue").textContent =
+    data.aqi === null ? "—" : numberFormat(data.aqi, 0);
 
-Function rowToObject(row, headers) {
+  const category = aqiCategory(data.aqi);
+  $("aqiCategory").textContent = category.label;
+  $("aqiCategory").className = `status ${category.className}`;
 
-  If (Array.isArray(row)) {
+  $("pmValue").textContent =
+    data.pm25 === null ? "—" : numberFormat(data.pm25, 1);
 
-    Const object = {};
+  $("pollutantValue").textContent = formatPollutant(data.pollutant);
 
-    Headers.forEach((header, index) => {
+  $("tempValue").textContent =
+    data.temperature === null ? "—" : `${numberFormat(data.temperature, 1)}°C`;
 
-      Object[header] = row[index];
+  $("humidityValue").textContent =
+    data.humidity === null ? "—" : `${numberFormat(data.humidity, 0)}%`;
 
-    });
+  $("modelPm25").textContent =
+    data.pm25 === null
+      ? "Data belum tersedia"
+      : `${numberFormat(data.pm25, 1)} µg/m³ (estimasi)`;
 
-    Return object;
+  updateEstimate();
+  renderResultAirInsight();
+  
+}
 
+function cacheIQAirData(data) {
+  try {
+    localStorage.setItem(CONFIG.IQAIR_CACHE_KEY, JSON.stringify(data));
+    localStorage.setItem(CONFIG.IQAIR_CACHE_TIME_KEY, String(Date.now()));
+  } catch (_) {}
+}
+
+function readIQAirCache() {
+  try {
+    const raw = localStorage.getItem(CONFIG.IQAIR_CACHE_KEY);
+    const savedAt = Number(localStorage.getItem(CONFIG.IQAIR_CACHE_TIME_KEY));
+
+    if (!raw || !savedAt) return null;
+    if (Date.now() - savedAt > CONFIG.IQAIR_CACHE_MAX_AGE_MS) return null;
+
+    return JSON.parse(raw);
+  } catch (_) {
+    return null;
   }
-
-
-
-  Return row && typeof row === “object” ? row : {};
-
 }
 
+async function fetchIQAir(force = false) {
+  if (!validIQAirConfig()) {
+    const cache = readIQAirCache();
 
-
-Function findField(row, names) {
-
-  Const keys = Object.keys(row);
-
-
-
-  For (const name of names) {
-
-    If (row[name] !== undefined && row[name] !== null && row[name] !== “”) {
-
-      Return row[name];
-
+    if (cache) {
+      renderLiveData(cache);
+      $("liveStatus").textContent = "Menampilkan cache · API key belum dikonfigurasi";
+    } else {
+      $("liveStatus").textContent = "Masukkan API key IQAir untuk memulai.";
     }
-
-
-
-    Const normalizedName = name.toLowerCase();
-
-
-
-    Const match = keys.find(
-
-      Key => key.toLowerCase() === normalizedName
-
-    );
-
-
-
-    If (match && row[match] !== “”) return row[match];
-
-  }
-
-
-
-  Return null;
-
-}
-
-
-
-Function normalizeHistoryPayload(payload, kind) {
-
-  Let rows = [];
-
-  Let headers = Array.isArray(payload?.headers) ? payload.headers : [];
-
-
-
-  If (Array.isArray(payload)) {
-
-    Rows = payload;
-
-  } else if (Array.isArray(payload?.data)) {
-
-    Rows = payload.data;
-
-  } else if (Array.isArray(payload?.rows)) {
-
-    Rows = payload.rows;
-
-  } else if (Array.isArray(payload?.values)) {
-
-    Rows = payload.values;
-
-  }
-
-
-
-  // Dukungan untuk respons berbentuk array-of-arrays dengan header di baris pertama.
-
-  If (
-
-    Rows.length > 0 &&
-
-    Array.isArray(rows[0]) &&
-
-    Headers.length === 0
-
-  ) {
-
-    Headers = rows.shift().map(value => String(value));
-
-  }
-
-
-
-  Const objects = rows.map(row => rowToObject(row, headers));
-
-
-
-  Return objects.map(row => {
-
-    Const dateValue = findField(row, [
-
-      “tanggal_wita”, “tanggal”, “date”, “day”, “timestamp”, “bulan”, “month”
-
-    ]);
-
-
-
-    Const aqiValue = findField(row, kind === “monthly”
-
-      ? [“rata2_aqius”, “rata_rata_aqi”, “avg_aqi”, “aqi”, “rata2_aqi_us”]
-
-      : [“rata2_aqius”, “rata_rata_aqi”, “avg_aqi”, “aqi”, “rata2_aqi_us”]
-
-    );
-
-
-
-    Const pmValue = findField(row, [
-
-      “rata2_pm25_est_ug_m3”, “rata2_pm25”, “pm25”, “avg_pm25”
-
-    ]);
-
-
-
-    Const countValue = findField(row, [
-
-      “jumlah_pengambilan”, “jumlah_success”, “count”, “samples”
-
-    ]);
-
-
-
-    Const date = safeDate(dateValue);
-
-    Const aqi = validNumber(aqiValue);
-
-    Const pm25 = validNumber(pmValue);
-
-    Const count = validNumber(countValue);
-
-
-
-    Return {
-
-      Date,
-
-      dateKey: date ? localDateKey(date) : null,
-
-      aqi: aqi !== null && aqi >= 0 ? aqi : null,
-
-      pm25: pm25 !== null && pm25 >= 0 ? pm25 : null,
-
-      count,
-
-      raw: row
-
-    };
-
-  }).filter(item => item.dateKey !== null);
-
-}
-
-
-
-Async function fetchHistoryType(type) {
-
-  Const url = new URL(CONFIG.HISTORY_WEB_APP_URL);
-
-  url.searchParams.set(“type”, type);
-
-  url.searchParams.set(“_”, String(Date.now()));
-
-
-
-  const response = await fetch(url.toString(), {
-
-    method: “GET”,
-
-    cache: “no-store”
-
-  });
-
-
-
-  If (!response.ok) {
-
-    Throw new Error(`Riwayat ${type}: HTTP ${response.status}`);
-
-  }
-
-
-
-  Return response.json();
-
-}
-
-
-
-Async function fetchHistory() {
-
-  If (!validHistoryConfig()) {
-
-    $(“historyStatus”).textContent =
-
-      “Masukkan URL Web App Apps Script untuk mengaktifkan riwayat.”;
-
-    $(“dailyInsightTitle”).textContent = “Riwayat belum terhubung”;
-
-    $(“dailyInsightText”).textContent =
-
-      “Grafik dan kalender akan aktif setelah URL Web App dikonfigurasi.”;
-
-    drawChart();
 
     return;
-
   }
 
+  if (!force) {
+    const cache = readIQAirCache();
 
-
-  $(“historyStatus”).textContent = “Memuat riwayat...”;
-
-
-
-  Try {
-
-    Const [dailyPayload, monthlyPayload] = await Promise.all([
-
-      fetchHistoryType(“daily”),
-
-      fetchHistoryType(“monthly”)
-
-    ]);
-
-
-
-    State.daily = normalizeHistoryPayload(dailyPayload, “daily”)
-
-      .filter(item => item.aqi !== null)
-
-      .sort((a, b) => a.date – b.date);
-
-
-
-    State.monthly = normalizeHistoryPayload(monthlyPayload, “monthly”)
-
-      .filter(item => item.aqi !== null)
-
-      .sort((a, b) => a.date – b.date);
-
-
-
-    // Daily data dipakai untuk grafik dan kalender agar setiap tanggal
-
-    // merepresentasikan data yang tersedia pada tingkat harian.
-
-    // Monthly data dipakai sebagai fallback bila tanggal hanya tersedia
-
-    // pada ringkasan bulanan yang format tanggalnya cocok.
-
-
-
-    $(“historyStatus”).textContent =
-
-      `${state.daily.length} catatan harian · ${state.monthly.length} catatan bulanan`;
-
-
-
-    drawChart();
-
-    renderDailyInsight();
-
-    renderCalendar();
-
-  } catch (error) {
-
-    Console.error(“History error:”, error);
-
-    $(“historyStatus”).textContent =
-
-      “Riwayat gagal dimuat. Periksa URL, format respons, dan izin Web App.”;
-
-    $(“dailyInsightTitle”).textContent = “Data historis belum tersedia”;
-
-    $(“dailyInsightText”).textContent =
-
-      “Periksa kembali endpoint Apps Script dan akses publik Web App.”;
-
-    drawChart();
-
+    if (cache) {
+      renderLiveData(cache);
+      $("liveStatus").textContent = "Menampilkan data cache sementara...";
+    }
   }
 
-}
+  $("refreshBtn").disabled = true;
+  $("liveStatus").textContent = "Mengambil data IQAir...";
 
-
-
-/* =========================================================
-
-10.	GRAFIK HARIAN CANVAS
-
-   ========================================================= */
-
-
-
-Function drawChart() {
-
-  Const canvas = $(“dailyChart”);
-
-  Const ctx = canvas.getContext(“2d”);
-
-  Const rect = canvas.getBoundingClientRect();
-
-
-
-  If (!rect.width || !rect.height) return;
-
-
-
-  Const ratio = Math.max(1, window.devicePixelRatio || 1);
-
-  Canvas.width = Math.floor(rect.width * ratio);
-
-  Canvas.height = Math.floor(rect.height * ratio);
-
-  Ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-
-
-  Const width = rect.width;
-
-  Const height = rect.height;
-
-
-
-  Ctx.clearRect(0, 0, width, height);
-
-
-
-  Const styles = getComputedStyle(document.body);
-
-  Const textColor = styles.getPropertyValue(“—muted”).trim() || “#9aada0”;
-
-  Const borderColor = styles.getPropertyValue(“—border”).trim() || “#293b30”;
-
-  Const greenColor = styles.getPropertyValue(“—green”).trim() || “#78dfa0”;
-
-
-
-  If (!state.daily.length) {
-
-    Ctx.fillStyle = textColor;
-
-    Ctx.font = “14px system-ui”;
-
-    Ctx.textAlign = “center”;
-
-    Ctx.fillText(“Belum ada data harian untuk ditampilkan”, width / 2, height / 2);
-
-    Return;
-
-  }
-
-
-
-  Const data = state.daily.slice(-30);
-
-  Const padding = { top: 20, right: 16, bottom: 36, left: 43 };
-
-  Const plotW = width – padding.left – padding.right;
-
-  Const plotH = height – padding.top – padding.bottom;
-
-
-
-  Const maxValue = Math.max(
-
-    100,
-
-    Math.ceil(Math.max(...data.map(item => item.aqi)) / 50) * 50
-
+  const url = new URL(
+    "https://api.airvisual.com/v2/nearest_city"
   );
 
+  url.searchParams.set("lat", String(CONFIG.LATITUDE));
+  url.searchParams.set("lon", String(CONFIG.LONGITUDE));
+  url.searchParams.set("key", CONFIG.IQAIR_API_KEY);
 
+  try {
+    const response = await fetch(url.toString());
 
-  Ctx.font = “11px system-ui”;
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
 
-  Ctx.lineWidth = 1;
+    const json = await response.json();
 
-  Ctx.textAlign = “right”;
+    if (json.status !== "success" || !json.data) {
+      throw new Error(json.data?.message || "Respons IQAir tidak valid.");
+    }
 
+    const pollution = json.data.current?.pollution;
+    const weather = json.data.current?.weather;
 
+    const rawAQI = validNumber(pollution?.aqius);
+    const aqi = rawAQI !== null && rawAQI >= 0 ? rawAQI : null;
 
-  For (let i = 0; i <= 4; i++) {
+    const data = {
+      aqi,
+      pm25: aqi === null ? null : estimatePM25FromAQI(aqi),
+      temperature: validNumber(weather?.tp),
+      humidity: validNumber(weather?.hu),
+      pollutant: pollution?.mainus || null,
+      observationTime: pollution?.ts || weather?.ts || new Date().toISOString()
+    };
 
-    Const value = maxValue * i / 4;
+    cacheIQAirData(data);
+    renderLiveData(data);
 
-    Const y = padding.top + plotH – plotH * i / 4;
+    $("liveStatus").textContent =
+      `Diperbarui ${new Date().toLocaleTimeString("id-ID")} · IQAir`;
+  } catch (error) {
+    console.error("IQAir error:", error);
 
+    const cache = readIQAirCache();
 
-
-    Ctx.strokeStyle = borderColor;
-
-    Ctx.beginPath();
-
-    Ctx.moveTo(padding.left, y);
-
-    Ctx.lineTo(width – padding.right, y);
-
-    Ctx.stroke();
-
-
-
-    Ctx.fillStyle = textColor;
-
-    Ctx.fillText(String(Math.round(value)), padding.left – 8, y + 4);
-
+    if (cache) {
+      renderLiveData(cache);
+      $("liveStatus").textContent = "Koneksi gagal · menampilkan cache";
+    } else {
+      $("liveStatus").textContent =
+        "Data belum tersedia. Periksa koneksi, API key, atau batas API.";
+    }
+  } finally {
+    $("refreshBtn").disabled = false;
   }
-
-
-
-  Const points = data.map((item, index) => ({
-
-    X: padding.left + (
-
-      Data.length === 1 ? plotW / 2 : plotW * index / (data.length – 1)
-
-    ),
-
-    Y: padding.top + plotH – plotH * item.aqi / maxValue,
-
-    Item
-
-  }));
-
-
-
-  Const gradient = ctx.createLinearGradient(0, padding.top, 0, height);
-
-  Gradient.addColorStop(0, “rgba(120,223,160,0.25)”);
-
-  Gradient.addColorStop(1, “rgba(120,223,160,0.01)”);
-
-
-
-  Ctx.beginPath();
-
-  Points.forEach((point, index) => {
-
-    If (index === 0) ctx.moveTo(point.x, point.y);
-
-    Else ctx.lineTo(point.x, point.y);
-
-  });
-
-
-
-  If (points.length > 1) {
-
-    Ctx.lineTo(points[points.length – 1].x, padding.top + plotH);
-
-    Ctx.lineTo(points[0].x, padding.top + plotH);
-
-    Ctx.closePath();
-
-    Ctx.fillStyle = gradient;
-
-    Ctx.fill();
-
-  }
-
-
-
-  Ctx.beginPath();
-
-  Points.forEach((point, index) => {
-
-    If (index === 0) ctx.moveTo(point.x, point.y);
-
-    Else ctx.lineTo(point.x, point.y);
-
-  });
-
-
-
-  Ctx.strokeStyle = greenColor;
-
-  Ctx.lineWidth = 2.5;
-
-  Ctx.stroke();
-
-
-
-  Points.forEach(point => {
-
-    Ctx.beginPath();
-
-    Ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
-
-    Ctx.fillStyle = greenColor;
-
-    Ctx.fill();
-
-  });
-
-
-
-  Const labelCount = Math.min(5, data.length);
-
-  Ctx.textAlign = “center”;
-
-  Ctx.fillStyle = textColor;
-
-
-
-  For (let i = 0; i < labelCount; i++) {
-
-    Const index = labelCount === 1
-
-      ? 0
-
-      : Math.round(i * (data.length – 1) / (labelCount – 1));
-
-
-
-    Const point = points[index];
-
-    Const label = point.item.date
-
-      .toLocaleDateString(“id-ID”, { day: “numeric”, month: “short” });
-
-
-
-    Ctx.fillText(label, point.x, height – 10);
-
-  }
-
 }
 
-
-
-Window.addEventListener(“resize”, drawChart);
-
-
+$("refreshBtn").addEventListener("click", () => fetchIQAir(true));
 
 /* =========================================================
-
-11.	INSIGHT HARIAN
-
+   8. PERHITUNGAN MODEL PAPARAN
+   Q (m³/jam) -> Q (m³/menit)
+   Volume = Q/60 × durasi menit
+   Massa terhirup = PM2.5 × volume
+   Massa terdeposit = massa terhirup × DF
    ========================================================= */
 
+function updateEstimate() {
+  const ageKey = $("ageGroup").value;
+  const durationMinutes = Number($("duration").value);
+  const params = MODEL_PARAMETERS[ageKey];
 
+  $("modelQ").textContent =
+    `${numberFormat(params.Q, 2)} m³/jam · parameter tetap`;
 
-Function renderDailyInsight() {
+  $("modelDF").textContent =
+    `${numberFormat(params.DF, 2)} · parameter tetap`;
 
-  If (!state.daily.length) {
+  if (
+    state.pm25 === null ||
+    !Number.isFinite(state.pm25) ||
+    state.pm25 < 0
+  ) {
+    $("depositedResult").textContent = "—";
+    $("inhaledResult").textContent = "—";
+    $("volumeResult").textContent = "—";
 
-    $(“dailyInsightTitle”).textContent = “Belum ada data harian”;
+    $("insightMass").textContent = "Data PM2.5 belum tersedia";
+    $("insightSummary").textContent =
+      "Estimasi belum dapat dihitung. Tunggu data kualitas udara yang valid.";
+    $("durationInsight").textContent =
+      "Durasi akan digunakan untuk memperkirakan volume udara yang dihirup.";
 
-    $(“dailyInsightText”).textContent =
-
-      “Insight akan muncul setelah data harian tersedia.”;
-
-    Return;
-
+    state.lastEstimate = null;
+    return;
   }
 
+  const qPerMinute = params.Q / 60;
+  const volumeM3 = qPerMinute * durationMinutes;
+  const inhaledMassUg = state.pm25 * volumeM3;
+  const depositedMassUg = inhaledMassUg * params.DF;
 
+  state.lastEstimate = {
+    ageKey,
+    ageLabel: params.label,
+    qPerHour: params.Q,
+    df: params.DF,
+    durationMinutes,
+    pm25: state.pm25,
+    volumeM3,
+    inhaledMassUg,
+    depositedMassUg
+  };
 
-  Const latest = state.daily[state.daily.length – 1];
+  $("depositedResult").textContent = `${numberFormat(depositedMassUg, 6)} µg`;
+  $("inhaledResult").textContent = `${numberFormat(inhaledMassUg, 6)} µg`;
+  $("volumeResult").textContent = `${numberFormat(volumeM3, 4)} m³`;
 
-  Const category = aqiCategory(latest.aqi);
-
-
-
-  $(“dailyInsightTitle”).textContent =
-
-    `${formatLongDate(latest.date)} — ${category.label}`;
-
-
-
-  $(“dailyInsightText”).textContent =
-
-    `Rata-rata AQI US harian tercatat ${numberFormat(latest.aqi, 0)}. ` +
-
-    `Kategori ini menggambarkan tingkat indeks kualitas udara, ` +
-
-    `bukan diagnosis kesehatan. ` +
-
-    (latest.pm25 !== null
-
-      ? `Catatan konsentrasi PM2.5 estimasi pada rekap: ${numberFormat(latest.pm25, 1)} µg/m³.`
-
-      : “Konsentrasi PM2.5 historis tidak tersedia pada catatan ini.”);
-
+  updateExposureInsight(state.lastEstimate);
 }
 
+function updateExposureInsight(result) {
+  if (!result) return;
 
+  const {
+    ageLabel,
+    durationMinutes,
+    pm25,
+    volumeM3,
+    inhaledMassUg,
+    depositedMassUg,
+    df
+  } = result;
+
+  const durationText =
+    durationMinutes % 60 === 0
+      ? `${durationMinutes / 60} jam`
+      : `${durationMinutes} menit`;
+
+  $("insightMass").textContent =
+    `${numberFormat(depositedMassUg, 6)} µg`;
+
+  $("insightSummary").textContent =
+    `Untuk kelompok ${ageLabel.toLowerCase()} dengan durasi paparan ` +
+    `${durationText}, model memperkirakan massa PM2.5 terdeposit ` +
+    `sebesar ${numberFormat(depositedMassUg, 6)} µg. ` +
+    `Angka ini dihitung dari estimasi konsentrasi PM2.5, ` +
+    `volume udara terhirup, dan faktor deposisi.`;
+
+  $("durationInsight").textContent =
+    `Pada konsentrasi yang diasumsikan tetap sebesar ` +
+    `${numberFormat(pm25, 1)} µg/m³, durasi ${durationText} ` +
+    `menghasilkan estimasi volume udara terhirup ` +
+    `${numberFormat(volumeM3, 4)} m³. Jika durasi berubah, ` +
+    `hasil estimasi juga dapat berubah.`;
+
+  // Menyimpan nilai untuk memudahkan inspeksi saat mengembangkan prototype.
+  $("insightMass").title =
+    `Massa terhirup: ${numberFormat(inhaledMassUg, 6)} µg; DF: ${df}`;
+}
+
+$("ageGroup").addEventListener("change", updateEstimate);
+$("duration").addEventListener("change", updateEstimate);
+$("calculateBtn").addEventListener("click", () => {
+  updateEstimate();
+  showToast("Estimasi diperbarui berdasarkan parameter model.");
+});
 
 /* =========================================================
+   9. RIWAYAT DARI GOOGLE APPS SCRIPT
+   Endpoint yang diharapkan:
+   ?type=daily
+   ?type=monthly
+   ?type=raw
 
-12.	KALENDER BULANAN
-
+   Kode ini menggunakan daily dan monthly.
+   Format JSON yang disarankan:
+   {"headers":["tanggal_wita","rata2_aqius",...],"data":[...]}
    ========================================================= */
 
-
-
-Function monthName(year, month) {
-
-  Return new Date(year, month, 1).toLocaleDateString(“id-ID”, {
-
-    Month: “long”,
-
-    Year: “numeric”
-
-  });
-
+function validHistoryConfig() {
+  return (
+    CONFIG.HISTORY_WEB_APP_URL &&
+    CONFIG.HISTORY_WEB_APP_URL !== "ISI_URL_WEB_APP_APPS_SCRIPT" &&
+    CONFIG.HISTORY_WEB_APP_URL.startsWith("https://")
+  );
 }
 
-
-
-Function getDailyRecordMap() {
-
-  Const map = new Map();
-
-
-
-  State.daily.forEach(item => {
-
-    If (item.dateKey) map.set(item.dateKey, item);
-
-  });
-
-
-
-  Return map;
-
-}
-
-
-
-Function renderCalendar() {
-
-  Const grid = $(“calendarGrid”);
-
-  Grid.replaceChildren();
-
-
-
-  $(“monthTitle”).textContent =
-
-    monthName(state.calendarYear, state.calendarMonth);
-
-
-
-  const weekdays = [“Min”, “Sen”, “Sel”, “Rab”, “Kam”, “Jum”, “Sab”];
-
-
-
-  weekdays.forEach(day => {
-
-    const cell = document.createElement(“div”);
-
-    cell.className = “weekday”;
-
-    cell.textContent = day;
-
-    grid.appendChild(cell);
-
-  });
-
-
-
-  Const firstDay = new Date(
-
-    State.calendarYear, state.calendarMonth, 1
-
-  ).getDay();
-
-
-
-  Const daysInMonth = new Date(
-
-    State.calendarYear, state.calendarMonth + 1, 0
-
-  ).getDate();
-
-
-
-  For (let i = 0; i < firstDay; i++) {
-
-    Const empty = document.createElement(“div”);
-
-    Grid.appendChild(empty);
-
+function rowToObject(row, headers) {
+  if (Array.isArray(row)) {
+    const object = {};
+    headers.forEach((header, index) => {
+      object[header] = row[index];
+    });
+    return object;
   }
 
+  return row && typeof row === "object" ? row : {};
+}
 
+function findField(row, names) {
+  const keys = Object.keys(row);
 
-  Const records = getDailyRecordMap();
+  for (const name of names) {
+    if (row[name] !== undefined && row[name] !== null && row[name] !== "") {
+      return row[name];
+    }
 
+    const normalizedName = name.toLowerCase();
 
-
-  For (let day = 1; day <= daysInMonth; day++) {
-
-    Const date = new Date(
-
-      State.calendarYear, state.calendarMonth, day
-
+    const match = keys.find(
+      key => key.toLowerCase() === normalizedName
     );
 
-
-
-    Const key = localDateKey(date);
-
-    Const record = records.get(key);
-
-
-
-    Const button = document.createElement(“button”);
-
-    Button.type = “button”;
-
-    Button.className = “day”;
-
-    Button.disabled = !record;
-
-
-
-    If (record) {
-
-      Button.classList.add(calendarLevel(record.aqi));
-
-      Button.title =
-
-        `${formatLongDate(date)} · AQI ${numberFormat(record.aqi, 0)}`;
-
-
-
-      Const number = document.createElement(“span”);
-
-      Number.className = “date-num”;
-
-      Number.textContent = String(day);
-
-
-
-      Const aqi = document.createElement(“span”);
-
-      Aqi.className = “date-aqi”;
-
-      Aqi.textContent = `AQI ${numberFormat(record.aqi, 0)}`;
-
-
-
-      Button.append(number, aqi);
-
-
-
-      Button.addEventListener(“click”, () => {
-
-        State.selectedDate = key;
-
-
-
-        Grid.querySelectorAll(“.day”).forEach(cell => {
-
-          Cell.classList.remove(“selected”);
-
-        });
-
-
-
-        Button.classList.add(“selected”);
-
-        renderDayDetail(record);
-
-      });
-
-    } else {
-
-      Const number = document.createElement(“span”);
-
-      Number.className = “date-num”;
-
-      Number.textContent = String(day);
-
-
-
-      Const missing = document.createElement(“span”);
-
-      Missing.className = “date-aqi”;
-
-      Missing.textContent = “—“;
-
-
-
-      Button.append(number, missing);
-
-    }
-
-
-
-    If (state.selectedDate === key && record) {
-
-      Button.classList.add(“selected”);
-
-    }
-
-
-
-    Grid.appendChild(button);
-
+    if (match && row[match] !== "") return row[match];
   }
 
-
-
-  If (state.selectedDate) {
-
-    Const record = records.get(state.selectedDate);
-
-    If (record) renderDayDetail(record);
-
-  }
-
+  return null;
 }
 
+function normalizeHistoryPayload(payload, kind) {
+  let rows = [];
+  let headers = Array.isArray(payload?.headers) ? payload.headers : [];
 
+  if (Array.isArray(payload)) {
+    rows = payload;
+  } else if (Array.isArray(payload?.data)) {
+    rows = payload.data;
+  } else if (Array.isArray(payload?.rows)) {
+    rows = payload.rows;
+  } else if (Array.isArray(payload?.values)) {
+    rows = payload.values;
+  }
 
-Function renderDayDetail(record) {
+  // Dukungan untuk respons berbentuk array-of-arrays dengan header di baris pertama.
+  if (
+    rows.length > 0 &&
+    Array.isArray(rows[0]) &&
+    headers.length === 0
+  ) {
+    headers = rows.shift().map(value => String(value));
+  }
 
-  Const box = $(“dayDetail”);
+  const objects = rows.map(row => rowToObject(row, headers));
 
-  Box.replaceChildren();
+  return objects.map(row => {
+    const dateValue = findField(row, [
+      "tanggal_wita", "tanggal", "date", "day", "timestamp", "bulan", "month"
+    ]);
 
+    const aqiValue = findField(row, kind === "monthly"
+      ? ["rata2_aqius", "rata_rata_aqi", "avg_aqi", "aqi", "rata2_aqi_us"]
+      : ["rata2_aqius", "rata_rata_aqi", "avg_aqi", "aqi", "rata2_aqi_us"]
+    );
 
+    const pmValue = findField(row, [
+      "rata2_pm25_est_ug_m3", "rata2_pm25", "pm25", "avg_pm25"
+    ]);
 
-  Const heading = document.createElement(“h4”);
+    const countValue = findField(row, [
+      "jumlah_pengambilan", "jumlah_success", "count", "samples"
+    ]);
 
-  Heading.textContent = formatLongDate(record.date);
+    const date = safeDate(dateValue);
+    const aqi = validNumber(aqiValue);
+    const pm25 = validNumber(pmValue);
+    const count = validNumber(countValue);
 
+    return {
+      date,
+      dateKey: date ? localDateKey(date) : null,
+      aqi: aqi !== null && aqi >= 0 ? aqi : null,
+      pm25: pm25 !== null && pm25 >= 0 ? pm25 : null,
+      count,
+      raw: row
+    };
+  }).filter(item => item.dateKey !== null);
+}
 
+async function fetchHistoryType(type) {
+  const url = new URL(CONFIG.HISTORY_WEB_APP_URL);
+  url.searchParams.set("type", type);
+  url.searchParams.set("_", String(Date.now()));
 
-  Const category = aqiCategory(record.aqi);
-
-
-
-  Const status = document.createElement(“span”);
-
-  Status.className = `status ${category.className}`;
-
-  Status.textContent = category.label;
-
-
-
-  Const statusWrap = document.createElement(“div”);
-
-  statusWrap.style.marginBottom = “14px”;
-
-  statusWrap.appendChild(status);
-
-
-
-  const details = document.createElement(“div”);
-
-  details.className = “detail-grid”;
-
-
-
-  const values = [
-
-    [“Rata-rata AQI US”, numberFormat(record.aqi, 0)],
-
-    [
-
-      “Estimasi PM2.5”,
-
-      Record.pm25 === null ? “Tidak tersedia” : `${numberFormat(record.pm25, 1)} µg/m³`
-
-    ],
-
-    [
-
-      “Jumlah catatan”,
-
-      Record.count === null ? “Tidak tersedia” : numberFormat(record.count, 0)
-
-    ]
-
-  ];
-
-
-
-  Values.forEach(([label, value]) => {
-
-    Const item = document.createElement(“div”);
-
-    Item.className = “detail-item”;
-
-
-
-    Const name = document.createElement(“span”);
-
-    Name.textContent = label;
-
-
-
-    Const result = document.createElement(“strong”);
-
-    Result.textContent = value;
-
-
-
-    Item.append(name, result);
-
-    Details.appendChild(item);
-
+  const response = await fetch(url.toString(), {
+    method: "GET",
+    cache: "no-store"
   });
 
-
-
-  Const note = document.createElement(“p”);
-
-  Note.className = “muted small”;
-
-  Note.style.marginBottom = “0”;
-
-  Note.textContent =
-
-    “Nilai merupakan rekap data yang tersimpan, bukan jaminan bahwa kondisi udara sama sepanjang hari.”;
-
-
-
-  Box.append(heading, statusWrap, details, note);
-
-}
-
-
-
-Function shiftMonth(delta) {
-
-  Const next = new Date(
-
-    State.calendarYear,
-
-    State.calendarMonth + delta,
-
-    1
-
-  );
-
-
-
-  State.calendarYear = next.getFullYear();
-
-  State.calendarMonth = next.getMonth();
-
-
-
-  renderCalendar();
-
-}
-
-
-
-$(“prevMonthBtn”).addEventListener(“click”, () => shiftMonth(-1));
-
-$(“nextMonthBtn”).addEventListener(“click”, () => shiftMonth(1));
-
-
-
-$(“showCalendarBtn”).addEventListener(“click”, () => {
-
-  $(“monthlyPanel”).hidden = false;
-
-
-
-  If (state.daily.length) {
-
-    Const latest = state.daily[state.daily.length – 1].date;
-
-    State.calendarYear = latest.getFullYear();
-
-    State.calendarMonth = latest.getMonth();
-
+  if (!response.ok) {
+    throw new Error(`Riwayat ${type}: HTTP ${response.status}`);
   }
 
+  return response.json();
+}
 
+async function fetchHistory() {
+  if (!validHistoryConfig()) {
+    $("historyStatus").textContent =
+      "Masukkan URL Web App Apps Script untuk mengaktifkan riwayat.";
+    $("dailyInsightTitle").textContent = "Riwayat belum terhubung";
+    $("dailyInsightText").textContent =
+      "Grafik dan kalender akan aktif setelah URL Web App dikonfigurasi.";
+    drawChart();
+    return;
+  }
 
-  renderCalendar();
+  $("historyStatus").textContent = "Memuat riwayat...";
 
-  $(“monthlyPanel”).scrollIntoView({ behavior: “smooth”, block: “start” });
+  try {
+    const [dailyPayload, monthlyPayload] = await Promise.all([
+      fetchHistoryType("daily"),
+      fetchHistoryType("monthly")
+    ]);
 
-});
+    state.daily = normalizeHistoryPayload(dailyPayload, "daily")
+      .filter(item => item.aqi !== null)
+      .sort((a, b) => a.date - b.date);
 
+    state.monthly = normalizeHistoryPayload(monthlyPayload, "monthly")
+      .filter(item => item.aqi !== null)
+      .sort((a, b) => a.date - b.date);
 
+    // Daily data dipakai untuk grafik dan kalender agar setiap tanggal
+    // merepresentasikan data yang tersedia pada tingkat harian.
+    // Monthly data dipakai sebagai fallback bila tanggal hanya tersedia
+    // pada ringkasan bulanan yang format tanggalnya cocok.
 
-$(“hideCalendarBtn”).addEventListener(“click”, () => {
+    $("historyStatus").textContent =
+      `${state.daily.length} catatan harian · ${state.monthly.length} catatan bulanan`;
 
-  $(“monthlyPanel”).hidden = true;
-
-  $(“history”).scrollIntoView({ behavior: “smooth”, block: “start” });
-
-});
-
-
+    drawChart();
+    renderDailyInsight();
+    renderCalendar();
+  } catch (error) {
+    console.error("History error:", error);
+    $("historyStatus").textContent =
+      "Riwayat gagal dimuat. Periksa URL, format respons, dan izin Web App.";
+    $("dailyInsightTitle").textContent = "Data historis belum tersedia";
+    $("dailyInsightText").textContent =
+      "Periksa kembali endpoint Apps Script dan akses publik Web App.";
+    drawChart();
+  }
+}
 
 /* =========================================================
-
-13.	INISIALISASI DAN PEMBARUAN BERKALA
-
+   10. GRAFIK HARIAN CANVAS
    ========================================================= */
 
+function drawChart() {
+  const canvas = $("dailyChart");
+  const ctx = canvas.getContext("2d");
+  const rect = canvas.getBoundingClientRect();
 
+  if (!rect.width || !rect.height) return;
 
-Async function initializePETA() {
+  const ratio = Math.max(1, window.devicePixelRatio || 1);
+  canvas.width = Math.floor(rect.width * ratio);
+  canvas.height = Math.floor(rect.height * ratio);
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
-  Const cache = readIQAirCache();
+  const width = rect.width;
+  const height = rect.height;
 
+  ctx.clearRect(0, 0, width, height);
 
+  const styles = getComputedStyle(document.body);
+  const textColor = styles.getPropertyValue("--muted").trim() || "#9aada0";
+  const borderColor = styles.getPropertyValue("--border").trim() || "#293b30";
+  const greenColor = styles.getPropertyValue("--green").trim() || "#78dfa0";
 
-  If (cache) renderLiveData(cache);
-
-
-
-  Await Promise.allSettled([
-
-    fetchIQAir(false),
-
-    fetchHistory()
-
-  ]);
-
-
-
-  // Pilih bulan data terbaru bila riwayat tersedia.
-
-  If (state.daily.length) {
-
-    Const latest = state.daily[state.daily.length – 1].date;
-
-    State.calendarYear = latest.getFullYear();
-
-    State.calendarMonth = latest.getMonth();
-
-    renderCalendar();
-
+  if (!state.daily.length) {
+    ctx.fillStyle = textColor;
+    ctx.font = "14px system-ui";
+    ctx.textAlign = "center";
+    ctx.fillText("Belum ada data harian untuk ditampilkan", width / 2, height / 2);
+    return;
   }
 
+  const data = state.daily.slice(-30);
+  const padding = { top: 20, right: 16, bottom: 36, left: 43 };
+  const plotW = width - padding.left - padding.right;
+  const plotH = height - padding.top - padding.bottom;
 
+  const maxValue = Math.max(
+    100,
+    Math.ceil(Math.max(...data.map(item => item.aqi)) / 50) * 50
+  );
 
-  updateEstimate();
+  ctx.font = "11px system-ui";
+  ctx.lineWidth = 1;
+  ctx.textAlign = "right";
 
+  for (let i = 0; i <= 4; i++) {
+    const value = maxValue * i / 4;
+    const y = padding.top + plotH - plotH * i / 4;
+
+    ctx.strokeStyle = borderColor;
+    ctx.beginPath();
+    ctx.moveTo(padding.left, y);
+    ctx.lineTo(width - padding.right, y);
+    ctx.stroke();
+
+    ctx.fillStyle = textColor;
+    ctx.fillText(String(Math.round(value)), padding.left - 8, y + 4);
+  }
+
+  const points = data.map((item, index) => ({
+    x: padding.left + (
+      data.length === 1 ? plotW / 2 : plotW * index / (data.length - 1)
+    ),
+    y: padding.top + plotH - plotH * item.aqi / maxValue,
+    item
+  }));
+
+  const gradient = ctx.createLinearGradient(0, padding.top, 0, height);
+  gradient.addColorStop(0, "rgba(120,223,160,0.25)");
+  gradient.addColorStop(1, "rgba(120,223,160,0.01)");
+
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  });
+
+  if (points.length > 1) {
+    ctx.lineTo(points[points.length - 1].x, padding.top + plotH);
+    ctx.lineTo(points[0].x, padding.top + plotH);
+    ctx.closePath();
+    ctx.fillStyle = gradient;
+    ctx.fill();
+  }
+
+  ctx.beginPath();
+  points.forEach((point, index) => {
+    if (index === 0) ctx.moveTo(point.x, point.y);
+    else ctx.lineTo(point.x, point.y);
+  });
+
+  ctx.strokeStyle = greenColor;
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  points.forEach(point => {
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
+    ctx.fillStyle = greenColor;
+    ctx.fill();
+  });
+
+  const labelCount = Math.min(5, data.length);
+  ctx.textAlign = "center";
+  ctx.fillStyle = textColor;
+
+  for (let i = 0; i < labelCount; i++) {
+    const index = labelCount === 1
+      ? 0
+      : Math.round(i * (data.length - 1) / (labelCount - 1));
+
+    const point = points[index];
+    const label = point.item.date
+      .toLocaleDateString("id-ID", { day: "numeric", month: "short" });
+
+    ctx.fillText(label, point.x, height - 10);
+  }
 }
 
+window.addEventListener("resize", drawChart);
 
+/* =========================================================
+   11. INSIGHT HARIAN
+   ========================================================= */
+
+function renderDailyInsight() {
+  if (!state.daily.length) {
+    $("dailyInsightTitle").textContent = "Belum ada data harian";
+    $("dailyInsightText").textContent =
+      "Insight akan muncul setelah data harian tersedia.";
+    return;
+  }
+
+  const latest = state.daily[state.daily.length - 1];
+  const category = aqiCategory(latest.aqi);
+
+  $("dailyInsightTitle").textContent =
+    `${formatLongDate(latest.date)} — ${category.label}`;
+
+  $("dailyInsightText").textContent =
+    `Rata-rata AQI US harian tercatat ${numberFormat(latest.aqi, 0)}. ` +
+    `Kategori ini menggambarkan tingkat indeks kualitas udara, ` +
+    `bukan diagnosis kesehatan. ` +
+    (latest.pm25 !== null
+      ? `Catatan konsentrasi PM2.5 estimasi pada rekap: ${numberFormat(latest.pm25, 1)} µg/m³.`
+      : "Konsentrasi PM2.5 historis tidak tersedia pada catatan ini.");
+}
+
+/* =========================================================
+   12. KALENDER BULANAN
+   ========================================================= */
+
+function monthName(year, month) {
+  return new Date(year, month, 1).toLocaleDateString("id-ID", {
+    month: "long",
+    year: "numeric"
+  });
+}
+
+function getDailyRecordMap() {
+  const map = new Map();
+
+  state.daily.forEach(item => {
+    if (item.dateKey) map.set(item.dateKey, item);
+  });
+
+  return map;
+}
+
+function renderCalendar() {
+  const grid = $("calendarGrid");
+  grid.replaceChildren();
+
+  $("monthTitle").textContent =
+    monthName(state.calendarYear, state.calendarMonth);
+
+  const weekdays = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+
+  weekdays.forEach(day => {
+    const cell = document.createElement("div");
+    cell.className = "weekday";
+    cell.textContent = day;
+    grid.appendChild(cell);
+  });
+
+  const firstDay = new Date(
+    state.calendarYear, state.calendarMonth, 1
+  ).getDay();
+
+  const daysInMonth = new Date(
+    state.calendarYear, state.calendarMonth + 1, 0
+  ).getDate();
+
+  for (let i = 0; i < firstDay; i++) {
+    const empty = document.createElement("div");
+    grid.appendChild(empty);
+  }
+
+  const records = getDailyRecordMap();
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(
+      state.calendarYear, state.calendarMonth, day
+    );
+
+    const key = localDateKey(date);
+    const record = records.get(key);
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "day";
+    button.disabled = !record;
+
+    if (record) {
+      button.classList.add(calendarLevel(record.aqi));
+      button.title =
+        `${formatLongDate(date)} · AQI ${numberFormat(record.aqi, 0)}`;
+
+      const number = document.createElement("span");
+      number.className = "date-num";
+      number.textContent = String(day);
+
+      const aqi = document.createElement("span");
+      aqi.className = "date-aqi";
+      aqi.textContent = `AQI ${numberFormat(record.aqi, 0)}`;
+
+      button.append(number, aqi);
+
+      button.addEventListener("click", () => {
+        state.selectedDate = key;
+
+        grid.querySelectorAll(".day").forEach(cell => {
+          cell.classList.remove("selected");
+        });
+
+        button.classList.add("selected");
+        renderDayDetail(record);
+      });
+    } else {
+      const number = document.createElement("span");
+      number.className = "date-num";
+      number.textContent = String(day);
+
+      const missing = document.createElement("span");
+      missing.className = "date-aqi";
+      missing.textContent = "—";
+
+      button.append(number, missing);
+    }
+
+    if (state.selectedDate === key && record) {
+      button.classList.add("selected");
+    }
+
+    grid.appendChild(button);
+  }
+
+  if (state.selectedDate) {
+    const record = records.get(state.selectedDate);
+    if (record) renderDayDetail(record);
+  }
+}
+
+function renderDayDetail(record) {
+  const box = $("dayDetail");
+  box.replaceChildren();
+
+  const heading = document.createElement("h4");
+  heading.textContent = formatLongDate(record.date);
+
+  const category = aqiCategory(record.aqi);
+
+  const status = document.createElement("span");
+  status.className = `status ${category.className}`;
+  status.textContent = category.label;
+
+  const statusWrap = document.createElement("div");
+  statusWrap.style.marginBottom = "14px";
+  statusWrap.appendChild(status);
+
+  const details = document.createElement("div");
+  details.className = "detail-grid";
+
+  const values = [
+    ["Rata-rata AQI US", numberFormat(record.aqi, 0)],
+    [
+      "Estimasi PM2.5",
+      record.pm25 === null ? "Tidak tersedia" : `${numberFormat(record.pm25, 1)} µg/m³`
+    ],
+    [
+      "Jumlah catatan",
+      record.count === null ? "Tidak tersedia" : numberFormat(record.count, 0)
+    ]
+  ];
+
+  values.forEach(([label, value]) => {
+    const item = document.createElement("div");
+    item.className = "detail-item";
+
+    const name = document.createElement("span");
+    name.textContent = label;
+
+    const result = document.createElement("strong");
+    result.textContent = value;
+
+    item.append(name, result);
+    details.appendChild(item);
+  });
+
+  const note = document.createElement("p");
+  note.className = "muted small";
+  note.style.marginBottom = "0";
+  note.textContent =
+    "Nilai merupakan rekap data yang tersimpan, bukan jaminan bahwa kondisi udara sama sepanjang hari.";
+
+  box.append(heading, statusWrap, details, note);
+}
+
+function shiftMonth(delta) {
+  const next = new Date(
+    state.calendarYear,
+    state.calendarMonth + delta,
+    1
+  );
+
+  state.calendarYear = next.getFullYear();
+  state.calendarMonth = next.getMonth();
+
+  renderCalendar();
+}
+
+$("prevMonthBtn").addEventListener("click", () => shiftMonth(-1));
+$("nextMonthBtn").addEventListener("click", () => shiftMonth(1));
+
+$("showCalendarBtn").addEventListener("click", () => {
+  $("monthlyPanel").hidden = false;
+
+  if (state.daily.length) {
+    const latest = state.daily[state.daily.length - 1].date;
+    state.calendarYear = latest.getFullYear();
+    state.calendarMonth = latest.getMonth();
+  }
+
+  renderCalendar();
+  $("monthlyPanel").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+$("hideCalendarBtn").addEventListener("click", () => {
+  $("monthlyPanel").hidden = true;
+  $("history").scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+/* =========================================================
+   13. INISIALISASI DAN PEMBARUAN BERKALA
+   ========================================================= */
+
+async function initializePETA() {
+  const cache = readIQAirCache();
+
+  if (cache) renderLiveData(cache);
+
+  await Promise.allSettled([
+    fetchIQAir(false),
+    fetchHistory()
+  ]);
+
+  // Pilih bulan data terbaru bila riwayat tersedia.
+  if (state.daily.length) {
+    const latest = state.daily[state.daily.length - 1].date;
+    state.calendarYear = latest.getFullYear();
+    state.calendarMonth = latest.getMonth();
+    renderCalendar();
+  }
+
+  updateEstimate();
+}
 
 initializePETA();
 
-
-
 setInterval(() => {
-
   fetchIQAir(false);
-
 }, CONFIG.IQAIR_REFRESH_MS);
 
-
-
 setInterval(() => {
-
   fetchHistory();
-
 }, CONFIG.HISTORY_REFRESH_MS);
-
 </script>
-
 </body>
-
 </html>
