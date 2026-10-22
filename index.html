@@ -41,14 +41,23 @@ html {
   scroll-padding-top: 85px;
 }
 
+
 body {
   margin: 0;
-  background: var(--bg);
+
+  background:
+    linear-gradient(
+      rgba(4, 17, 11, 0.72),
+      rgba(4, 17, 11, 0.85)
+    ),
+    url("kebutuhan/bgweb.jpeg") center / cover no-repeat fixed;
+
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, sans-serif;
   line-height: 1.65;
   transition: background .25s, color .25s;
 }
+
 
 button, select, input { font: inherit; }
 button, select { cursor: pointer; }
@@ -497,6 +506,80 @@ canvas {
 }
 
 .result-mini .big-number { font-size: 1.5rem; }
+  
+  /* Indikator kualitas udara pada kartu hasil estimasi */
+.air-insight {
+  margin-top: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  background: var(--surface2);
+  min-width: 0;
+}
+
+.air-insight-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.air-insight-top h3 {
+  font-size: 1.05rem;
+}
+
+.air-insight-value {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin: 16px 0;
+  padding: 15px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.air-insight-value .big-number {
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  margin: 4px 0;
+}
+
+.air-guidance {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+}
+
+.air-guidance .insight-symbol {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  font-size: 1.2rem;
+}
+
+.air-guidance h4 {
+  margin: 2px 0 6px;
+}
+
+.air-guidance p {
+  margin: 0;
+  color: var(--muted);
+  font-size: .88rem;
+}
+
+#resultAirTimestamp {
+  margin: 15px 0 0;
+}
+
+@media (max-width: 480px) {
+  .air-insight {
+    padding: 14px;
+  }
+
+  .air-insight-value {
+    gap: 8px;
+  }
+}
 
 .exposure-insight { margin-top: 25px; }
 
@@ -558,18 +641,28 @@ canvas {
 
 .flow-title h4 { margin: 4px 0 17px; }
 
+./* The Science Behind It: tahapan vertikal */
 .flow-steps {
   display: flex;
-  align-items: stretch;
-  gap: 9px;
+  flex-direction: column;
+  gap: 24x;
 }
 
 .flow-step {
-  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
   min-width: 0;
+  padding: 18px;
   border: 1px solid var(--border);
-  padding: 12px;
-  border-radius: 11px;
+  border-radius: 13px;
+  background: var(--surface2);
+  margin-bottom: 12px;
+}
+
+.flow-step-main {
+  min-width: 0;
 }
 
 .flow-step span {
@@ -577,24 +670,92 @@ canvas {
   color: var(--green);
   font-size: .7rem;
   font-weight: 900;
+  letter-spacing: .1em;
 }
 
 .flow-step strong {
   display: block;
-  font-size: .8rem;
-  margin: 8px 0;
+  margin: 6px 0;
+  font-size: .98rem;
   line-height: 1.4;
 }
 
 .flow-step small {
+  display: block;
   color: var(--muted);
-  font-size: .73rem;
+  font-size: .8rem;
   line-height: 1.5;
 }
 
-.flow-arrow {
-  align-self: center;
+.flow-details {
+  width: 155px;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.flow-details summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 11px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface);
   color: var(--green);
+  font-size: .8rem;
+  font-weight: 800;
+  cursor: pointer;
+  list-style: none;
+}
+
+.flow-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.flow-details summary span {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform .2s;
+}
+
+.flow-details[open] summary span {
+  transform: rotate(45deg);
+}
+
+.flow-details p {
+  grid-column: 1 / -1;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: .85rem;
+  line-height: 1.7;
+}
+
+.flow-formula {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--green);
+  background: var(--surface);
+  font-size: .86rem;
+  font-weight: 800;
+}
+
+@media (max-width: 600px) {
+  .flow-step {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+    padding: 15px;
+  }
+
+  .flow-details {
+    width: 100%;
+  }
+
+  .flow-details summary {
+    width: 100%;
+  }
 }
 
 .insight-note {
@@ -681,6 +842,128 @@ footer {
   .day .date-aqi { font-size: .57rem; }
   .calendar { gap: 4px; }
 }
+  
+  /* ==================================
+   PETA — FOREST BACKGROUND THEME
+   ================================== */
+
+/* Background seluruh halaman */
+body {
+  background:
+    linear-gradient(
+      rgba(7, 22, 15, 0.76),
+      rgba(7, 22, 15, 0.84)
+    ),
+    url("images/hutan.jpg") center center / cover fixed no-repeat !important;
+  color: #f1f5ef;
+}
+
+/* Area utama dibuat transparan */
+main,
+section,
+.container {
+  background-color: transparent;
+}
+
+/* Navbar */
+header,
+nav,
+.navbar {
+  background: rgba(9, 24, 17, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+/* Kartu agar tetap terbaca */
+.card,
+.flow-step,
+.air-insight,
+.result-card {
+  background: rgba(232, 240, 232, 0.94);
+  color: #203127;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+}
+
+/* Teks sekunder di dalam kartu */
+.card p,
+.flow-step small,
+.air-insight p {
+  color: #53665a;
+}
+
+/* Hero: hilangkan overlay lama yang terlalu gelap */
+.hero {
+  background: transparent !important;
+}
+
+/* Tampilan HP */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll !important;
+    background-position: center top;
+  }
+}
+  
+/* NAVIGASI SECTION 01-04 */
+.section-nav {
+  position: sticky;
+  top: 62px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 16px 24px;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  background: rgba(10, 18, 15, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  scrollbar-width: none;
+}
+
+.section-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.section-nav a {
+  flex-shrink: 0;
+  color: #c5d0c7;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  transition: color 0.2s ease;
+}
+
+.section-nav a:hover {
+  color: #b6d89b;
+}
+
+/* TAMPILAN HP */
+@media (max-width: 600px) {
+  .section-nav {
+    top: 58px;
+    gap: 24px;
+    padding: 14px 18px;
+  }
+
+  .section-nav a {
+    font-size: 10px;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* JARAK SAAT MENU DIKLIK */
+#monitor,
+#history,
+#estimate,
+#about {
+  scroll-margin-top: 140px;
+}
+
 </style>
 </head>
 
@@ -699,6 +982,15 @@ footer {
       <button class="btn" id="themeToggle" type="button" aria-label="Ubah tema">☀️</button>
     </div>
   </div>
+
+  <!-- NAVIGASI SECTION BARU -->
+  <nav class="section-nav">
+    <a href="#monitor">01 / LIVE MONITORING</a>
+    <a href="#history">02 / HISTORICAL DATA</a>
+    <a href="#estimate">03 / EXPOSURE MODEL</a>
+    <a href="#about">04 / ABOUT THE PROJECT</a>
+  </nav>
+
 </header>
 
 <main>
@@ -885,19 +1177,19 @@ footer {
           <div class="field">
             <label for="ageGroup">Kelompok usia</label>
             <select id="ageGroup">
-              <option value="bayi">Bayi (<1 Tahun)</option>
-              <option value="balita">Balita</option>
-              <option value="anak_kecil">Anak kecil</option>
-              <option value="anak">Anak</option>
-              <option value="anak_sekolah">Anak sekolah</option>
-              <option value="remaja">Remaja</option>
-              <option value="remaja_akhir">Remaja akhir</option>
-              <option value="dewasa" selected>Dewasa</option>
-              <option value="dewasa_31">Dewasa 31–40 tahun</option>
-              <option value="dewasa_41">Dewasa 41–50 tahun</option>
-              <option value="dewasa_tengah">Dewasa tengah</option>
-              <option value="lansia">Lansia</option>
-              <option value="lansia_akhir">Lansia akhir</option>
+              <option value="bayi">Usia <1 tahun</option>
+              <option value="balita">Usia (1 - <2 tahun)</option>
+              <option value="anak_kecil">Usia 2 - <3 tahun</option>
+              <option value="anak">Usia 3 - <6 tahun</option>
+              <option value="anak_sekolah">Usia 6 - <11 tahun</option>
+              <option value="remaja">Usia 11 - <16 tahun</option>
+              <option value="remaja_akhir">Usia 16 - <21 tahun</option>
+              <option value="dewasa" selected>Usia 21 - <31 tahun</option>
+              <option value="dewasa_31">Usia 31 - <41 tahun</option>
+              <option value="dewasa_41">Usia 41 - <51 tahun</option>
+              <option value="dewasa_tengah">Usia 51 - <61 tahun</option>
+              <option value="lansia">Usia 61 - <71 tahun</option>
+              <option value="lansia_akhir">Usia >71 tahun</option>
             </select>
           </div>
 
@@ -963,6 +1255,44 @@ footer {
             <div class="small muted">m³</div>
           </div>
         </div>
+        
+        <!-- INDIKATOR KUALITAS UDARA -->
+<div class="air-insight">
+  <div class="air-insight-top">
+    <div>
+      <div class="card-label">KONDISI UDARA SAAT INI</div>
+      <h3 style="margin:6px 0">Apa artinya?</h3>
+    </div>
+    <span class="status" id="resultAqiCategory">Menunggu data</span>
+  </div>
+
+  <div class="air-insight-value">
+    <div>
+      <div class="small muted">Indeks kualitas udara (AQI US)</div>
+      <div class="big-number" id="resultAqi">—</div>
+    </div>
+    <div>
+      <div class="small muted">Estimasi PM2.5</div>
+      <div class="big-number" id="resultPm25">—</div>
+      <div class="small muted">µg/m³</div>
+    </div>
+  </div>
+
+  <div class="air-guidance">
+    <div class="insight-symbol" id="resultAirIcon">🌿</div>
+    <div>
+      <h4 id="resultAirTitle">Menunggu data kualitas udara</h4>
+      <p id="resultAirText">
+        Informasi kategori dan panduan aktivitas akan muncul setelah
+        data kualitas udara tersedia.
+      </p>
+    </div>
+  </div>
+
+  <p class="small muted" id="resultAirTimestamp">
+    Waktu observasi belum tersedia.
+  </p>
+</div>
 
         <div class="notice">
           Hasil ini adalah estimasi berdasarkan asumsi konsentrasi
@@ -1035,38 +1365,87 @@ footer {
         </article>
       </div>
 
-      <div class="insight-flow">
-        <div class="flow-title">
-          <div class="eyebrow">THE SCIENCE BEHIND IT</div>
-          <h4>Dari udara hingga estimasi deposisi</h4>
-        </div>
+      <div class="section-heading">
+  <span class="eyebrow"><br>THE SCIENCE</span>
+  <h2>The Science Behind It</h2>
+  <p>
+    Memahami bagaimana konsentrasi PM2.5 digunakan untuk
+    memperkirakan massa partikel yang terhirup dan terdeposit.
+  </p>
+</div>
+      
+      <div class="flow-steps">
+  <article class="flow-step">
+    <div class="flow-step-main">
+      <span>01 / INPUT</span>
+      <strong>Konsentrasi PM2.5</strong>
+      <small>Massa partikel per volume udara.</small>
+    </div>
+    <details class="flow-details">
+      <summary>Selengkapnya <span>＋</span></summary>
+      <p>
+        Konsentrasi PM2.5 menunjukkan perkiraan massa partikel halus
+        dalam setiap meter kubik udara. Pada prototype ini, nilai
+        konsentrasi diperoleh melalui estimasi dari AQI US, bukan
+        pembacaan konsentrasi mentah dari sensor.
+      </p>
+    </details>
+  </article>
 
-        <div class="flow-steps">
-          <div class="flow-step">
-            <span>01</span>
-            <strong>Konsentrasi PM2.5</strong>
-            <small>Massa partikel per volume udara</small>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <span>02</span>
-            <strong>Volume terhirup</strong>
-            <small>Laju inhalasi × durasi</small>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <span>03</span>
-            <strong>Massa terhirup</strong>
-            <small>Konsentrasi × volume</small>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <span>04</span>
-            <strong>Massa terdeposit</strong>
-            <small>Massa terhirup × DF</small>
-          </div>
-        </div>
-      </div>
+  <article class="flow-step">
+    <div class="flow-step-main">
+      <span>02 / INHALATION</span>
+      <strong>Volume udara terhirup</strong>
+      <small>Q × durasi paparan.</small>
+    </div>
+    <details class="flow-details">
+      <summary>Selengkapnya <span>＋</span></summary>
+      <p>
+        Laju inhalasi Q dinyatakan dalam m³/jam. Nilai tersebut
+        dikonversi menjadi m³/menit, kemudian dikalikan dengan durasi
+        paparan dalam menit untuk memperkirakan volume udara yang
+        dihirup selama periode tersebut.
+      </p>
+      <div class="flow-formula">V = (Q / 60) × t</div>
+    </details>
+  </article>
+
+  <article class="flow-step">
+    <div class="flow-step-main">
+      <span>03 / INHALED MASS</span>
+      <strong>Massa PM2.5 terhirup</strong>
+      <small>Konsentrasi × volume udara.</small>
+    </div>
+    <details class="flow-details">
+      <summary>Selengkapnya <span>＋</span></summary>
+      <p>
+        Estimasi massa terhirup diperoleh dengan mengalikan konsentrasi
+        PM2.5 dengan volume udara terhirup. Hasilnya dinyatakan dalam
+        mikrogram (µg), dengan asumsi konsentrasi tetap selama durasi
+        yang dipilih.
+      </p>
+      <div class="flow-formula">M terhirup = C × V</div>
+    </details>
+  </article>
+
+  <article class="flow-step">
+    <div class="flow-step-main">
+      <span>04 / DEPOSITION</span>
+      <strong>Massa PM2.5 terdeposit</strong>
+      <small>Massa terhirup × faktor deposisi.</small>
+    </div>
+    <details class="flow-details">
+      <summary>Selengkapnya <span>＋</span></summary>
+      <p>
+        Faktor deposisi (DF) digunakan untuk memperkirakan bagian
+        massa yang terhirup dan kemudian terdeposit. Nilai DF
+        ditetapkan oleh model berdasarkan kelompok usia dan tidak
+        dapat diubah secara manual oleh pengguna.
+      </p>
+      <div class="flow-formula">M terdeposit = M terhirup × DF</div>
+    </details>
+  </article>
+</div>
 
       <div class="insight-note">
         <span>ⓘ</span>
@@ -1255,6 +1634,25 @@ function formatLongDate(date) {
     year: "numeric"
   });
 }
+  
+  function formatPollutant(value) {
+  if (!value) return "—";
+
+  const names = {
+    p1: "PM10",
+    p2: "PM2.5",
+    pm10: "PM10",
+    pm25: "PM2.5",
+    o3: "O₃",
+    no2: "NO₂",
+    so2: "SO₂",
+    co: "CO"
+  };
+
+  const key = String(value).trim().toLowerCase();
+
+  return names[key] || String(value).toUpperCase();
+}
 
 /* =========================================================
    4. KATEGORI AQI US
@@ -1286,6 +1684,80 @@ function aqiCategory(aqi) {
   }
 
   return { label: "Berbahaya", className: "verybad" };
+}
+  
+  function renderResultAirInsight() {
+  const aqi = state.aqi;
+  const pm25 = state.pm25;
+  const category = aqiCategory(aqi);
+
+  $("resultAqi").textContent =
+    aqi === null ? "—" : numberFormat(aqi, 0);
+
+  $("resultPm25").textContent =
+    pm25 === null ? "—" : numberFormat(pm25, 1);
+
+  $("resultAqiCategory").textContent = category.label;
+  $("resultAqiCategory").className = `status ${category.className}`;
+
+  let title = "Data kualitas udara belum tersedia";
+  let message = "Periksa koneksi atau tunggu data kualitas udara yang valid.";
+  let icon = "ℹ️";
+
+  if (aqi !== null && Number.isFinite(aqi)) {
+    if (aqi <= 50) {
+      title = "Kategori baik";
+      message =
+        "Kualitas udara berada pada kategori baik menurut AQI US. " +
+        "Tetap perhatikan perubahan kondisi udara dan informasi setempat.";
+      icon = "🌿";
+    } else if (aqi <= 100) {
+      title = "Kategori sedang";
+      message =
+        "Kualitas udara berada pada kategori sedang. " +
+        "Sebagian besar orang biasanya dapat beraktivitas seperti biasa, " +
+        "tetapi orang yang lebih sensitif dapat memperhatikan gejala " +
+        "dan mengurangi aktivitas luar ruang bila merasa tidak nyaman.";
+      icon = "🌤️";
+    } else if (aqi <= 150) {
+      title = "Perhatian bagi kelompok sensitif";
+      message =
+        "Kelompok yang lebih sensitif terhadap polusi dapat membatasi " +
+        "aktivitas luar ruang yang berat atau berkepanjangan. " +
+        "Perhatikan informasi kualitas udara setempat.";
+      icon = "⚠️";
+    } else if (aqi <= 200) {
+      title = "Kategori tidak sehat";
+      message =
+        "Pertimbangkan mengurangi aktivitas luar ruang, terutama " +
+        "aktivitas berat atau berkepanjangan. Kelompok sensitif sebaiknya " +
+        "lebih berhati-hati dan mengikuti informasi kesehatan setempat.";
+      icon = "🌫️";
+    } else if (aqi <= 300) {
+      title = "Kategori sangat tidak sehat";
+      message =
+        "Kurangi paparan udara luar ruang sebisa mungkin dan ikuti " +
+        "anjuran otoritas setempat. Pertimbangkan memindahkan aktivitas " +
+        "ke dalam ruang dengan udara yang lebih bersih.";
+      icon = "⚠️";
+    } else {
+      title = "Kategori berbahaya";
+      message =
+        "Hindari aktivitas luar ruang yang tidak diperlukan dan ikuti " +
+        "anjuran otoritas setempat mengenai perlindungan dari polusi udara.";
+      icon = "🚨";
+    }
+  }
+
+  $("resultAirTitle").textContent = title;
+  $("resultAirText").textContent = message;
+  $("resultAirIcon").textContent = icon;
+
+  const observed = safeDate(state.observationTime);
+
+  $("resultAirTimestamp").textContent = observed
+    ? `Waktu observasi sumber: ${observed.toLocaleString("id-ID")}`
+    : "Waktu observasi sumber belum tersedia.";
 }
 
 function calendarLevel(aqi) {
@@ -1400,6 +1872,8 @@ function renderLiveData(data) {
       : `${numberFormat(data.pm25, 1)} µg/m³ (estimasi)`;
 
   updateEstimate();
+  renderResultAirInsight();
+  
 }
 
 function cacheIQAirData(data) {
@@ -1922,19 +2396,6 @@ window.addEventListener("resize", drawChart);
 /* =========================================================
    11. INSIGHT HARIAN
    ========================================================= */
-
-   function formatPollutant(value) {
-  const pollutantMap = {
-    p1: "PM10",
-    p2: "PM2.5",
-    pm10: "PM10",
-    pm25: "PM2.5",
-    pm2_5: "PM2.5"
-  };
-
-  const key = String(value ?? "").trim().toLowerCase();
-  return pollutantMap[key] || value || "—";
-}
 
 function renderDailyInsight() {
   if (!state.daily.length) {
