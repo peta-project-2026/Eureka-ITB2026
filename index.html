@@ -8,54 +8,123 @@
 
 <style>
 
-/* ==========================================
-   PETA-KARHUTLA — LIGHT SAGE PERMANEN
-========================================== */
+/* =========================================
+   TEMA DEFAULT — DARK FOREST
+   Warna lama PETA-KARHUTLA
+   ========================================= */
+:root {
+  color-scheme: dark;
 
-:root,
-[data-theme="light"],
-[data-theme="dark"] {
-    color-scheme: light;
+  --bg-main: #09100c;
+  --bg-section: #101a14;
+  --bg-card: #101a14;
+  --bg-input: #152219;
+  --bg-formula: #111a13;
 
-    --bg-main: #F5F8F3;
-    --bg-section: #EDF3EA;
-    --bg-card: #FFFFFF;
-    --bg-input: #FFFFFF;
-    --bg-formula: #EAF2E7;
+  --border-color: #293b30;
+  --border-hover: #78dfa0;
 
-    --border-color: #D8E3D5;
-    --border-hover: #4A7C59;
+  --text-primary: #edf5ef;
+  --text-secondary: #9aada0;
+  --text-muted: #9aada0;
 
-    --text-primary: #294533;
-    --text-secondary: #45614B;
-    --text-muted: #718274;
+  --accent-green: #78dfa0;
+  --accent-bright: #78dfa0;
 
-    --accent-green: #34764A;
-    --accent-bright: #2D6A4F;
+  --nav-bg: rgba(9, 16, 12, 0.82);
+  --hero-overlay: linear-gradient(
+    90deg,
+    rgba(9, 16, 12, 0.92),
+    rgba(9, 16, 12, 0.65),
+    rgba(9, 16, 12, 0.85)
+  );
 
-    /* Semua permukaan utama solid */
-    --nav-bg: #FFFFFF;
+  --danger: #ff837e;
+  --shadow: 0 18px 50px #00000020;
 
-    /* Hero tetap menampilkan gambar hutan */
-    --hero-overlay: linear-gradient(
-        90deg,
-        rgba(237, 243, 234, 0.94),
-        rgba(237, 243, 234, 0.78),
-        rgba(237, 243, 234, 0.48)
-    );
+  /* Alias untuk kompatibilitas dengan CSS lama */
+  --bg: var(--bg-main);
+  --surface: var(--bg-card);
+  --surface2: var(--bg-section);
+  --text: var(--text-primary);
+  --muted: var(--text-muted);
+  --border: var(--border-color);
+  --green: var(--accent-green);
+  --green-dark: #183c28;
+}
 
-    --danger: #B42318;
-    --shadow: 0 12px 32px #29453312;
+/* =========================================
+   TEMA TERANG — LIGHT SAGE
+   ========================================= */
+body.light,
+[data-theme="light"] {
+  color-scheme: light;
 
-    /* Alias untuk CSS lama */
-    --bg: var(--bg-main);
-    --surface: var(--bg-card);
-    --surface2: var(--bg-section);
-    --text: var(--text-primary);
-    --muted: var(--text-muted);
-    --border: var(--border-color);
-    --green: var(--accent-green);
-    --green-dark: #294533;
+  --bg-main: #f4f7f4;
+  --bg-section: #eaf0eb;
+  --bg-card: #ffffff;
+  --bg-input: #ffffff;
+  --bg-formula: #e1ebe2;
+
+  --border-color: #d0dad1;
+  --border-hover: #4a7c59;
+
+  --text-primary: #1c2826;
+  --text-secondary: #354a3d;
+  --text-muted: #5e7365;
+
+  --accent-green: #2d6a4f;
+  --accent-bright: #355e3b;
+
+  --nav-bg: rgba(244, 247, 244, 0.88);
+  --hero-overlay: linear-gradient(
+    90deg,
+    rgba(244, 247, 244, 0.95),
+    rgba(244, 247, 244, 0.70),
+    rgba(244, 247, 244, 0.90)
+  );
+
+  --danger: #b42318;
+  --shadow: 0 18px 50px #00000012;
+
+  /* Alias untuk kompatibilitas dengan CSS lama */
+  --bg: var(--bg-main);
+  --surface: var(--bg-card);
+  --surface2: var(--bg-section);
+  --text: var(--text-primary);
+  --muted: var(--text-muted);
+  --border: var(--border-color);
+  --green: var(--accent-green);
+  --green-dark: #dcebe0;
+}
+
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+
+
+body {
+  margin: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 35, 25, 0.20),
+      rgba(8, 35, 25, 0.45)
+    ),
+    url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2000&q=85")
+    center center / cover no-repeat fixed;
+
+  background-color: #173c2c;
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  line-height: 1.65;
+  transition: background-color .25s, color .25s;
 }
 
 
