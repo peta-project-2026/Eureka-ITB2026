@@ -2250,6 +2250,9 @@ async function fetchHistory() {
       fetchHistoryType("monthly")
     ]);
 
+    console.log("DAILY PAYLOAD:", dailyPayload);
+    console.log("MONTHLY PAYLOAD:", monthlyPayload);
+
     state.daily = normalizeHistoryPayload(dailyPayload, "daily")
       .filter(item => item.aqi !== null)
       .sort((a, b) => a.date - b.date);
